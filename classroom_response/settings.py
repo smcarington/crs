@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'polls',
 ]
 
@@ -132,6 +133,18 @@ MEDIA_URL  = '/media/'
 LATEX_ROOT = '/home/tholden/djangotest/latex'
 LOG_ROOT = '/tmp'
 MARKS_LOG = "/".join([LOG_ROOT, 'marks_log.log'])
+
+# For websockets we need to define the CHANNEL_LAYERS setting
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "polls.routing.channel_routing",
+    },
+}
 
 # Get local settings
 try:

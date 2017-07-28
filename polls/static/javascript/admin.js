@@ -121,33 +121,59 @@ $(document).ready(function() {
     });
 
     // Check to see how many votes have been cast
-    function voteCheck() {
-        // Get the course primary key from the url
-        var course_pk = location.href.split('/')[4]
+    // Replaced by websockets
+//    function voteCheck() {
+//        // Get the course primary key from the url
+//        var course_pk = location.href.split('/')[4]
+//
+//        $.get(
+//            '/query_live/', 
+//            {course_pk: course_pk},
+//            function(data) {
+//                preData = data['state'].split('-');
+//                pk      = preData[0];
+//                state   = preData[1];
+//                delete data['state']
+//                if (state == 'True') {
+//                    $("#votes-"+pk).html("Total Votes: "+data['numVotes']);
+//                    delete data['numVotes'];
+//                    Object.keys(data).forEach(function (key) {
+//                        $("#"+key).html("("+data[key]+" votes)");
+//                    });
+//                } else if (state == 'False') {
+//                    $("#votes-"+pk).html('');
+//                }
+//            }, 
+//        "json");
+//        setTimeout(voteCheck, 2000);
+//    }
+//    // Start the method to check if votes have been cast
+//    setTimeout(voteCheck, 2000);
 
-        $.get(
-            '/query_live/', 
-            {course_pk: course_pk},
-            function(data) {
-                preData = data['state'].split('-');
-                pk      = preData[0];
-                state   = preData[1];
-                delete data['state']
-                if (state == 'True') {
-                    $("#votes-"+pk).html("Total Votes: "+data['numVotes']);
-                    delete data['numVotes'];
-                    Object.keys(data).forEach(function (key) {
-                        $("#"+key).html("("+data[key]+" votes)");
-                    });
-                } else if (state == 'False') {
-                    $("#votes-"+pk).html('');
-                }
-            }, 
-        "json");
-        setTimeout(voteCheck, 2000);
-    }
-    // Start the method to check if votes have been cast
-    setTimeout(voteCheck, 2000);
+    // Websocket version of poll_admin interface. Used for updating votes only.
+    // Start/stop information can still be sent by ajax.
+    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/query_live/");
+
+    // Update votes.
+    votesock.onmessage = function(message) {
+        var data = JSON.parse(message.data);
+        // Data should include the current state of the question and the primary
+        // key of the question. Extract this.
+        preData = data['state'].split('-');
+        pk      = preData[0];
+        state   = preData[1];
+        delete data['state']
+        if (state == 'True') { // Voting is live
+            $("#votes-"+pk).html("Total Votes: "+data['numVotes']);
+            delete data['numVotes'];
+            Object.keys(data).forEach(function (key) {
+                $("#"+key).html("("+data[key]+" votes)");
+            });
+        } else if (state == 'False') { // Voting has ended, so clear total votes
+            $("#votes-"+pk).html('');
+        }
+    };
 
     $("#slides_live").click( function() {
         $('[type="checkbox"]').click();
