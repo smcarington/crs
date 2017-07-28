@@ -1,0 +1,48 @@
+{% extends 'polls/base.html' %}
+
+{% comment %}
+    course_pk - an integer with the course primary key
+    course - The course
+    polls - a list of polls for the course
+{% endcomment %}
+
+{% block title %}
+<title>Polls - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <h2> Polls for  {{course.name}} </h2> 
+    <a href="{% url 'live_poll' course_pk=course_pk %}" class="btn btn-default">Live Poll</a>
+
+    {% for poll in polls %}
+        <div class="row-content">
+            <div class="poll-title col-md-8">
+                <a href="{% url 'list_pollquestions' course_pk=course_pk poll_pk=poll.pk %}">
+                    {{poll.title}}
+                </a> 
+                <small class="add-data"> 
+                    ({{ poll.questions.count }} Questions)
+                </small>
+            </div>
+            {% if user.is_staff %}
+                <div class = "col-md-4">
+                    <a href="{% url 'poll_admin' course_pk=course_pk poll_pk=poll.pk %}" class="btn btn-default">
+                        Poll Administration
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block buttons %}
+    {% if user.is_staff %}
+    <div class="button-div">
+        <a href="{% url 'new_poll' course_pk=course_pk%}" class="btn btn-default">New Poll</a>
+    </div>
+    {% endif %}
+{% endblock %}
+
+

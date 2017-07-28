@@ -1,0 +1,93 @@
+{% extends 'polls/base.html' %}
+{% load navbar_inclusion_tag %}
+
+{% comment %}
+    Has (possibly empty) PollQuestion element 'question'
+    Has course - Course object
+    If 'question' is non-empty, has list of PollChoices called 'choices'
+    An integer num_votes with the total number of votes
+    Will be passed a string with the current state. The server can be in one of 
+    three states:
+        1. No current poll. If this is the case, state="-1"
+        2. Displaying question and voting. If this is the case, state="questionpk-true"
+           where questionpk is the primary key of the question, and 'true' indicates that
+           voting is on.
+        3. Displaying question, no voting (showing result). If this is the case,
+           state="questionpk-false". 
+{% endcomment %}
+
+{% block title %}
+    <title>Live Poll - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <a href="{% url 'list_polls' course_pk=course.pk %}">&#171; Polls</a>
+    <h2>Live Poll - {{course.name}} </h2>
+
+    {% if question %}
+        <div class="mathrender question-detail live-poll">
+            {{question.text | safe}}
+        </div>
+        <p id="response"></p>
+        {% if question.can_vote %}
+            <div class="mathrender multiplechoice"> 
+                {% for choice in choices %}
+                <button class="btn btn-primary" id="button_{{choice.pk}}">{{forloop.counter}}</button> 
+                <p>{{choice.text}}</p> 
+                <br>
+                {% endfor %}
+            </div>
+        {% else %}
+            <dl>
+                {% for choice in choices %}
+                <dt class="mathrender">{{choice.text}}</dt>
+                <dd>{% score_div choice.num_votes votes %}</dd>
+                <br>
+                <hr class="fadehr">
+                {% endfor %}
+            </dl>
+        {% endif %}
+    {% else %}
+        <p> There is currently no poll on which to vote. </p>
+    {% endif %}
+
+{% endblock %}
+{% block script %}
+<script>
+    var state = "{{state}}";
+
+    function queryChange() {
+        $.get(
+            '/query_live/', 
+            { course_pk: {{course.pk}}},
+            function(data) {
+                cur_state = data['state'];
+                if (state != cur_state) {
+                    location.reload(true);
+                }
+        }, "json");
+        setTimeout(queryChange, 5000);
+    }
+
+    $('document').ready( function() {
+
+        setTimeout(queryChange, 5000);
+
+        $('button').click( function() {
+            choicepk=$(this).attr('id').split('_')[1];
+            $.post('/query_live/', {pk: choicepk}, 
+                function(data) {
+                    if (data['status']=='success') {
+                        // Inform the user
+                        $('#response').html('You voted successfully!');
+                        //setTimeout( function(){ $('#response').html('') }, 2000);
+                        // Diable the buttons
+                        $('button').prop('disabled', true);
+                    }
+                }, 
+            "json");
+        });
+    });
+</script>
+{% endblock %}

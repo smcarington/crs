@@ -1,0 +1,92 @@
+{% extends 'polls/base.html' %}
+{% comment %}
+    course_pk, poll_pk are included
+    Context has PollQuestion element question
+    Context has list of PollChoice elements choices
+    Context has boolean 'edit' passed from edit_pollquestion.
+{% endcomment %}
+
+{% block title %}
+<title>Poll Question Edit - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+<form method="POST" action="{% if choices %}{% url 'edit_pollquestion' course_pk=course_pk poll_pk=poll_pk question_pk=question.pk%}{% else %}{% url 'new_pollquestion' course_pk=course_pk poll_pk=question.poll.pk question_pk=question.pk%}{% endif %}"> {% csrf_token %}
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <td>Question:</td>
+                    <td> <textarea cols="80" rows="10" id="id_text" name="question">{% if question.text %}{{question.text}}{% endif %}</textarea></td>
+                </tr>
+                <tr>
+                    <td>Preview:</td>
+                    <td><div id="form_preview" class="diff">
+
+                        </div>
+                    </td>
+                </tr>
+                {% for choice in choices %}
+                <tr>
+                    <td> Choice: </td>
+                    <td> <input size="50" id="old_{{choice.pk}}" name="old_{{choice.pk}}" type="text" maxlength="400" value="{{choice.text}}"></td>
+                </tr>
+                {% empty %}
+                <tr> 
+                    <td> Choice: </td>
+                    <td> <input size="50" id="id_choice_0" name="new_0" type="text" maxlength="200"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <input type="hidden" name="num-choice" value="1" id="num-choice">
+        <button id="form-submit" class="btn btn-default" type="submit" value="Submit">Submit</button>
+    </form>
+    <button class="btn btn-default" id="add-choice">Add Choice</button> 
+{% endblock %}
+
+{% block sidenote %}
+    <p> To delete a choice, simply leave the input blank. </p>
+{% endblock %}
+
+{% block script %}
+    <script>
+    $(document).ready(function() {
+        var numChoices = {{question.pollchoice_set.count}} + 1;
+        $("#add-choice").click( function () {
+            appendString = '<tr><td>Choice:</td><td><input size="50" id="id_choice_'+numChoices.toString()+'" name="new_'+numChoices.toString()+'" type="text" maxlength="200"></tr>';
+            $("tbody").append(appendString);
+            numChoices++;
+            $("#num-choice").val(numChoices.toString());
+        });
+
+        {% if not edit %}
+        // Set a global flag to determine if we are leaving the page through a form submission
+        var leave_through_submit = false;
+        $("#form-submit").click( function() {
+            leave_through_submit = true;
+        });
+
+        $(window).on('beforeunload', function() {
+            if (!leave_through_submit) {
+                $.ajax({
+                    url: "{% url 'new_pollquestion' course_pk=course_pk poll_pk=question.poll.pk question_pk=question.pk %}", 
+                    data: {del:"True"},
+                    type: "POST",
+                    async: false
+                    });
+            }
+        })
+        {% endif %}
+        $("#form_preview").html($("#id_text").val());
+        renderMathInElement( $("#form_preview")[0] );
+
+        $("#id_text").keyup( function() {
+            $("#form_preview").html($(this).val());
+            renderMathInElement( $("#form_preview")[0] );
+        });
+
+
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'polls/base.html' %}
+{% load navbar_inclusion_tag %}
+{% load staticfiles %}
+
+{% comment %}
+    poll_pk - integer with the poll primary key
+    Context contains Poll element called poll.
+    Context contains PollQuestion element called questions (filtered by order).
+{% endcomment %}
+
+{% block title %}
+<title>Poll Administration - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <a href="{% url 'list_polls' course_pk=course_pk %}">&#171; Polls</a>
+
+    <h2> {{poll.title}} Administration </h2>
+    <a href="{% url 'live_poll' course_pk=course_pk%}" class="btn btn-default">Live Poll</a>
+
+    {% for question in questions %}
+    <div id="global-{{question.pk}}">
+        <div class="row div-{{question.pk}}" {% if question.can_vote %}style="background-color: #c2c2c2"{% endif %}>
+            <div class="question-title col-md-6 mathrender">
+                <p ><b>[{{forloop.counter}}/{{questions.count}}]</b> {{question.text| safe}}</p>
+                    <small> <a href="{% url 'edit_pollquestion' course_pk=course_pk poll_pk=poll_pk question_pk=question.pk %}">Edit</a> 
+                        <a href="{% url 'delete_item' pk=question.pk objectStr='pollquestion' %}">Delete</a> 
+                        <a href=javascript:void(0) id="open-{{question.pk}}">Choices</a> 
+                        <a href="{% url 'poll_history' course_pk=course_pk poll_pk=poll_pk question_pk=question.pk poll_num=question.num_poll %}">History</a>
+                        <a data-id="{{question.pk}}" class="voters" href="{% url 'who_voted' course_pk=course_pk poll_pk=poll_pk question_pk=question.pk poll_num=question.num_poll %}">Voters</a>
+                    </small>
+            </div>
+            {% if user.is_staff %}
+            <div class = "col-md-4" style="padding:0">
+                Slide: <input type="checkbox" id="check_{{question.pk}}" {% if question.live %}checked{% endif %}>
+                <button class="btn btn-success" id="start_{{question.pk}}">Start</button> <button class="btn btn-danger" id="stop_{{question.pk}}"> Stop</button> 
+                <p id="response_{{question.pk}}"></p>
+                <p id="votes-{{question.pk}}"></p>
+            </div>
+            <div class = "col-md-2">
+                <div id="arrow-up-{{question.pk}}" class="arrow">&#x25B2;</div>
+                <div id="arrow-down-{{question.pk}}" class="arrow">&#x25BC;</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" id="{{question.pk}}-choices" style="display:none"> 
+                <ol>
+                {% for choice in question|filter_poll_choice %}
+                <li><p class="mathrender">{{choice.text}} <small id="{{choice.pk}}-votes">({{choice.num_votes}} votes)</small></p>
+                {% endfor %}
+                </ol>
+            </div>
+        </div>
+        <hr class="fadehr">
+    </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
+
+{% block sidenote %}
+    <ul>
+        <li> The `Slide' checkbox makes the question available to students and should only be used once all instructors have completed polling.
+        <li> Use the 'Start' button to push the question to the live-poll page and open voting.
+        <li> Use the 'Stop' button to stop voting and display results.
+<!--        <li> The 'Reset' button clears the current poll results and resets
+votes to zero. The data from the previous vote is preserved. -->
+    </ul>
+    <div class="button-div">
+        <a href="{% url 'new_pollquestion' course_pk=course_pk poll_pk=poll.pk %}" class="btn btn-default">New Question</a>
+    </div>
+{% endblock %}
+
+{% block buttons %}
+    <div class="button-div">
+        <a class="btn btn-default" id='slides_live'>Toggle Slides</a>
+        <button class="btn btn-default" id="endall_-1">End Polling</button>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src={% static "javascript/admin.js" %}></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% load staticfiles %}
+{% load navbar_inclusion_tag %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+        {% block title %}
+        <title>{{site_name}}</title>
+        {% endblock %}
+        <meta name=viewport content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}">
+		<link rel="stylesheet" href="{% static 'css/polls.css' %}">
+	</head>
+	<body>
+
+        <div id="wrapper">
+
+            {% navbar_inclusion_tag %}
+
+            <div class="content container">
+                <div class="row">
+                    <div class = "col-md-8">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                    <div class = "col-md-3 sidenote">
+                        {% block sidenote %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block buttons %}
+        {% endblock %}
+
+        <div class="clearfix bot-pad"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src={% static "javascript/polls.js" %}></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/contrib/auto-render.min.js"></script>
+
+        {% block script %}
+        {% endblock %}
+	</body>
+</html>

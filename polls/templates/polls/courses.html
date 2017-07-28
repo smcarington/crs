@@ -1,0 +1,25 @@
+{% extends 'polls/base.html' %}
+{% comment %}
+    courses - list of Course objects for the user
+{% endcomment %}
+
+{% block title %}
+    <title>Courses - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <h2> Available Courses </h2>
+    {% for course in courses %}
+        <div class="course row 
+            {% if forloop.counter|divisibleby:2 %}even {% else %} odd {% endif %}
+            ">
+            <a href="{% url 'list_polls' course_pk=course.pk %}" class="row-content">
+                {{course.name}}
+                <span class="add-data"> 
+                    ( {{course.get_num_polls}} Polls, Last active: ) 
+                </span>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}
+

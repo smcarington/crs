@@ -1,0 +1,27 @@
+{% extends 'polls/base.html' %}
+{% load navbar_inclusion_tag %}
+
+{% comment %}
+    Has Poll item 'poll'
+    Has list of PollQuestion elements 'questions'
+{% endcomment %}
+
+{% block content %}
+    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <a href="{% url 'list_polls' course_pk=course_pk %}">&#171; Polls</a>
+
+    <h2>Questions for Poll {{poll.title}}</h2>
+    
+    {% for question in questions %}
+        {% if question.live %}
+            <div class="mathrender question-detail"> {{question.text|safe}}
+                <ol>
+                {% for choice in question|filter_poll_choice %}
+                    <li> {{ choice.text|safe }} </li>
+                {% endfor %}
+                </ol> 
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'polls/base.html' %}
+{% load navbar_inclusion_tag %}
+{% load staticfiles %}
+
+{% comment %}
+    course_pk, poll_pk - Primary keys for the course and poll respectively
+    Context has PollQuestion element question
+    Context has list of PollChoice elements called choices 
+    Context has boolean element call see_all
+{% endcomment %}
+
+{% block title %}
+    <title>Poll History - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <a href="{% url 'list_polls' course_pk=course_pk %}">&#171; Polls</a>
+    <a href="{% url 'poll_admin' course_pk=course_pk poll_pk=question.poll.pk %}">&#171; Poll Administration</a>
+    <div class="mathrender question-detail live-poll">
+        {{question.text | safe}}
+    </div>
+    <select id="poll-select" class="form-control">
+        <option value="-1">See All Polls</option>
+        {% for k in question.num_poll|get_range %}
+        <option value="{{forloop.counter}}" {% if poll_num == forloop.counter %}selected="selected"{% endif %}>Poll {{forloop.counter}}</option>
+        {% endfor %}
+    </select>
+
+    {% if poll_num == -1 %}
+        <div class="mathrender multiplechoice">
+            {% for choice in question|filter_poll_choice %}
+            <p>{{forloop.counter}}. {{choice.text}}</p> 
+            <br>
+            {% endfor %}
+        </div>
+
+        {% for k in question.num_poll|get_range %}
+            <div class="h-bar-graph">
+                {% total_votes question.pk forloop.counter as this_votes %}
+                {% for choice in question|filter_poll_choice:forloop.counter %}
+                <div style="overflow: hidden; margin: 10px 0 10px 0;">
+                    <div style="width:30px; float:left">{{forloop.counter}}.</div>
+                    {% score_div choice.num_votes this_votes %}
+                </div>
+                {% endfor %}
+            </div>
+            <hr class="fadehr">
+        {% endfor %}
+    {% else %}
+        <dl>
+            {% for choice in choices %}
+            <dt class="mathrender">{{choice.text}}</dt>
+            <dd>{% score_div choice.num_votes votes %}</dd>
+            <br>
+            <hr class="fadehr">
+            {% endfor %}
+        </dl>
+    {% endif %}
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        var question = {{question.pk}};
+        $(document).ready( function() {
+            $("#poll-select").change( function() {
+                poll_number = $(this).val();
+                // To ensure the history is preserved, we have to push this onto
+                // the history stack before loading the page
+                myurl = "/courses/{{course_pk}}/{{poll_pk}}/"+{{question.pk}}+"/poll_history/"+poll_number+"/";
+                dict_name = "q{{question.pk}}"; //Not really used, but should be unique
+                history.pushState( {dict_name: myurl}, myurl);
+                window.location.replace(myurl);
+            });
+        });
+    </script>
+{% endblock %}

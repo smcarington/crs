@@ -1,0 +1,19 @@
+{% extends 'polls/base.html' %}
+
+{% comment %}
+    Context has String element "success_string".
+    Context has String element "redirect_string"
+{% endcomment %}
+
+{% block title %}
+    <title>Success! - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+<h4> {{success_string | safe}} </h4>
+
+<div>
+    {{redirect_string | safe}}.
+</div>
+    
+{% endblock %}

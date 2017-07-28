@@ -1,0 +1,41 @@
+{% extends 'polls/base.html' %}
+{% load navbar_inclusion_tag %}
+
+{# Context has list of Polls elements, called {{polls}} #}
+
+{% block title %}
+<title>Dump Polls - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+
+{% for poll in polls %}
+    <div class="diff question-detail live-poll">
+        {{poll.question_statement | safe}}
+    </div>
+    <p> <b>Entropy:</b> {{poll.entropy}}, <b>Poll: </b> {{poll.poll_question.poll.title}} </p>
+    <ul>
+        {% for choice in poll.choices %}
+            <dt class="diff">{{choice.text}}</dt>
+            <dd>{% score_div choice.num_votes poll.votes %}</dd>
+            <br>
+        {% endfor %}
+    </ul>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+    {% if polls.has_previous %}
+        <a href="?page={{ polls.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+        Page {{ polls.number }} of {{ polls.paginator.num_pages }}.
+    </span>
+
+    {% if polls.has_next %}
+        <a href="?page={{ polls.next_page_number }}">next</a>
+    {% endif %}
+    </span>
+</div>
+{% endblock %}

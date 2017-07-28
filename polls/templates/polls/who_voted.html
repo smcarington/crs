@@ -1,0 +1,29 @@
+{% comment %}
+    Context contains {{list}} element which is an list of tuples ('username', choice.pk)
+{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Student Votes</title>
+        <meta name=viewport content="width=device-width, initial-scale=1">
+	</head>
+    <body>
+        <a href=javascript:void()>Refresh</a>
+
+        <ol>
+        {% for item in list %}
+            <li> <b>{{item.0}}</b> - {{item.1}}
+        {% empty %}
+            <p> No students voted </p>
+        {% endfor %}
+        </ol>
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $('a').click( function () {
+            location.reload();
+        });
+    </script>
+</html>
