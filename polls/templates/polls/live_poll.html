@@ -55,38 +55,33 @@
 {% endblock %}
 {% block script %}
 <script>
-    var state = "{{state}}";
-
-    function queryChange() {
-        $.get(
-            '/query_live/', 
-            { course_pk: {{course.pk}}},
-            function(data) {
-                cur_state = data['state'];
-                if (state != cur_state) {
-                    location.reload(true);
-                }
-        }, "json");
-        setTimeout(queryChange, 5000);
-    }
-
     $('document').ready( function() {
+        var course_pk = {{course.pk}}
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/vote/" + course_pk + "/");
 
-        setTimeout(queryChange, 5000);
+        votesock.onmessage = function(message) {
+            var data = JSON.parse(message.data);
+
+            if (data.hasOwnProperty('status')) { //voting response
+                 if (data['status']=='success') {
+                    // Inform the user
+                    $('#response').html('You voted successfully!');
+                    // Diable the buttons
+                    $('button').prop('disabled', true);
+                }
+            }
+            else if (data.hasOwnProperty('state')) { //state change
+                location.reload(true);
+            }
+        };
 
         $('button').click( function() {
-            choicepk=$(this).attr('id').split('_')[1];
-            $.post('/query_live/', {pk: choicepk}, 
-                function(data) {
-                    if (data['status']=='success') {
-                        // Inform the user
-                        $('#response').html('You voted successfully!');
-                        //setTimeout( function(){ $('#response').html('') }, 2000);
-                        // Diable the buttons
-                        $('button').prop('disabled', true);
-                    }
-                }, 
-            "json");
+            choice_pk=$(this).attr('id').split('_')[1];
+            message = {
+                choice_pk: choice_pk,
+            }
+            votesock.send(JSON.stringify(message));
         });
     });
 </script>

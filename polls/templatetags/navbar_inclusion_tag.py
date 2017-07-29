@@ -18,15 +18,16 @@ def navbar_inclusion_tag(context):
 
 @register.simple_tag
 def check_active(request, view_name):
-    if not request:
-        return ''
-    try:
-        if view_name in resolve(request.path_info).url_name:
-            return 'active'
-        else:
-            return ''
-    except Resolver404:
-        return ''
+    return
+#    if not request:
+#        return ''
+#    try:
+#        if view_name in resolve(request.path_info).url_name:
+#            return 'active'
+#        else:
+#            return ''
+#    except Resolver404:
+#        return ''
 
 @register.simple_tag
 def to_percent(num, den):

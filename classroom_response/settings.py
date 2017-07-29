@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -122,8 +121,8 @@ STATIC_URL = '/static/'
 
 # Project Specific Settings
 LOGIN_URL = "/accounts/login/"
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/courses/"
+LOGOUT_REDIRECT_URL = "/courses/"
 
 URL_PREPEND = ''
 SITE_NAME = ''

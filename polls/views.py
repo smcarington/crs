@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from django.db.models import Max, Q, F
 
 from .models import *

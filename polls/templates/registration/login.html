@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="POST" action="{% url 'django.contrib.auth.views.login' %}">
+<form method="POST" action="{% url 'login' %}">
 {% csrf_token %}
 
 {% if form.errors %}

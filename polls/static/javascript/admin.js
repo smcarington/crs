@@ -1,4 +1,73 @@
 $(document).ready(function() {
+    // Websocket version of poll_admin interface. Used for updating votes only.
+    // Start/stop information can still be sent by ajax.
+
+    var course_pk = location.href.split('/')[4]
+    var poll_pk  = location.href.split('/')[5]
+    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/query_live/" + course_pk + "/" + poll_pk + "/");
+
+    // Update votes.
+    votesock.onmessage = function(message) {
+        var data = JSON.parse(message.data);
+
+        if (data.hasOwnProperty('state')) { //Message is a vote update
+            // Data should include the current state of the question and the primary
+            // key of the question. Extract this.
+            preData = data['state'].split('-');
+            pk      = preData[0];
+            state   = preData[1];
+            delete data['state']
+            if (state == 'True') { // Voting is live
+                $("#votes-"+pk).html("Total Votes: "+data['numVotes']);
+                delete data['numVotes'];
+                Object.keys(data).forEach(function (key) {
+                    $("#"+key).html("("+data[key]+" votes)");
+                });
+            } else if (state == 'False') { // Voting has ended, so clear total votes
+                $("#votes-"+pk).html('');
+            }
+        } else { // Update from start/stop button
+            if (data['action']=='endall') {
+                $('[id^="response"]').html(data['response']);
+                setTimeout( function() {$('[id^="response"]').html('')}, 2000);
+            } else {
+                $response = $("#response_"+pk);
+                $response.html(data['response']);
+                setTimeout( function() {$response.html('')}, 2000);
+            }
+
+            // Check to see if the question has been restarted.
+            // When resetting a question, we must replace the choice pk's. In this instance only, the
+            // response item contains a pk map whose keys are the old pk's, and whose values are the new pk's
+            if (data.hasOwnProperty('pkMap')) {
+                pkMap = data['pkMap'];
+                $("#"+pk+"-choices>ol>li>p>small").each( function() {
+                    // Determine the old pk, which is the field for the new pk
+                    idString = $(this).attr('id').split('-');
+                    newIDString = pkMap[idString[0]]+"-votes";
+                    $(this).attr('id', newIDString);
+                    $(this).html("(0 votes)");
+                });
+            }
+
+            // To make the 'voters' anchor work, we need to update to the current poll whenever we hit start
+            // Look for the anchor whose data-id matches the question primary key
+            if (action == 'start') {
+                $anchor = $("a.voters[data-id="+pk+"]");
+                url_string = $anchor.attr("href");
+
+                // Need to do some regex magix
+                re = /(\d+)\/(\d+)\//;
+                match=re.exec(url_string);
+                new_poll = (parseInt(match[2]) + 1).toString();
+                new_url = url_string.replace(match[0], match[1]+"/"+new_poll+"/");
+
+                $anchor.attr("href", new_url);
+            }
+        }
+    };
+
     // Poll administration 
     $('[id^="check"]').click( function() {
         var question = $(this).attr('id').split('_')[1];
@@ -10,52 +79,20 @@ $(document).ready(function() {
                 setTimeout( function() {$response.html('')}, 2000);
         }, "json");
     });
-
+    
     // When a button is clicked (that is, the start/stop/reset buttons), determine 
     // the appropriate action and send the server the appropriate response
     $('button').click( function() {
         preData = $(this).attr('id').split('_');
         action  = preData[0];
         pk      = preData[1];
-        $.post('/live_question/', {action: action, questionpk: pk},
-            function(data) {
-                if (action=='endall') {
-                    $('[id^="response"]').html(data['response']);
-                    setTimeout( function() {$('[id^="response"]').html('')}, 2000);
-                } else {
-                    $response = $("#response_"+pk);
-                    $response.html(data['response']);
-                    setTimeout( function() {$response.html('')}, 2000);
-                }
 
-                // Check to see if the question has been restarted.
-                // When resetting a question, we must replace the choice pk's. In this instance only, the
-                // response item contains a pk map whose keys are the old pk's, and whose values are the new pk's
-                if (data.hasOwnProperty('pkMap')) {
-                    pkMap = data['pkMap'];
-                    $("#"+pk+"-choices>ol>li>p>small").each( function() {
-                        // Determine the old pk, which is the field for the new pk
-                        idString = $(this).attr('id').split('-');
-                        newIDString = pkMap[idString[0]]+"-votes";
-                        $(this).attr('id', newIDString);
-                        $(this).html("(0 votes)");
-                    });
-                }
-
-                // To make the 'voters' anchor work, we need to update to the current poll whenever we hit start
-                // Look for the anchor whose data-id matches the question primary key
-                if (action == 'start') {
-                    $anchor = $("a.voters[data-id="+pk+"]");
-                    url_string = $anchor.attr("href");
-
-                    // Need to do some regex magix
-                    re = /(\d+)\/(\d+)\//;
-                    match=re.exec(url_string);
-                    new_poll = (parseInt(match[2]) + 1).toString();
-                    new_url = url_string.replace(match[0], match[1]+"/"+new_poll+"/");
-
-                    $anchor.attr("href", new_url);
-                }
+        var message = {
+            action: action,
+            questionpk: pk
+        }
+        votesock.send(JSON.stringify(message))
+    });
 
                 //if (action=='reset') {
                 //    pkMap = data['pkMap'];
@@ -67,15 +104,13 @@ $(document).ready(function() {
                 //        $(this).html("(0 votes)");
                 //    });
                 //}
-            }, "json");
         // Highlight the appropriate div so it is easy to see
-        if (action == 'start') {
-            color = "#c2c2c2";
-        } else if (action == 'stop') {
-            color = "transparent"
-        }
-        $(".div-"+pk).css("background-color", color);
-    });
+//        if (action == 'start') {
+//            color = "#c2c2c2";
+//        } else if (action == 'stop') {
+//            color = "transparent"
+//        }
+//        $(".div-"+pk).css("background-color", color);
 
     // Opens choices option in poll administration
     $("[id^='open']").click( function () {
@@ -149,31 +184,6 @@ $(document).ready(function() {
 //    }
 //    // Start the method to check if votes have been cast
 //    setTimeout(voteCheck, 2000);
-
-    // Websocket version of poll_admin interface. Used for updating votes only.
-    // Start/stop information can still be sent by ajax.
-    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/query_live/");
-
-    // Update votes.
-    votesock.onmessage = function(message) {
-        var data = JSON.parse(message.data);
-        // Data should include the current state of the question and the primary
-        // key of the question. Extract this.
-        preData = data['state'].split('-');
-        pk      = preData[0];
-        state   = preData[1];
-        delete data['state']
-        if (state == 'True') { // Voting is live
-            $("#votes-"+pk).html("Total Votes: "+data['numVotes']);
-            delete data['numVotes'];
-            Object.keys(data).forEach(function (key) {
-                $("#"+key).html("("+data[key]+" votes)");
-            });
-        } else if (state == 'False') { // Voting has ended, so clear total votes
-            $("#votes-"+pk).html('');
-        }
-    };
 
     $("#slides_live").click( function() {
         $('[type="checkbox"]').click();
