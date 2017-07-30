@@ -1,0 +1,28 @@
+{% load navbar_inclusion_tag %}
+
+{% if question %}
+    <div class="mathrender question-detail live-poll">
+        {{question.text | safe}}
+    </div>
+    <p id="response"></p>
+    {% if question.can_vote %}
+        <div class="mathrender multiplechoice"> 
+            {% for choice in choices %}
+            <button class="btn btn-primary" id="button_{{choice.pk}}">{{forloop.counter}}</button> 
+            <p>{{choice.text}}</p> 
+            <br>
+            {% endfor %}
+        </div>
+    {% else %}
+        <dl>
+            {% for choice in choices %}
+            <dt class="mathrender">{{choice.text}}</dt>
+            <dd>{% score_div choice.num_votes votes %}</dd>
+            <br>
+            <hr class="fadehr">
+            {% endfor %}
+        </dl>
+    {% endif %}
+{% else %}
+    <p> There is currently no poll on which to vote. </p>
+{% endif %}

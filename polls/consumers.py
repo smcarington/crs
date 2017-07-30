@@ -6,6 +6,7 @@ from channels import Group, Channel
 from channels.sessions import channel_session
 from channels.auth import channel_session_user, channel_session_user_from_http
 from django.db import transaction, IntegrityError
+from django.template import loader
 from .models import *
 
 # Attached to websocket.connect
@@ -34,6 +35,11 @@ def admin_disconnect(message, course_pk, poll_pk):
 def admin_receive(message, course_pk, poll_pk):
     """ Triggered when a poll is started or stopped. Should use the same logic
         as the http-request /live_question/.
+
+        Additionally, on start/stop we need to render the
+        live_poll_template.html template and broadcast it to the voters. The
+        previous scheme was to just reload the page, but this is inefficient as
+        it requires both an http and ws request.
     """
     # Data will contain "action" with either "start" or "stop" and "questionpk"
     # with an integer string 
@@ -46,10 +52,11 @@ def admin_receive(message, course_pk, poll_pk):
 
         try:
             question = PollQuestion.objects.get(pk = question_pk)
+            course   = Course.objects.get(pk = course_pk)
         except Exception as e:
             print(str(e))
 
-        if status == 'endall':
+        if status == 'endall': # State -1
             # Make sure this only kills the poll questsions for this course
             PollQuestion.objects.filter(
                     visible=True,
@@ -58,7 +65,18 @@ def admin_receive(message, course_pk, poll_pk):
                         visible=False, 
                         can_vote=False)
             response_data = {'response': 'Polling has ended'}
-            Group('Voter-'+course_pk).send({'text': json.dumps({'state': 'changed'})})
+
+            # Send information to the voters
+            state = str(question.pk)+"-"+str(question.can_vote)
+            content = loader.render_to_string(
+                    'polls/live_poll_template.html', 
+                    {
+                        'state': state,
+                        'course': course,
+                    }
+                )
+            Group('Voter-'+course_pk).send({'text': json.dumps({'content': content})})
+
         # The PollQuestion model has built in functions for this. But we have to make sure
         # that this is the only live question on start.
         #
@@ -73,6 +91,7 @@ def admin_receive(message, course_pk, poll_pk):
                 # we first check to see if any votes have been cast.
                 choices  = question.choices.filter(cur_poll=question.num_poll)
                 num_votes = sum(choices.values_list('num_votes', flat=True))
+                state = str(question.pk)+"-"+str(question.can_vote)
 
                 response_data = {'response': 'Question pushed to live page'}
                 if num_votes != 0:
@@ -83,16 +102,42 @@ def admin_receive(message, course_pk, poll_pk):
                 # current course if reimplemented
                 # PollQuestion.objects.filter(visible=True).update(visible=False, can_vote=False)
                 question.start()
-                Group('Voter-'+course_pk).send({'text': json.dumps({'state': 'changed'})})
+
+                # Send information to the voters
+                content = loader.render_to_string(
+                        'polls/live_poll_template.html', 
+                        {
+                            'question': question, 
+                            'choices': choices, 
+                            'state': state, 
+                            'votes': num_votes,
+                            'course': course,
+                        }
+                    )
+                Group('Voter-'+course_pk).send({'text': json.dumps({'content': content})})
         elif status == 'stop':
             if not question.can_vote:
                 response_data = {'response': 'This question is not live.'}
             elif not question.visible:
                 response_data = {'response': 'That question is not visible'}
             else:
-                Group('Voter-'+course_pk).send({'text': json.dumps({'state': 'changed'})})
                 question.stop()
                 response_data = {'response': 'Question stopped. Displaying results.'}
+
+                choices  = question.choices.filter(cur_poll=question.num_poll)
+                num_votes = sum(choices.values_list('num_votes', flat=True))
+                state = str(question.pk)+"-"+str(question.can_vote)
+                content = loader.render_to_string(
+                        'polls/live_poll_template.html', 
+                        {
+                            'question': question, 
+                            'choices': choices, 
+                            'state': state, 
+                            'votes': num_votes,
+                            'course': course,
+                        }
+                    )
+                Group('Voter-'+course_pk).send({'text': json.dumps({'content': content})})
 
         # Add the action to the response data, since it's used in figuring out
         # the page logic
@@ -162,8 +207,8 @@ def voter_receive(message, course_pk):
 
             response_data = {'status': 'success'}
 
-            Group('Voter-'+course_pk).send({'text': json.dumps(response_data)})
-            send_votes_to_admin(choice.question, course_pk)
+        Group('Voter-'+course_pk).send({'text': json.dumps(response_data)})
+        send_votes_to_admin(choice.question, course_pk)
 
 def send_votes_to_admin(question, course_pk):
     """ Helper method that fires when someone votes. Used to update the number

@@ -25,32 +25,9 @@
     <a href="{% url 'list_polls' course_pk=course.pk %}">&#171; Polls</a>
     <h2>Live Poll - {{course.name}} </h2>
 
-    {% if question %}
-        <div class="mathrender question-detail live-poll">
-            {{question.text | safe}}
-        </div>
-        <p id="response"></p>
-        {% if question.can_vote %}
-            <div class="mathrender multiplechoice"> 
-                {% for choice in choices %}
-                <button class="btn btn-primary" id="button_{{choice.pk}}">{{forloop.counter}}</button> 
-                <p>{{choice.text}}</p> 
-                <br>
-                {% endfor %}
-            </div>
-        {% else %}
-            <dl>
-                {% for choice in choices %}
-                <dt class="mathrender">{{choice.text}}</dt>
-                <dd>{% score_div choice.num_votes votes %}</dd>
-                <br>
-                <hr class="fadehr">
-                {% endfor %}
-            </dl>
-        {% endif %}
-    {% else %}
-        <p> There is currently no poll on which to vote. </p>
-    {% endif %}
+    <div id="livepollquestion"> {# Used to replace html from websocket response #}
+        {% include 'polls/live_poll_template.html' %}
+    </div>
 
 {% endblock %}
 {% block script %}
@@ -71,18 +48,28 @@
                     $('button').prop('disabled', true);
                 }
             }
-            else if (data.hasOwnProperty('state')) { //state change
-                location.reload(true);
+            else if (data.hasOwnProperty('content')) { //state change
+                $('#livepollquestion').html(data['content']);
+                // Need to re-render the mathematics
+                $('.mathrender').each( function () {
+                    renderMathInElement( $(this)[0] );
+                });
+                //New buttons may have been added, so add listeners
+                add_button_listeners();
             }
         };
 
-        $('button').click( function() {
-            choice_pk=$(this).attr('id').split('_')[1];
-            message = {
-                choice_pk: choice_pk,
-            }
-            votesock.send(JSON.stringify(message));
-        });
+        function add_button_listeners() {
+            $('button').click( function() {
+                choice_pk=$(this).attr('id').split('_')[1];
+                message = {
+                    choice_pk: choice_pk,
+                }
+                votesock.send(JSON.stringify(message));
+            });
+        }
+
+        add_button_listeners();
     });
 </script>
 {% endblock %}

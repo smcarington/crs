@@ -161,6 +161,18 @@ dd {
     min-height: 100%;
 }
 
+.button-div {
+    position: absolute;
+    width: 60%;
+}
+
+.button-div a, .button-div button {
+    margin: 10px 0px 50px 0px;
+    float: right;
+    display:inline;
+}
+
+
 .navbar{
     padding: 5px 20px 5px 20px;
 }
