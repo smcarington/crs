@@ -103,7 +103,10 @@ def admin_receive(message, course_pk, poll_pk):
                 # PollQuestion.objects.filter(visible=True).update(visible=False, can_vote=False)
                 question.start()
 
-                # Send information to the voters
+                # Send information to the voters.
+                # Note that the choice_pk's may have reset wit hthe change in
+                # the poll number, so we must reload them
+                choices  = question.choices.filter(cur_poll=question.num_poll)
                 content = loader.render_to_string(
                         'polls/live_poll_template.html', 
                         {
@@ -115,6 +118,7 @@ def admin_receive(message, course_pk, poll_pk):
                         }
                     )
                 Group('Voter-'+course_pk).send({'text': json.dumps({'content': content})})
+                send_votes_to_admin(question, course_pk)
         elif status == 'stop':
             if not question.can_vote:
                 response_data = {'response': 'This question is not live.'}

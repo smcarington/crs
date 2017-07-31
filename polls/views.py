@@ -387,6 +387,7 @@ def live_poll(request, course_pk):
                     'state': state, 
                     'votes':num_votes,
                     'course': course,
+                    'url_prepend': settings.URL_PREPEND,
                 })
 
     # If no question is currently live, we do nothing
@@ -398,6 +399,7 @@ def live_poll(request, course_pk):
                 {
                     'state': state,
                     'course': course,
+                    'url_prepend': settings.URL_PREPEND,
                 })
     except PollQuestion.MultipleObjectsReturned:
     # Somehow multiple questions are visible. Shut them all down.
@@ -414,6 +416,7 @@ def live_poll(request, course_pk):
                 {
                     'state': state,
                     'course': course,
+                    'url_prepend': settings.URL_PREPEND,
                 })
 
 @login_required

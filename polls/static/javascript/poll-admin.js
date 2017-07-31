@@ -5,8 +5,8 @@ $(document).ready(function() {
     // Located in a hidden input because of template rendering
     var url_prepend = document.getElementById("url_prepend").value.split('/')[0]
 
-    var course_pk = location.href.split('/')[4]
-    var poll_pk  = location.href.split('/')[5]
+    var course_pk = document.getElementById("course_pk").value
+    var poll_pk  = document.getElementById("poll_pk").value
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
     var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/" + url_prepend+ "/query_live/" + course_pk + "/" + poll_pk + "/");
 
