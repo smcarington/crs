@@ -1,11 +1,14 @@
 $(document).ready(function() {
     // Websocket version of poll_admin interface. Used for updating votes only.
     // Start/stop information can still be sent by ajax.
+    
+    // Located in a hidden input because of template rendering
+    var url_prepend = document.getElementById("url_prepend").value.split('/')[0]
 
     var course_pk = location.href.split('/')[4]
     var poll_pk  = location.href.split('/')[5]
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/query_live/" + course_pk + "/" + poll_pk + "/");
+    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/" + url_prepend+ "/query_live/" + course_pk + "/" + poll_pk + "/");
 
     // Update votes.
     votesock.onmessage = function(message) {

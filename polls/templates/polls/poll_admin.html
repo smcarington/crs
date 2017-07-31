@@ -10,6 +10,8 @@
 
 {% block title %}
 <title>Poll Administration - {{site_name}}</title>
+{# Sketchy workaround for adding variables to js file. See poll-admin.js #}
+<input type="hidden" id="url_prepend" name="variable" value="{{url_prepend}}">
 {% endblock %}
 
 {% block content %}
@@ -80,5 +82,5 @@ votes to zero. The data from the previous vote is preserved. -->
 {% endblock %}
 
 {% block script %}
-    <script src={% static "javascript/admin.js" %}></script>
+    <script src={% static "javascript/poll-admin.js" %}></script>
 {% endblock %}

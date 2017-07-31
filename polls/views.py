@@ -122,6 +122,7 @@ def poll_admin(request, course_pk, poll_pk):
                 'questions': questions,
                 'course_pk': course_pk,
                 'poll_pk': poll_pk,
+                'url_prepend': settings.URL_PREPEND,
             })
 
 @staff_required()
