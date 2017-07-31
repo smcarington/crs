@@ -34,7 +34,8 @@
 <script>
     $('document').ready( function() {
         var course_pk = "{{course.pk}}";
-        var url_prepend = "{{url_prepend}}".split('/')[0];
+        var url_prepend = "{{url_prepend}}";
+        url_prepend = url_prepend.substring(0,url_prepend.length-1);
         var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
         var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/" + url_prepend +  "/vote/" + course_pk + "/");
 

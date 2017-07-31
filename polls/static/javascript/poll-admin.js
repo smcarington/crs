@@ -3,7 +3,8 @@ $(document).ready(function() {
     // Start/stop information can still be sent by ajax.
     
     // Located in a hidden input because of template rendering
-    var url_prepend = document.getElementById("url_prepend").value.split('/')[0]
+    var url_prepend = document.getElementById("url_prepend").value;
+    url_prepend = url_prepend.substring(0, url_prepend.length-1);
 
     var course_pk = document.getElementById("course_pk").value
     var poll_pk  = document.getElementById("poll_pk").value
