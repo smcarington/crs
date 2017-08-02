@@ -57,8 +57,14 @@ def courses(request):
         'polls/courses.html', 
         {'courses' : courses} )
 
+@login_required
 def administrative(request):
-    return
+    if not request.user.is_staff:
+        return Http404("Not a valid User")
+    else:
+        return render(
+            request,
+            'polls/administration.html')
 
 @login_required
 def list_polls(request, course_pk):

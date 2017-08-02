@@ -1,0 +1,19 @@
+{% extends "polls/base.html" %}
+
+{% block title %}
+<title>Administration - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Administration</h1>
+    
+    {% if perms.polls.add_course %}
+        <h3>Create Courses </h3>
+            <a href="" class="btn btn-success">Add New Course</a>
+
+        <h3>Manage Users</h3>
+    {% endif %}
+{% endblock %}
+
+{% block sidenote %}
+{% endblock %}
