@@ -36,20 +36,33 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'shibboleth',
     'channels',
     'polls',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+#    'django.contrib.auth.middleware.RemoteUserMiddleware',
+    'shibboleth.middleware.ShibbolethRemoteUserMiddleware',
+
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'shibboleth.backends.ShibbolethRemoteUserBackend',
+#    'django.contrib.auth.backends.RemoteUserBackend',
+]
+
+SHIBBOLETH_ATTRIBUTE_MAP = {
+    "utorid": (True, "username"),
+}
 
 ROOT_URLCONF = 'classroom_response.urls'
 

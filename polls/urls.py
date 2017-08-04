@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^query_live/$', views.query_live, name='query_live'),
     # Ajax End
     url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', views.delete_item, name='delete_item'),
+
 ]

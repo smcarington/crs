@@ -7,6 +7,8 @@ class Course(models.Model):
         who are enrolled in that course.
     """
     name = models.CharField(max_length=20)
+    last_used = models.DateTimeField(default
+
 
     def get_num_polls(self):
         return self.poll_set.count()

@@ -7,14 +7,10 @@ from django.conf.urls.static import static
 from django.contrib.auth import (login, logout)
 from django.contrib.auth.views import *
 from django.contrib import admin
-import classroom_response.views as project_views
 
 url_prepend = settings.URL_PREPEND
 
 urlpatterns = [
-    # Remote User Login
-    url(r'^tholden2/login/$', project_views.remote_login, name='remote_login'),
-    # Superuser
     url(r'^{prepend}superuser/'.format(prepend=url_prepend), admin.site.urls),
     url(r'^{prepend}accounts/login/$'.format(prepend=url_prepend),
         LoginView.as_view(), name='login'),
