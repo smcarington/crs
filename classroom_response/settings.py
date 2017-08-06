@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'polls.middleware.UtorAuthMiddleware',
+    'polls.middleware.UtorAuthMiddleware.UtorAuthMiddleware',
 
 ]
 
