@@ -1,4 +1,5 @@
 {% extends 'polls/base.html' %}
+{% load guardian_tags %}
 
 {% comment %}
     course_pk - an integer with the course primary key
@@ -11,6 +12,7 @@
 {% endblock %}
 
 {% block content %}
+    {% get_obj_perms request.user for course as "course_perms" %} 
     <a href="{% url 'courses' %}">&#171; Courses</a>
     <h2> Polls for  {{course.name}} </h2> 
     <a href="{% url 'live_poll' course_pk=course_pk %}" class="btn btn-default">Live Poll</a>
@@ -25,7 +27,7 @@
                     ({{ poll.questions.count }} Questions)
                 </small>
             </div>
-            {% if user.is_staff %}
+            {% if "can_see_poll_admin" in course_perms or "can_edit_poll" in course_perms %}
                 <div class = "col-md-4">
                     <a href="{% url 'poll_admin' course_pk=course_pk poll_pk=poll.pk %}" class="btn btn-default">
                         Poll Administration
@@ -38,7 +40,8 @@
 {% endblock %}
 
 {% block buttons %}
-    {% if user.is_staff %}
+    {% get_obj_perms request.user for course as "course_perms" %} 
+    {% if "can_edit_poll" in course_perms %}
     <div class="button-div">
         <a href="{% url 'new_poll' course_pk=course_pk%}" class="btn btn-default">New Poll</a>
     </div>

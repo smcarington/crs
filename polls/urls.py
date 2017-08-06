@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^change_question_order/$', views.change_question_order, name='change_question_order'),
     url(r'^live_question/$', views.live_question, name='live_question'),
     url(r'^query_live/$', views.query_live, name='query_live'),
+    url(r'^make_live/$', views.make_live, name='make_live'),
     # Ajax End
     url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', views.delete_item, name='delete_item'),
 ]

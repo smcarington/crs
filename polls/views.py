@@ -82,12 +82,16 @@ def list_polls(request, course_pk):
          'course'   : course,})
 
 @staff_required()
-def new_poll(request):
+def new_poll(request, course_pk):
     if request.method == "POST":
         form = PollForm(request.POST)
         if form.is_valid():
-            poll = form.save()
-            return redirect('polls')
+            course = Course.objects.get(pk=course_pk)
+            poll = form.save(commit=False)
+            poll.course = course
+            poll.save()
+
+            return redirect('list_polls', course_pk=course_pk)
     else:
         form = PollForm()
 
@@ -123,13 +127,18 @@ def poll_admin(request, course_pk, poll_pk):
     """
     poll = get_object_or_404(Poll, pk=poll_pk)
     questions = poll.questions.all().order_by('position')
+    course = Course.objects.get(pk=course_pk)
+
+    if not request.user.has_perm('can_see_poll_admin', poll.course):
+        raise HttpResponseForbidden("Insufficient Privileges")
+
     return render(
             request, 
             'polls/poll_admin.html', 
             {
                 'poll': poll, 
                 'questions': questions,
-                'course_pk': course_pk,
+                'course': course,
                 'poll_pk': poll_pk,
                 'url_prepend': settings.URL_PREPEND,
             })
@@ -164,8 +173,10 @@ def new_pollquestion(request, course_pk, poll_pk, question_pk=None):
     # To facilitate question + choice at the same time, we must instantiate the
     # question before hand. This will also make editing a question easy in the
     # future
-
     poll = get_object_or_404(Poll, pk=poll_pk)
+
+    if not request.user.has_perm('can_edit_poll', poll.course):
+        raise HttpResponseForbidden("Unauthorized access")
 
     # If a question is created for the first time, we must instantiate it so that
     # our choices have somewhere to point. If it already exists, retrieve it
@@ -288,7 +299,7 @@ def make_live(request):
     question.live = (request.POST['live']=='true');
     question.save()
 
-    response_data = {'response': 'Question live: ' + str(question.live)}
+    response_data = {'response': 'Question Visible: ' + str(question.live)}
 
     return HttpResponse(json.dumps(response_data))
 
@@ -573,7 +584,6 @@ def generate_redirect_string(name, url):
     """
     return "<a href={}>Return to {}</a>".format(url,name)
 
-@staff_required
 def create_course(request):
     """ View for generating and handling the create course form. This form asks
     for the name of the course, and the default administrator. The view must

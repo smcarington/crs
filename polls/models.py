@@ -10,7 +10,7 @@ class Course(models.Model):
         who are enrolled in that course.
     """
     name = models.CharField(max_length=20)
-    last_active= models.DateTimeField(blank=True, null=True)
+    last_active = models.DateTimeField(blank=True, null=True)
 
     def update_last_active(self):
         self.last_active = timezone.now()

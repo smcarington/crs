@@ -147,6 +147,10 @@ dd {
     font-size:10pt;
 }
 
+.question_live {
+    background-color: #c2c2c2;
+}
+
 
 .question-detail {
     margin: 20px 0 20px 0;

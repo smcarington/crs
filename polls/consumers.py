@@ -103,6 +103,9 @@ def admin_receive(message, course_pk, poll_pk):
                 # PollQuestion.objects.filter(visible=True).update(visible=False, can_vote=False)
                 question.start()
 
+                # Update the last-active 
+                course.update_last_active()
+
                 # Send information to the voters.
                 # Note that the choice_pk's may have reset wit hthe change in
                 # the poll number, so we must reload them

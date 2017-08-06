@@ -9,7 +9,7 @@ $(document).ready(function() {
     var course_pk = document.getElementById("course_pk").value
     var poll_pk  = document.getElementById("poll_pk").value
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/ws" + url_prepend+ "/query_live/" + course_pk + "/" + poll_pk + "/");
+    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/ws/" + url_prepend+ "/query_live/" + course_pk + "/" + poll_pk + "/");
 
     // Update votes.
     votesock.onmessage = function(message) {
@@ -69,6 +69,13 @@ $(document).ready(function() {
 
                 $anchor.attr("href", new_url);
             }
+
+            // Make the backgrounds work:
+            // Turn off the active one
+            $('.question_live').removeClass('question_live');
+            if (action == 'start') {
+                $('div.row.div-'+pk).addClass('question_live');
+            }
         }
     };
 
@@ -76,7 +83,7 @@ $(document).ready(function() {
     $('[id^="check"]').click( function() {
         var question = $(this).attr('id').split('_')[1];
         var live     = $(this).is(':checked');
-        $.post('/make_live/', {question: question, live: live}, 
+        $.post('/'+url_prepend+'/make_live/', {question: question, live: live}, 
             function(data) {
                 $response = $("#response_"+question);
                 $response.html(data['response']);
@@ -97,24 +104,6 @@ $(document).ready(function() {
         }
         votesock.send(JSON.stringify(message))
     });
-
-                //if (action=='reset') {
-                //    pkMap = data['pkMap'];
-                //    $("#"+pk+"-choices>ol>li>p>small").each( function() {
-                //        // Determine the old pk, which is the field for the new pk
-                //        idString = $(this).attr('id').split('-');
-                //        newIDString = pkMap[idString[0]]+"-votes";
-                //        $(this).attr('id', newIDString);
-                //        $(this).html("(0 votes)");
-                //    });
-                //}
-        // Highlight the appropriate div so it is easy to see
-//        if (action == 'start') {
-//            color = "#c2c2c2";
-//        } else if (action == 'stop') {
-//            color = "transparent"
-//        }
-//        $(".div-"+pk).css("background-color", color);
 
     // Opens choices option in poll administration
     $("[id^='open']").click( function () {

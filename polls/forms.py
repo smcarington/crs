@@ -41,4 +41,7 @@ class AddStudentsForm(forms.ModelForm):
         model = CSVFile
         fields = ('doc_file',)
 
-
+class PollForm(forms.ModelForm):
+    class Meta:
+        model = Poll
+        fields = ('title',)
