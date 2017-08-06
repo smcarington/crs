@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'guardian',
     'channels',
     'polls',
 ]
@@ -50,11 +51,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'polls.middleware.UtorAuthMiddleware.UtorAuthMiddleware',
-
 ]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.RemoteUserBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
 ]
 
 SHIBBOLETH_ATTRIBUTE_MAP = {
@@ -135,6 +137,7 @@ LOGIN_REDIRECT_URL = "/courses/"
 LOGOUT_REDIRECT_URL = "/courses/"
 
 URL_PREPEND = ''
+WS_PREPEND = URL_PREPEND
 SITE_NAME = ''
 SITE_URL = ''
 NOTES_URL = ''

@@ -1,0 +1,98 @@
+{% extends 'polls/base.html' %}
+
+{# Has context {{sidenote}} #}
+{# Has context {{header}} with name of page #}
+{# Has context {{show_preview}} #}
+
+{% block title %}
+<title>{{header}} - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+<h4> {{header}} </h4>
+<div class="quiz-divs">
+    {% if form.is_multipart %}
+        <form method="POST", enctype="multipart/form-data">
+    {% else %}
+        <form method="POST" >
+    {% endif %}
+    {% csrf_token %}
+        <table class="form-table">
+            {% for field in form %}
+            <tr>
+                {{field.errors}}
+                <td> {{ field.label_tag }} </td>
+                <td> {{ field }} <br>
+                {% if field.help_text %}
+                <p> {{field.help_text|safe }} </p>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+{% if show_preview %}
+    <div id="form_preview_wrapper">
+        <p><b>Preview</b></p>
+        <div id="form_preview" class="diff">
+
+        </div>
+        <br>
+        <p><b>Solution</b></p>
+        <div id="solution_preview" class="diff">
+
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block sidenote %}
+    <div class="quiz-divs">
+        {{sidenote | safe}}
+    </div>
+{% endblock %}
+
+{% block script %}
+{% if show_preview %}
+    <script>
+        // ToDo: Make a function to minimize code redundancy 
+        $(document).ready( function() {
+
+            if ($("#id_text").length) {
+                $("#form_preview").html($("#id_text").val());
+                renderMathInElement( $("#form_preview")[0] );
+
+                $("#id_text").keyup( function() {
+                    $("#form_preview").html($(this).val());
+                    renderMathInElement( $("#form_preview")[0] );
+                });
+            } else if ($("#id_problem_str").length) {
+                $("#form_preview").html($("#id_problem_str").val());
+                renderMathInElement( $("#form_preview")[0] );
+
+                $("#id_problem_str").keyup( function() {
+                    $("#form_preview").html($(this).val());
+                    renderMathInElement( $("#form_preview")[0] );
+                });
+            } else {
+                $("#form_preview_wrapper").remove();
+            }
+
+            if ($("#id_solution").length) {
+                $("#solution_preview").html($("#id_solution").val());
+                renderMathInElement( $("#solution_preview")[0] );
+
+                $("#id_solution").keyup( function() {
+                    $("#solution_preview").html($(this).val());
+                    renderMathInElement( $("#solution_preview")[0] );
+                });
+
+            }
+        });
+    </script>
+{% endif%}
+{% endblock %}

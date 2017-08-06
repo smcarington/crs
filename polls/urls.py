@@ -25,6 +25,9 @@ urlpatterns = [
     # Polls end
     # Admin begin
     url(r'^administrative/$', views.administrative, name='administrative'),
+    url(r'^administrative/create_course/$', views.create_course, name='create_course'),
+    url(r'^administrative/add_staff_member/$', views.add_staff_member, name='add_staff_member'),
+    url(r'^administrative/add_students/$', views.add_students, name='add_students'),
     # Admin end
     # Ajax Begin
     url(r'^change_question_order/$', views.change_question_order, name='change_question_order'),
@@ -32,5 +35,4 @@ urlpatterns = [
     url(r'^query_live/$', views.query_live, name='query_live'),
     # Ajax End
     url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', views.delete_item, name='delete_item'),
-
 ]

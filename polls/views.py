@@ -10,7 +10,10 @@ from django.db import transaction, IntegrityError
 from django.db.models import Max, Q, F
 
 from .models import *
+from .forms import *
+from guardian.shortcuts import get_objects_for_user
 import json
+import csv
 
 def staff_required(login_url=settings.LOGIN_URL):
     return user_passes_test(lambda u:u.is_staff, login_url=login_url)
@@ -562,4 +565,133 @@ def who_voted(request, course_pk, poll_pk, question_pk, poll_num):
 
 # ----------------- (fold) History ----------------------- #
 
-# ----- Classed Based Views  ----------- #
+# --------- Course Administration ------- #
+
+def generate_redirect_string(name, url):
+    """ Shortcut for generating the redirect html to be inserted into
+    success.html
+    """
+    return "<a href={}>Return to {}</a>".format(url,name)
+
+@staff_required
+def create_course(request):
+    """ View for generating and handling the create course form. This form asks
+    for the name of the course, and the default administrator. The view must
+    handle setting the administrator.
+    """
+    if not request.user.is_superuser:
+        raise HttpResponseForbidden("You are not authorized to create a course")
+
+    if request.method == "POST": # Form returned filled in
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = form.save()
+            # If a default admin has been specified, add them
+            username = request.POST['default_admin']
+            success_string = "Course {} successfully created".format(
+                    course.name )
+            if username:
+                course.add_admin(username)
+                success_string += "<br>User {} added as default admin".format(
+                        username)
+            redirect_string = generate_redirect_string(
+                    'Administration', reverse('administrative') )
+
+            return render(request,
+                    'polls/success.html',
+                    { 'success_string': success_string,
+                      'redirect_string' : redirect_string,
+                    }
+                )
+    else: # request method is GET, so seeing page for the first time
+        form = CourseForm()
+
+        return render(request, 'polls/generic_form.html', 
+                {'form': form,
+                 'header': "Create Course"
+                }
+            )
+
+def add_staff_member(request):
+    """ Add staff members to a course """
+    # Populate the form with list of courses 
+    courses = get_objects_for_user(request.user, 'polls.can_edit_poll')
+    if request.method == "POST":
+        form = StaffForm(request.POST)
+        course_pk = int(request.POST['course'])
+        username  = request.POST['username']
+        is_admin = 'admin' in request.POST
+
+        course = Course.objects.get(pk=course_pk)
+        course.add_admin(username, staff=not is_admin)
+
+        redirect_string = generate_redirect_string(
+            'Administrative', reverse('administrative') )
+        success_string = ("User {} successfully added to course {} "
+           "with {} privileges").format(
+               username, course.name, "admin" if is_admin else "staff")
+
+        return render(request, 'polls/success.html',
+            { 'success_string': success_string,
+              'redirect_string': redirect_string,
+            }
+        )
+    else:
+        form = StaffForm(queryset=courses)
+        return render(request, 'polls/generic_form.html',
+            { 'form': form,
+              'header': "Add Staff Member",
+            }
+        )
+
+def add_students(request):
+    # Populate the form with list of courses 
+    courses = get_objects_for_user(request.user, 'polls.can_edit_poll')
+    sidenote = ("Upload a csv file whose rows are the UTORid's of the "
+        "students you wish to add to this course")
+    if request.method == "POST":
+        form = AddStudentsForm(request.POST, request.FILES, queryset=courses)
+
+        if form.is_valid():
+            # Get the course
+            course_pk = int(request.POST['course'])
+            course = Course.objects.get(pk=course_pk)
+            # Save the file to make it easier to read from later
+            csv_file = form.save()
+
+            # Read through the CSV file 
+            with open(csv_file.doc_file.path, 'rt') as the_file:
+                for row in csv.reader(the_file):
+                    username = row[0]
+                    user, _ = User.objects.get_or_create(username=username)
+                    # Get the membership and add this course to that
+                    membership, _ = UserMembership.objects.get_or_create(user=user)
+                    membership.courses.add(course)
+
+            redirect_string = generate_redirect_string(
+                'Administrative', reverse('administrative') )
+            success_string = "Students successfully added to course {} ".format(
+                   course.name)
+
+            return render(request, 'polls/success.html',
+                { 'success_string': success_string,
+                  'redirect_string': redirect_string,
+                }
+            )
+
+        return render(request, 'polls/generic_form.html',
+            { 'form': form,
+              'header': "Add Students to Course",
+              'sidenote': sidenote,
+            }
+        )
+    else:
+        form = AddStudentsForm(queryset=courses)
+        return render(request, 'polls/generic_form.html',
+            { 'form': form,
+              'header': "Add Students to Course",
+              'sidenote': sidenote,
+            }
+        )
+
+

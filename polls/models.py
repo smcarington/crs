@@ -1,18 +1,55 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
+
+from guardian.models import UserObjectPermission
 
 class Course(models.Model):
     """ A container for storing multiple polls. Will only be visible to students
         who are enrolled in that course.
     """
     name = models.CharField(max_length=20)
+    last_active= models.DateTimeField(blank=True, null=True)
+
+    def update_last_active(self):
+        self.last_active = timezone.now()
+        self.save()
+
+    def add_admin(self, username, staff=False):
+        """ Adds row level adminstrative abilities for the specified user. Takes
+        an optional parameter 'staff' (default False) which indicates whether
+        the user is staff or admin. Admin have the permission 'can_edit_poll'
+        while staff have 'can_see_poll_admin'.
+        """
+        try:
+            user, _ = User.objects.get_or_create(username=username)
+            user.is_staff = True
+            user.save()
+
+            # Make sure the user is also a part of the course
+            membership, _ = UserMembership.objects.get_or_create(user=user)
+            membership.courses.add(self)
+
+            # Give the user permission to edit this course
+            perm = 'can_see_poll_admin' if staff else 'can_edit_poll'
+            UserObjectPermission.objects.assign_perm(
+                perm, user, obj=self
+            )
+        except Exception as e:
+            print(e)
 
     def get_num_polls(self):
         return self.poll_set.count()
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        permissions = (
+            ("can_see_poll_admin", "Can see the poll administration"),
+            ("can_edit_poll", "Can edit the poll"),
+        )
 
 class UserMembership(models.Model):
     """ Tracks which courses a student/ta can see
@@ -25,9 +62,8 @@ class UserMembership(models.Model):
         for course in self.courses.all():
             course_string += str(course)
 
-        return "{} {}: {}".format(
-            self.user.first_name,
-            self.user.last_name,
+        return "{}: {}".format(
+            self.user.username,
             course_string)
 
 class Poll(models.Model):
@@ -215,3 +251,12 @@ class StudentVote(models.Model):
 
     def __str__(self):
         return self.student.username + ' vote '
+
+
+class CSVFile(models.Model):
+    """ Used for storing CSV files.
+    """
+    doc_file  = models.FileField(upload_to="tmp/")
+
+    def __str__(self):
+        return self.doc_file
