@@ -5,4 +5,6 @@ def remote_login(request):
     """ Used to redirect to the desired page after loggin in. Wherever login is
     directed should be protected by the remote user.
     """
-    return render(request, 'polls/check_ev.html')
+    next_page = request.GET['next']
+    import pdb; pdb.set_trace()
+    return redirect(next_page)

@@ -7,7 +7,7 @@ class UtorAuthMiddleware(RemoteUserMiddleware):
     which we need to strip.
     """
     header = 'HTTP_EPPN' # Custom Header
-    force_logout_if_no_header = True
+    force_logout_if_no_header = False
 
     def process_request(self, request):
         # AuthenticationMiddleware is required so that request.user exists.

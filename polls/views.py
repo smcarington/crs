@@ -49,7 +49,7 @@ def home(request):
 
 @login_required
 def courses(request):
-    membership = UserMembership.objects.get(
+    membership,_ = UserMembership.objects.get_or_create(
                     user=request.user)
     courses = membership.courses.all()
     return render(
@@ -60,7 +60,7 @@ def courses(request):
 @login_required
 def administrative(request):
     if not request.user.is_staff:
-        return Http404("Not a valid User")
+        raise HttpResponseForbidden("Not a valid User")
     else:
         return render(
             request,
