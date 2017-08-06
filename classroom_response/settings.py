@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shibboleth',
     'channels',
     'polls',
 ]
@@ -50,14 +49,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#    'django.contrib.auth.middleware.RemoteUserMiddleware',
-    'shibboleth.middleware.ShibbolethRemoteUserMiddleware',
+    'polls.middleware.UtorAuthMiddleware',
 
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'shibboleth.backends.ShibbolethRemoteUserBackend',
-#    'django.contrib.auth.backends.RemoteUserBackend',
+    'django.contrib.auth.backends.RemoteUserBackend',
 ]
 
 SHIBBOLETH_ATTRIBUTE_MAP = {
