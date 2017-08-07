@@ -9,7 +9,7 @@ class CourseForm(forms.ModelForm):
     default_admin = forms.CharField(label='Administrator', max_length=8)
     class Meta:
         model = Course
-        fields = ('name',)
+        fields = ('name', 'open_enrollment',)
         help_texts = {
             'name': 'Insert Course Name',
             'default_admin': 'Specify an initial administrator',

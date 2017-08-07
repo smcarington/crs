@@ -704,4 +704,39 @@ def add_students(request):
             }
         )
 
+@login_required
+def course_search(request):
+    """ AJAX view for searching for open enrollment courses. GET should contain
+    'query' 
+    """
+    if request.method == "GET":
+        query = request.GET['query']
+        
+        courses = Course.objects.filter(
+            open_enrollment=True, name__contains=query)[:10]
+        membership = UserMembership.objects.get(user=request.user)
 
+        return render(request, 'polls/course_search.html',
+            { 'courses': courses,
+              'membership': membership
+            }
+        )
+
+@login_required
+def enroll_course(request):
+    """ AJAX view for enrolling a student in an open enrollment course
+    """
+
+    if request.method == "POST":
+        course_pk = int(request.POST['course_pk'])
+        course = get_object_or_404(Course, pk=course_pk)
+        if course.open_enrollment:
+            membership, _ = UserMembership.objects.get_or_create(user=request.user)
+            membership.courses.add(course)
+            response_data = {'response': 'success'}
+        else:
+            response_data = {'response': 'Course does not permit open enrollment'}
+    else:
+        response_data = {'response': 'Invalid HTTP request'}
+
+    return HttpResponse(json.dumps(response_data))

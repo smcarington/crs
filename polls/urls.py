@@ -34,6 +34,8 @@ urlpatterns = [
     url(r'^live_question/$', views.live_question, name='live_question'),
     url(r'^query_live/$', views.query_live, name='query_live'),
     url(r'^make_live/$', views.make_live, name='make_live'),
+    url(r'^course_search/$', views.course_search, name='course_search'),
+    url(r'^enroll_course/$', views.enroll_course, name='enroll_course'),
     # Ajax End
     url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', views.delete_item, name='delete_item'),
 ]

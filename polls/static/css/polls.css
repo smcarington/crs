@@ -24,6 +24,10 @@ h2 {
     padding-bottom: 10px;
 }
 
+h2 a {
+    font-size: 10pt;
+}
+
 form button {
     float: right;
     margin-top:10px;
@@ -151,6 +155,21 @@ dd {
     background-color: #c2c2c2;
 }
 
+.enrolled {
+    color: lightgray;
+}
+
+.enrolled > span {
+    cursor: default;
+}
+
+.unenrolled >span {
+    cursor: pointer;
+}
+
+.glyphicon.glyphicon-plus {
+    padding-right: 20px;
+}
 
 .question-detail {
     margin: 20px 0 20px 0;
