@@ -68,7 +68,8 @@
                 poll_number = $(this).val();
                 // To ensure the history is preserved, we have to push this onto
                 // the history stack before loading the page
-                myurl = "/courses/{{course_pk}}/{{poll_pk}}/"+{{question.pk}}+"/poll_history/"+poll_number+"/";
+				myurl = "{% url 'poll_history' course_pk=course_pk poll_pk=poll_pk question_pk=question.pk poll_num=99999 %}";
+				myurl = myurl.replace('99999', poll_number)
                 dict_name = "q{{question.pk}}"; //Not really used, but should be unique
                 history.pushState( {dict_name: myurl}, myurl);
                 window.location.replace(myurl);
