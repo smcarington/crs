@@ -20,6 +20,7 @@
                 </span>
             </a>
         </div>
+    {% endfor %}
 
 <div class="modal fade" id="modal-search" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -40,8 +41,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-    {% endfor %}
 {% endblock %}
 
 {% block script %}
@@ -57,7 +56,7 @@
             });
 
             function update_search(query) {
-                $.get('{% url "course_search" %}', 
+                $.get("{% url 'course_search' %}", 
                     {query:query},
                     function (data) {
                         $(".modal-body").html(data);
@@ -72,7 +71,7 @@
             }
 
             function enroll_course(pk) {
-                $.post('{% url "enroll_course" %}',
+                $.post("{% url 'enroll_course' %}",
                     {course_pk: pk },
                     function (data) {
                         //If successful, reload the page

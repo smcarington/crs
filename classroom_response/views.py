@@ -6,5 +6,4 @@ def remote_login(request):
     directed should be protected by the remote user.
     """
     next_page = request.GET['next']
-    import pdb; pdb.set_trace()
     return redirect(next_page)
