@@ -33,10 +33,13 @@ class Course(models.Model):
             membership.courses.add(self)
 
             # Give the user permission to edit this course
-            perm = 'can_see_poll_admin' if staff else 'can_edit_poll'
             UserObjectPermission.objects.assign_perm(
-                perm, user, obj=self
+                'can_see_poll_admin', user, obj=self
             )
+            if not staff:
+                UserObjectPermission.objects.assign_perm(
+                    'can_edit_poll', user, obj=self
+                )
         except Exception as e:
             print(e)
 
