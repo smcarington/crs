@@ -63,7 +63,7 @@ def courses(request):
 @login_required
 def administrative(request):
     if not request.user.is_staff:
-        raise HttpResponseForbidden("Not a valid User")
+        return HttpResponseForbidden("Not a valid User")
     else:
         return render(
             request,
@@ -130,7 +130,7 @@ def poll_admin(request, course_pk, poll_pk):
     course = Course.objects.get(pk=course_pk)
 
     if not request.user.has_perm('can_see_poll_admin', poll.course):
-        raise HttpResponseForbidden("Insufficient Privileges")
+        return HttpResponseForbidden("Insufficient Privileges")
 
     return render(
             request, 
@@ -176,7 +176,7 @@ def new_pollquestion(request, course_pk, poll_pk, question_pk=None):
     poll = get_object_or_404(Poll, pk=poll_pk)
 
     if not request.user.has_perm('can_edit_poll', poll.course):
-        raise HttpResponseForbidden("Unauthorized access")
+        return HttpResponseForbidden("Unauthorized access")
 
     # If a question is created for the first time, we must instantiate it so that
     # our choices have somewhere to point. If it already exists, retrieve it
