@@ -65,7 +65,7 @@
             });
 
             function update_search(query) {
-                $.get('{% url "course_search" %}', 
+                $.get('{% url "quiz_course_search" %}', 
                     {query:query},
                     function (data) {
                         $(".modal-body").html(data);
@@ -80,7 +80,7 @@
             }
 
             function enroll_course(pk) {
-                $.post('{% url "enroll_course" %}',
+                $.post('{% url "quiz_enroll_course" %}',
                     {course_pk: pk },
                     function (data) {
                         //If successful, reload the page

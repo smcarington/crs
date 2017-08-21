@@ -23,7 +23,7 @@ class StaffForm(forms.Form):
 
     course = forms.ModelChoiceField(queryset=None)
     username = forms.CharField(max_length=8)
-    admin = forms.BooleanField(required=False)
+#    admin = forms.BooleanField(required=False)
 
     def __init__(self, queryset, *args, **kwargs):
         super(StaffForm, self).__init__(*args, **kwargs)

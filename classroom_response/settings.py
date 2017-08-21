@@ -136,8 +136,8 @@ STATIC_URL = '/static/'
 
 # Project Specific Settings
 LOGIN_URL = "/accounts/login/"
-LOGIN_REDIRECT_URL = "/courses/"
-LOGOUT_REDIRECT_URL = "/courses/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 URL_PREPEND = ''
 WS_PREPEND = URL_PREPEND
@@ -149,6 +149,7 @@ MEDIA_URL  = '/media/'
 LATEX_ROOT = '/home/tholden/djangotest/latex'
 LOG_ROOT = '/tmp'
 MARKS_LOG = "/".join([LOG_ROOT, 'marks_log.log'])
+SENDFILE_BACKEND = 'sendfile.backends.development'
 
 # For websockets we need to define the CHANNEL_LAYERS setting
 

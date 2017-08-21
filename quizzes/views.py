@@ -148,6 +148,7 @@ def edit_quiz(request, course_pk, quiz_pk):
     """
 
     quiz = get_object_or_404(Quiz, pk=quiz_pk)
+    course = quiz.course
     if request.method == "POST":
         form = QuizForm(request.POST, instance=quiz)
         if form.is_valid():
@@ -192,7 +193,9 @@ def list_quizzes(request, course_pk, message=''):
     # Get this specific user's previous quiz results
     student_quizzes = SQRTable(
         StudentQuizResult.objects.select_related(
-            'quiz', 'quiz__course').filter(student=request.user).order_by('quiz')
+            'quiz', 'quiz__course').filter(
+                student=request.user,
+                quiz__course=course).order_by('quiz')
     )
     RequestConfig(request, paginate={'per_page': 10}).configure(student_quizzes)
 
@@ -429,7 +432,7 @@ def search_students(request, course_pk):
             users = User.objects.filter(
                     qs, membership__courses__in=[course]).prefetch_related(
                     'membership','membership__courses').distinct()
-            ret_list = []
+            ret_list = users[0:10]
 #            for user in users:
 #                try:
 #                    if course in user.membership.courses.all():
@@ -1169,7 +1172,7 @@ def create_course(request):
                 success_string += "<br>User {} added as default admin".format(
                         username)
             redirect_string = generate_redirect_string(
-                    'Administration', reverse('administrative') )
+                    'Administration', reverse('quiz_admin') )
 
             return render(request,
                     'quizzes/success.html',
@@ -1194,16 +1197,15 @@ def add_staff_member(request):
         form = StaffForm(request.POST)
         course_pk = int(request.POST['course'])
         username  = request.POST['username']
-        is_admin = 'admin' in request.POST
 
         course = Course.objects.get(pk=course_pk)
-        course.add_admin(username, staff=not is_admin)
+        course.add_admin(username)
 
         redirect_string = generate_redirect_string(
-            'Administrative', reverse('administrative') )
+            'Administrative', reverse('quiz_admin') )
         success_string = ("User {} successfully added to course {} "
            "with {} privileges").format(
-               username, course.name, "admin" if is_admin else "staff")
+               username, course.name, "staff")
 
         return render(request, 'quizzes/success.html',
             { 'success_string': success_string,
@@ -1243,7 +1245,7 @@ def add_students(request):
                     membership.courses.add(course)
 
             redirect_string = generate_redirect_string(
-                'Administrative', reverse('administrative') )
+                'Administrative', reverse('quiz_admin') )
             success_string = "Students successfully added to course {} ".format(
                    course.name)
 

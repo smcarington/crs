@@ -605,7 +605,7 @@ def create_course(request):
                 success_string += "<br>User {} added as default admin".format(
                         username)
             redirect_string = generate_redirect_string(
-                    'Administration', reverse('administrative') )
+                    'Administration', reverse('polls_admin') )
 
             return render(request,
                     'polls/success.html',
@@ -636,7 +636,7 @@ def add_staff_member(request):
         course.add_admin(username, staff=not is_admin)
 
         redirect_string = generate_redirect_string(
-            'Administrative', reverse('administrative') )
+            'Administrative', reverse('polls_admin') )
         success_string = ("User {} successfully added to course {} "
            "with {} privileges").format(
                username, course.name, "admin" if is_admin else "staff")
@@ -679,7 +679,7 @@ def add_students(request):
                     membership.courses.add(course)
 
             redirect_string = generate_redirect_string(
-                'Administrative', reverse('administrative') )
+                'Administrative', reverse('polls_admin') )
             success_string = "Students successfully added to course {} ".format(
                    course.name)
 

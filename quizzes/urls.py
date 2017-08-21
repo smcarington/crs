@@ -15,11 +15,11 @@ urlpatterns = [
     ),
     url(r'^administrative/create_course/$', 
         views.create_course, 
-        name='create_course'
+        name='quiz_create_course'
     ),
     url(r'^administrative/add_staff_member/$', 
         views.add_staff_member, 
-        name='add_staff_member'
+        name='quiz_add_staff_member'
     ),
     url(r'^administrative/see_marks/$', 
         views.see_marks, 
@@ -35,15 +35,15 @@ urlpatterns = [
     ),
     url(r'^administrative/add_students/$', 
         views.add_students, 
-        name='add_students'
+        name='quiz_add_students'
     ),
     url(r'^course_search/$', 
         views.course_search, 
-        name='course_search'
+        name='quiz_course_search'
     ),
     url(r'^enroll_course/$', 
         views.enroll_course, 
-        name='enroll_course'
+        name='quiz_enroll_course'
     ),
     url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', 
         views.delete_item, 

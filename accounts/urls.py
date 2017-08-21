@@ -8,7 +8,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'login/$',
-        LoginView.as_view(), name='login'),
+        LoginView.as_view(
+            template_name='registration/login.html',
+            ), name='login'),
     url(r'^logout/$', 
         LogoutView.as_view(), {'next_page': '/courses/'}, name='logout'),
     url(r'^password_change/$',
