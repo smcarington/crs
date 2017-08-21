@@ -34,7 +34,7 @@
                     <small> 
                         {% if "can_edit_poll" in course_perms %} 
                         <a href="{% url 'edit_pollquestion' course_pk=course.pk poll_pk=poll_pk question_pk=question.pk %}">Edit</a> 
-                        <a href="{% url 'delete_item' pk=question.pk objectStr='pollquestion' %}">Delete</a> 
+                        <a href="{% url 'polls_delete_item' pk=question.pk objectStr='pollquestion' %}">Delete</a> 
                         {% endif %}
                         <a href=javascript:void(0) id="open-{{question.pk}}">Choices</a> 
                         <a href="{% url 'poll_history' course_pk=course.pk poll_pk=poll_pk question_pk=question.pk poll_num=question.num_poll %}">History</a>

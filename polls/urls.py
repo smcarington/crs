@@ -57,5 +57,7 @@ urlpatterns = [
         views.course_search, 
         name='polls_course_search'),
     # Ajax End
-    url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', views.delete_item, name='delete_item'),
+    url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', 
+            views.delete_item,
+            name='polls_delete_item'),
 ]

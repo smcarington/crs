@@ -47,7 +47,7 @@ urlpatterns = [
     ),
     url(r'^delete/(?P<objectStr>.+)/(?P<pk>\d+)$', 
         views.delete_item, 
-        name='delete_item'
+        name='quiz_delete_item'
     ),
 
     # Courses and Staff Admin (end)

@@ -26,23 +26,39 @@ def delete_item(request, objectStr, pk):
     if request.user.is_staff:
         # Depending on which item is set, we return different pages
         if objectStr == "pollquestion":
-            theObj      = get_object_or_404(PollQuestion, pk = pk)
-            poll_pk = theObj.poll.pk
-            course_pk = theObj.poll.course.pk
-            return_View = redirect(reverse(
-                    'poll_admin',  
-                    kwargs={
-                        'course_pk': course_pk,
-                        'poll_pk': poll_pk,
-                    }))
+            theObj = get_object_or_404(
+                    PollQuestion.objects.select_related('poll', 'poll__course'),
+                    pk = pk)
+            description = "PollQuestion {}".format(pk)
+            poll = theObj.poll
+            course = theObj.poll.course
+            if request.user.has_perm('polls.can_edit_poll', course):
+                return_view = redirect(reverse(
+                        'poll_admin',  
+                        kwargs={
+                            'course_pk': course.pk,
+                            'poll_pk': poll.pk,
+                        }))
+            else:
+                raise HttpResponseForbidden(
+                    "You are not authorized to delete that object")
+
         else:
             return HttpResponse('<h1>Invalid Object Type</h1>')
 
         if request.method == "POST":
             theObj.delete()
-            return return_View
+            return return_view
         else:
-            return render(request, 'polls/delete_item.html', {'object': theObj, 'type' : objectStr})
+            return render(
+                request, 
+                'polls/delete_item.html', 
+                {'object': theObj, 
+                 'type' : objectStr,
+                 'description': description,
+                 'return_url': return_view.url
+                 }
+            )
     else:
         return HttpResponseForbidden()
 
@@ -605,7 +621,7 @@ def create_course(request):
                 success_string += "<br>User {} added as default admin".format(
                         username)
             redirect_string = generate_redirect_string(
-                    'Administration', reverse('polls_admin') )
+                    'Administration', reverse('poll_admin') )
 
             return render(request,
                     'polls/success.html',
@@ -636,7 +652,7 @@ def add_staff_member(request):
         course.add_admin(username, staff=not is_admin)
 
         redirect_string = generate_redirect_string(
-            'Administrative', reverse('polls_admin') )
+            'Administrative', reverse('poll_admin') )
         success_string = ("User {} successfully added to course {} "
            "with {} privileges").format(
                username, course.name, "admin" if is_admin else "staff")
@@ -679,7 +695,7 @@ def add_students(request):
                     membership.courses.add(course)
 
             redirect_string = generate_redirect_string(
-                'Administrative', reverse('polls_admin') )
+                'Administrative', reverse('poll_admin') )
             success_string = "Students successfully added to course {} ".format(
                    course.name)
 

@@ -15,7 +15,7 @@
     <p class="warning"> Are you sure you want delete {{description}}? </p>
     {{ post.as_html | safe }}
 
-    <form action="{% url 'delete_item' objectStr=type pk=object.pk%}" class="delete-form" method="POST">{% csrf_token %}
+    <form action="{% url 'quiz_delete_item' objectStr=type pk=object.pk%}" class="delete-form" method="POST">{% csrf_token %}
         <input class="btn btn-warning" type="submit" value="Yes">
         <a href="{{return_url}}" class="btn btn-default">No</a>
     </form>

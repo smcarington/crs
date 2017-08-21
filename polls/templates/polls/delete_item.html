@@ -10,14 +10,12 @@
 {% endblock %}
 
 {% block content %}
-    <p class="warning"> Are you sure you want delete the following post? </p>
+    <p class="warning"> Are you sure you want delete {{description}}? </p>
     {{ post.as_html | safe }}
 
-    <form action="{% url 'delete_item' objectStr=type pk=object.pk%}" class="delete-form" method="POST">{% csrf_token %}
+    <form action="{% url 'polls_delete_item' objectStr=type pk=object.pk%}" class="delete-form" method="POST">{% csrf_token %}
         <input class="btn btn-warning" type="submit" value="Yes">
+        <a href="{{return_url}}" class="btn btn-default">No</a>
     </form>
-    {% if type == "pollquestion" %}
-        <a href="{% url 'poll_admin' course_pk=object.poll.course.pk poll_pk=object.poll.pk %}" class="btn btn-default">No</a>
-    {% endif %}
 
 {% endblock %}
