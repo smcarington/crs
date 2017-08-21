@@ -20,7 +20,7 @@ class MathColumn(Column):
                         'mq_pk': record.pk,
                     }
                 ),
-                reverse('delete_item', kwargs={'objectStr':'markedquestion', 'pk': record.pk}),
+                reverse('quiz_delete_item', kwargs={'objectStr':'markedquestion', 'pk': record.pk}),
            )
 
 #class LinkColumn(Column):
