@@ -1,0 +1,41 @@
+{% load navbar_inclusion_tag %}
+
+{% comment %}
+    Has problem_sets element of type ProblemSets. Set by navbar_inclusion_tag.py
+{% endcomment %}
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation"> 
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">{{site_name}}</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <a class = "{% check_active request 'courses' %}" href="{% url 'courses' %}">
+                    Courses
+                </a>
+            </li>
+
+            {% if request.user.is_staff %}
+                <li><a class="{% check_active request 'administrative' %}" href="{% url 'administrative' %}">Administration</a></li>
+            {% endif %}
+
+        </ul>
+        <div class="navbar-right">
+            {% if request.user.is_authenticated %}
+            <p class="top-menu">Hello {{ request.user.username }}<small> (<a href="{% url 'logout' %}">Log out</a>)<br> (<a href="{% url 'password_change' %}">Change Password</a>)</small></p>
+                {% else %}
+                <div class="top-menu">
+                    <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span>Log In</a>
+                    <br>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>

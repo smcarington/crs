@@ -1,0 +1,23 @@
+{% extends 'accounts/base.html' %}
+{% comment %}
+    Generic: used to delete elements. Should have
+    var object = model instance for the type to delete
+    var type = string of the type
+    {{description}} string describing the element
+    {{return_url}} with the url to which you travel if saying yes or no
+{% endcomment %}
+
+{% block title %}
+<title>Delete Item - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <p class="warning"> Are you sure you want delete {{description}}? </p>
+    {{ post.as_html | safe }}
+
+    <form action="{% url 'delete_item' objectStr=type pk=object.pk%}" class="delete-form" method="POST">{% csrf_token %}
+        <input class="btn btn-warning" type="submit" value="Yes">
+        <a href="{{return_url}}" class="btn btn-default">No</a>
+    </form>
+
+{% endblock %}

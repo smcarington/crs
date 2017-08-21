@@ -1,0 +1,98 @@
+{% extends 'accounts/base.html' %}
+{% load render_table from django_tables2 %}
+{% load guardian_tags %}
+
+{% comment %}
+    Has context {{live_quiz}} which is a list of Quiz elements which are currently active
+    Has context {{all_quizzes}} which is a list of all Quiz elements
+    Has context {{student_quizzes}} which is a list of StudentQuizResult elements
+    Has context {{message}} which is a String
+    Has context {{course}} which is Course object to which the quiz belongs
+{% endcomment %}
+
+{% block title %}
+<title>Quizzes - {{course.name}}</title>
+{% endblock %}
+
+{% block content %}
+    {% get_obj_perms request.user for course as "course_perms" %}
+    <a href="{% url 'quiz_courses' %}">&#171; Courses</a>
+    <h2>Quizzes - {{course.name}}</h2>
+
+    <p class="warning">{{message}}</p>
+
+    {% if 'can_edit_quiz' in course_perms %}
+        <div class="quiz-divs">
+            <h3>Administration</h3>
+            {% render_table all_quizzes_table %}
+        </div>
+
+        <div>
+            <a class="btn btn-default" href="javascript:void" data-toggle="modal" data-target="#modal-search">Search Student Results</a>
+        </div>
+        <div class="modal fade" id="modal-search" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">
+                    Search: <input type="text" size="20" id="ajax_search">
+                </h5>
+              </div>
+              <div class="modal-body">
+                  {# JS to add here #}
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+    {% endif %}
+
+    <div class="quiz-divs">
+        <h3>Live Quizzes</h3>
+
+        <ul>
+        {% for quiz in live_quiz %}
+        <li> <a class="btn btn-default" href="{% url 'start_quiz' course_pk=course.pk quiz_pk=quiz.pk %}">Start {{quiz.name}}</a> <small>({{quiz.out_of}} questions) Ends {{quiz.expires}}</small> 
+        {% empty %}
+            <p> There are currently no live quizzes.</p>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div class="quiz-divs">
+        <h3>Previous Quiz Results</h3>
+            {% render_table student_quizzes %}
+    </div>
+{% endblock %}
+ 
+{% block sidenote %}
+    {% get_obj_perms request.user for course as "course_perms" %}
+    {% if 'can_edit_quiz' in course_perms %}
+        <a class="btn btn-default" href="{% url 'new_quiz' course_pk=course.pk %}">Create New Quiz</a>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    {% get_obj_perms request.user for course as "course_perms" %}
+    {% if 'can_edit_quiz' in course_perms %}
+        <script>
+            $(document).ready( function() {
+                $("#ajax_search").keyup( function() {
+                    var query = $(this).val();
+                    update_search(query);
+                });
+
+                function update_search(query) {
+                    $.get('{% url "search_students" course_pk=course.pk %}', 
+                        {query:query},
+                        function (data) {
+                            $(".modal-body").html(data);
+                        },
+                        "html"
+                    );
+                }
+            });
+        </script>
+    {% endif %}
+{% endblock %}

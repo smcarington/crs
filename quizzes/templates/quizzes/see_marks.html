@@ -1,0 +1,17 @@
+{% extends 'accounts/base.html' %}
+
+{% comment %}
+    {{courses}} list of Course objects for the current user
+{% endcomment %}
+
+{% block content %}
+    <ul>
+        {% for course in courses %}
+            <li> 
+                <a href="{% url 'see_all_marks' course_pk=course.pk %}">
+                    {{course.name}}
+                </a>
+        {% empty %}
+        <p> You do not have adminstrative access to any courses </p>
+        {% endfor %}
+{% endblock %}

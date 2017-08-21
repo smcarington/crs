@@ -1,4 +1,4 @@
-{% extends 'polls/base.html' %}
+{% extends 'accounts/base.html' %}
 {% load guardian_tags %}
 
 {% comment %}
@@ -13,7 +13,7 @@
 
 {% block content %}
     {% get_obj_perms request.user for course as "course_perms" %} 
-    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <a href="{% url 'polls_courses' %}">&#171; Courses</a>
     <h2> Polls for  {{course.name}} </h2> 
     <a href="{% url 'live_poll' course_pk=course_pk %}" class="btn btn-default">Live Poll</a>
 

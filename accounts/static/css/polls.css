@@ -1,0 +1,245 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url("/static/nice_snow.png"), url("/~tholden/nice_snow.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    padding-top: 100px;
+}
+
+a, a:hover {
+    color: #0B0080;
+}
+
+h1 a {
+    padding-left: 20px;
+}
+
+h2 {
+    font-family: 'Conso', sans-serif;
+    padding-bottom: 10px;
+}
+
+h2 a {
+    font-size: 10pt;
+}
+
+form button {
+    float: right;
+    margin-top:10px;
+}
+
+/* Poll History */
+
+dt {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 100%;
+}
+
+dd {
+    display: inline-block;
+    width: 100%;
+    margin-left: 30px;
+    padding: 5px 0px;
+}
+
+.bar {
+    background-color: #76bdd5;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 100%;
+    height: 20px;
+}
+
+.zerobar {
+    color: black;
+    text-align: left;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14pt;
+    height: 25px;
+}
+
+/* end Poll History */
+
+.arrow, .arrow:hover, .arrow:visited,  .arrow:focus {
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14pt;
+/*    color: #3366ff; */
+    width: 20px;
+}
+
+#add-choice {
+    margin-top: 15px;
+}
+
+.form-table {
+    margin-top: 40px;
+    width: 100%;
+}
+
+#form_preview, #solution_preview {
+    padding: 5px;
+    border: dashed black 1px;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #000000;
+    float: right;
+    font-size: 12pt;
+    margin-right: 20px;
+    min-width: 150px;
+}
+
+.dropdown-menu li:hover {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display:block;
+}
+
+.row .course {
+    font-size: 140%;
+    padding-left: 20px;
+    margin: 5px 0;
+}
+
+.row-content:hover {
+    background-color: lightgrey;;
+    text-decoration: none;
+}
+
+.add-data {
+    font-size: 50%;
+    padding-left: 10px;
+    font-family: Courier New;
+}
+
+.poll-title {
+    display: inline-block;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 120%;
+}
+
+.question-title{
+    display: inline-block;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.multiplechoice, .multiplechoice button, .multiplechoice p {
+    display: inline-block;
+    min-width: 50px;
+    margin: 10px 10px;
+    font-size: 14pt;
+}
+
+.poll-title p {
+    font-size:10pt;
+}
+
+.question_live {
+    background-color: #c2c2c2;
+}
+
+.enrolled {
+    color: lightgray;
+}
+
+.enrolled > span {
+    cursor: default;
+}
+
+.unenrolled >span {
+    cursor: pointer;
+}
+
+.glyphicon.glyphicon-plus {
+    padding-right: 20px;
+}
+
+.question-detail {
+    margin: 20px 0 20px 0;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #a3c2c2;
+}
+
+#wrapper {
+    min-height: 100%;
+}
+
+.button-div {
+    position: absolute;
+    width: 60%;
+}
+
+.button-div a, .button-div button {
+    margin: 10px 0px 50px 0px;
+    float: right;
+    display:inline;
+}
+
+
+.navbar{
+    padding: 5px 20px 5px 20px;
+}
+
+/* navbar */
+.navbar-default {
+    background: #383838;
+    border-color: #E7E7E7;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #F5F5F5;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #F5F5F5;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: #F5F5F5;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #D3D3D3;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #D3D3D3;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #D3D3D3;
+    background-color: #D5D5D5;
+}
+/* Caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #F5F5F5;
+    border-bottom-color: #F5F5F5;
+}
+
+.navbar-right .top-menu,
+.navbar-right .top-menu > small > a {
+    color: #F5F5F5;
+}

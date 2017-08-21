@@ -1,0 +1,82 @@
+{% extends 'accounts/base.html' %}
+{% load navbar_inclusion_tag %}
+
+{% comment %}
+    Has context {{mquestion}} which is a MarkedQuestion element
+    Has context {{choices}} which is a deserialized list of lists corresponding to input choices
+    Has context {{error_message}} which is a string with an error message
+{% endcomment %}
+
+{% block title %}
+    <title>Edit Choices - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'quiz_admin' course_pk=mquestion.quiz.course.pk quiz_pk=mquestion.quiz.pk %}">&#171; Return to {{mquestion.quiz.name}} Administration</a>
+    <h1> Add and Edit Choices</h1>
+
+    <div class="mathrender quiz-divs question-detail">
+        {{mquestion.problem_str}}
+    </div>
+
+    <form method="POST">{% csrf_token %}
+        <div>
+            <h3> Add Choice </h3>
+            <p id="response">{{error_message}}</p>
+            <input name="new_choice" type="text" size="50">
+        </div>
+
+        <div>
+            <h3> Current Choices </h3>
+            <ul>
+            {% for choice in choices %}
+            <li data-id="{{forloop.counter}}">
+                {% mathify_choice choice %} {# Returns label html with 'choice' nicely formatted #}
+                <input data-id="{{forloop.counter}}" name="old_choice_{{forloop.counter}}" type="text" size="50" value="{{choice}}">
+                <span data-id="{{forloop.counter}}" class="choice-remove glyphicon glyphicon-remove arrow"></span>
+            {% empty %}
+                <p> There are currently no choices for this question. Please add at least one choice.</p>
+            {% endfor %}
+            </ul>
+        </div>
+        <input class="btn btn-default" type="submit" value="Submit" />
+    </form>
+
+    <div class="quiz-divs">
+        <input id="num_tests" name="num_tests" value="100" type="number">
+        <input id="submit" type="submit" value="Run Test">
+    </div>
+
+    <div id="test_results">
+
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready( function() {
+            $('#submit').click( function(event) {
+                event.preventDefault()
+                value =  $("#num_tests").val();
+                $.post('{% url "test_quiz_question" course_pk=mquestion.quiz.course.pk quiz_pk=mquestion.quiz.pk mq_pk=mquestion.pk%}', 
+                    {'num_tests': value},
+                    function (data) {
+                        $("#test_results").html(data);
+                        renderMathInElement( $("#test_results")[0]);
+                    },
+                    'html');
+            });
+
+            $('span.choice-remove').click( function() {
+                data_id = $(this).attr('data-id');
+                $('[data-id='+data_id+']').remove();
+                $('form').submit();
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block sidenote %}
+    {% include 'quizzes/edit_choices_instructions.html' %}
+{% endblock %}

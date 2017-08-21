@@ -1,0 +1,39 @@
+{% extends "accounts/base.html" %}
+
+{% comment %}
+    Context contains StudentQuizRecord element called {{record}} 
+    Context contains Quiz element called {{quiz}} 
+    Context contains Integer element called {{high_score}} 
+{% endcomment %}
+
+{% block title %}
+    <title>Get Ready - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <div id="quiz_start">
+        <h2>{{quiz.name}} <span> - Ends {{quiz.expires}}</span></h2>
+
+        <ul>
+            <li>This quiz contains {{quiz.out_of}} questions.
+            {% if record.cur_quest > 1 %}
+                You are currently on question {{record.cur_quest}}.
+            {% endif %}
+
+            {% if quiz.tries == 0 %}
+            <li> You are permitted an unlimited number of attempts.
+            {% else %}
+            <li> This is attempt number {{record.attempt}} of {{quiz.tries}} 
+            {% endif %}
+            <li> Only your highest score will count.
+            {% if high_score != -1 and high_score %}
+            Your highest score is {{high_score}}/{{quiz.out_of}}
+            {% endif %}
+            <li> Any question which requires a numerical answer should be recorded to at least <b>4 decimal points</b>
+        </ul>
+
+        <a class="btn btn-default" href="{% url 'display_question' course_pk=record.quiz.course.pk quiz_pk=record.quiz.pk sqr_pk=record.pk %}">Begin Quiz</a>
+    </div>
+{% endblock %}
+
+

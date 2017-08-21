@@ -1,0 +1,74 @@
+{% extends 'accounts/base.html' %}
+
+{% comment %}
+    Has context {{question}} which is a String object with the question statement
+    Has context {{sqr}} which is a StudentQuizResult object
+    Has context {{sqrpk}} which is an integer corresponding to the StudentQuizRecord primary key
+    Has context {{error_message}} which is a String with an error
+    Has context {{string_answer}} which is a String with the original answer, if error-returned
+    Has context {{mc_choices}} which is a list of strings with multiple choice answers
+{% endcomment %}
+
+{% block title %}
+    <title>{{sqr.quiz.name}}: Question {{sqr.cur_quest}} - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <h2>{{sqr.quiz.name}}: Question {{sqr.cur_quest}}</h2>
+   
+    {% if mc_choices %} {# We'll let ajax handle multiple choice #}
+        <div class="mathrender quiz-divs question-detail" data-id="{{question}}">
+            {{question | safe}}
+        </div>
+        <div class="mathrender multiplechoice">
+        {% for mc_choice in mc_choices %}
+            <button class="btn btn-primary quiz_mc" data-id="{{mc_choice}}">{{forloop.counter}}</button> 
+            <p>{{mc_choice}}</p> 
+            <br>
+        {% endfor %}
+        </div>
+    {% else %}
+        <form method="POST" action="{% url 'display_question' course_pk=sqr.quiz.course.pk quiz_pk=sqr.quiz.pk sqr_pk=sqr.pk submit='submit'%}">{% csrf_token %}
+            <div class="mathrender quiz-divs question-detail">
+                {{question | safe}}
+                <input type="hidden" value="{{question}}" name="problem">
+            </div>
+
+            <p class="warning"> {{error_message|safe}}</p>
+            <label>Your answer: </label> <input type="text" size="50" name="answer" value="{{string_answer}}">
+            <input class="btn btn-default" type="submit" value="Submit" />
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block sidenote %}
+<h4>Notes:</h4>
+<ul class="mathrender">
+     <li><b>If you input a numerical answer, please give at least 4 decimal places of accuracy.</b>
+     <li>You may use mathematical symbols, such as +,-,*,/ in your answer.
+     <li>Exponentiation is indicated by using a**b; for example, \(2^3\) may be entered as 2**3
+     <li>You may use the functions \(\sin, \cos,\tan, \ln\) in your answer.
+     <li>You may use the constants pi and e for  \(\pi\)  and \(e\).
+ </ul>
+{% endblock %}
+
+{% block script %}
+    <script>
+    $('document').ready( function() {
+        $('.quiz_mc').click( function() {
+            answer = $(this).attr('data-id');
+            problem = $(".question-detail").attr("data-id");
+            $.post("{% url 'display_question' course_pk=sqr.quiz.course.pk quiz_pk=sqr.quiz.pk sqr_pk=sqr.pk submit='submit'%}", 
+                {answer: answer,
+                 problem: problem,
+                }, 
+                function(data) {
+//                    document.write(data),
+                    location.replace("{% url 'display_question' course_pk=sqr.quiz.course.pk quiz_pk=sqr.quiz.pk sqr_pk=sqr.pk %}")
+                    renderMathInElement( $(".mathrender")[0] );
+                }, 
+            "text");
+        });
+    });
+    </script>
+{% endblock %}

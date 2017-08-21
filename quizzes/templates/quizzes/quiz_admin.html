@@ -1,0 +1,37 @@
+{% extends 'accounts/base.html' %}
+{% load render_table from django_tables2 %}
+
+{% comment %}
+    Has context quiz which is a Quiz element
+    Has context questions which is an MarkedQuestionsTable element corresponding to quiz's MarkedQuestion set.
+{% endcomment %}
+
+{% block title %}
+<title>Quiz Administration - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'list_quizzes' course_pk=quiz.course.pk %}">&#171; Return to Quizzes</a>
+    <h1>{{quiz.name}} Administration</h1>
+   
+    <div class="quiz-divs">
+    {% if questions %}
+        {% render_table questions %}
+    {% else %}
+        <p> There are currently no questions in this quiz. </p>
+    {% endif %}
+    </div>
+
+{% endblock %}
+
+
+{% block sidenote %}
+    <h4> Instructions </h4>
+    <div class="quiz-div">
+        <ul>
+            <li> Instructions
+        </ul>
+        <a class="btn btn-default" href="{% url 'edit_quiz_question' course_pk=quiz.course.pk quiz_pk=quiz.pk %}">Add Question</a>
+        <a class="btn btn-default" href="{% url 'edit_quiz' course_pk=quiz.course.pk quiz_pk=quiz.pk %}">Edit Quiz Properties</a>
+    </div>
+{% endblock %}

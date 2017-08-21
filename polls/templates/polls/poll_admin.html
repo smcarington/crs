@@ -1,4 +1,4 @@
-{% extends 'polls/base.html' %}
+{% extends 'accounts/base.html' %}
 {% load navbar_inclusion_tag %}
 {% load staticfiles %}
 {% load guardian_tags %}
@@ -20,7 +20,7 @@
 
 {% block content %}
     {% get_obj_perms request.user for course as "course_perms" %} 
-    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <a href="{% url 'polls_courses' %}">&#171; Courses</a>
     <a href="{% url 'list_polls' course_pk=course.pk %}">&#171; Polls</a>
 
     <h2> {{poll.title}} Administration </h2>

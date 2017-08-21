@@ -1,0 +1,2498 @@
+[
+{
+    "model": "quizzes.course",
+    "pk": 1,
+    "fields": {
+        "name": "Test Course",
+        "open_enrollment": false
+    }
+},
+{
+    "model": "quizzes.course",
+    "pk": 2,
+    "fields": {
+        "name": "MAT137",
+        "open_enrollment": false
+    }
+},
+{
+    "model": "quizzes.course",
+    "pk": 3,
+    "fields": {
+        "name": "MAT237",
+        "open_enrollment": true
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 1,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 01",
+        "tries": 0,
+        "live": "2017-05-19T04:01:00Z",
+        "expires": "2017-05-22T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5, 6]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 2,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 02",
+        "tries": 2,
+        "live": "2017-08-04T04:01:00Z",
+        "expires": "2017-08-31T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 7]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 3,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 03",
+        "tries": 2,
+        "live": "2017-06-02T04:01:00Z",
+        "expires": "2017-06-05T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 4,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 04",
+        "tries": 2,
+        "live": "2017-06-09T04:01:00Z",
+        "expires": "2017-06-12T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 5,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 05",
+        "tries": 2,
+        "live": "2017-06-16T04:01:00Z",
+        "expires": "2017-07-10T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 6,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 06",
+        "tries": 2,
+        "live": "2017-07-14T04:01:00Z",
+        "expires": "2017-07-18T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 7,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 07",
+        "tries": 2,
+        "live": "2017-07-21T04:01:00Z",
+        "expires": "2017-07-25T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 8,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 08",
+        "tries": 2,
+        "live": "2017-07-28T04:01:00Z",
+        "expires": "2017-08-01T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 9,
+    "fields": {
+        "course": 1,
+        "name": "Quiz 09",
+        "tries": 2,
+        "live": "2017-08-04T04:01:00Z",
+        "expires": "2017-08-08T03:59:00Z",
+        "_cat_list": "[1, 2, 3, 4, 5]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 14,
+    "fields": {
+        "course": 1,
+        "name": "Test Quiz",
+        "tries": 1,
+        "live": "2017-08-09T16:00:00Z",
+        "expires": "2017-08-15T16:00:00Z",
+        "_cat_list": "[1, 6]"
+    }
+},
+{
+    "model": "quizzes.quiz",
+    "pk": 15,
+    "fields": {
+        "course": 3,
+        "name": "Quiz 10",
+        "tries": 0,
+        "live": "2017-08-04T19:49:00Z",
+        "expires": "2017-08-18T19:49:00Z",
+        "_cat_list": "[]"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 1,
+    "fields": {
+        "quiz": 1,
+        "category": 1,
+        "problem_str": "If \\( f(x) = x^3 - {v[0]}x^2+{v[1]}x-@{v[0]}*{v[1]}@ \\), for what value of \\(x\\) does \\( f(x) = 0\\)?",
+        "choices": "rand(1,10); rand(1,10); 0; 0",
+        "num_vars": 4,
+        "answer": "{v[0]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 2,
+    "fields": {
+        "quiz": 1,
+        "category": 1,
+        "problem_str": "Let \\(a,b\\) be the roots of the equation \\( {v[2]} x^2 + @{v[2]}*({v[0]}+{v[1]})@x + @{v[0]}*{v[1]}*{v[2]}@\\). What is \\(a \\times b \\)?",
+        "choices": "rand(1,5); rand(1,5); rand(1,5); 0; 0; 0; 0",
+        "num_vars": 7,
+        "answer": "{v[0]}*{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 3,
+    "fields": {
+        "quiz": 1,
+        "category": 1,
+        "problem_str": "Let \\(a, b\\) be the roots of the polynomial \\( {v[1]}x^4-@{v[1]}*({v[0]}**2)@ \\). What is \\( a \\times b \\)?",
+        "choices": "rand(1,10); rand(2,5); 0",
+        "num_vars": 3,
+        "answer": "-{v[0]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 4,
+    "fields": {
+        "quiz": 1,
+        "category": 2,
+        "problem_str": "What is the domain of the function \\( \\displaystyle f(x) = \\frac1{{\\sqrt{{x^2-@{v[0]}+{v[1]}@x + @{v[0]}*{v[1]}@}}}} \\)?",
+        "choices": "rand(1,8); rand(9,15); 0; 0",
+        "num_vars": 4,
+        "answer": "\\( (-\\infty, {v[0]} ) \\cup ({v[1]}, \\infty) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( ({v[0]}, {v[1]}) \\); \\( ({v[1]}, \\infty) \\); \\( (-\\infty, {v[0]} ) \\); It is impossible to determine"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 5,
+    "fields": {
+        "quiz": 1,
+        "category": 2,
+        "problem_str": "What is the domain of the function \\( f(x) = \\displaystyle \\frac1{{ {v[2]}x^2 - @{v[2]}*({v[0]}+{v[1]})@x + @{v[2]}*{v[1]}*{v[0]}@ }} \\)?",
+        "choices": "rand(1,8); rand(9,12); rand(1,5); 0; 0;0 ;0:rand(1,5); rand(6,10); rand(1,5); 0; 0;0 ;0",
+        "num_vars": 7,
+        "answer": "All \\( \\mathbb R\\) except \\( \\{{ {v[0]}, {v[1]} \\}} \\).",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "It is impossible to tell; \\( (-\\infty, {v[0]} ) \\cup ({v[1]}, \\infty) \\); \\( (-\\infty, {v[0]}) \\); \\( ({v[1]}, \\infty) \\); \\( ( {v[0]}, {v[1]} ) \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 6,
+    "fields": {
+        "quiz": 1,
+        "category": 2,
+        "problem_str": "What is the domain of the function \\( f(x) = \\displaystyle \\sqrt[3]{{x^2+{v[0]}x-{v[1]}}} \\)?",
+        "choices": "rand(1,10); rand(11,15)",
+        "num_vars": 2,
+        "answer": "\\(\\mathbb R\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "It is impossible to tell; All \\( \\mathbb R \\) except \\( 0 \\); \\( (-\\infty, -{v[0]}) \\cup ({v[1]},\\infty) \\); \\( (-{v[0]},{v[1]}) \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 7,
+    "fields": {
+        "quiz": 1,
+        "category": 3,
+        "problem_str": "Suppose that \\(f(x)\\) is even and \\(g(x)\\) is even. Which of the following is true about \\( f(g(x)) \\)? <input type=hidden value =\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( f(g(x)) \\) is even",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( f(g(x)) \\) is odd; \\( f(g(x)) \\) is neither even nor odd; It is impossible to say without more information"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 8,
+    "fields": {
+        "quiz": 1,
+        "category": 3,
+        "problem_str": "Suppose that \\(f(x)\\) is even and \\(g(x)\\) is odd. Which of the following is true about \\( f(g(x)) \\)? <input type=hidden value =\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( f(g(x)) \\) is even",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( f(g(x)) \\) is odd; \\( f(g(x)) \\) is neither even nor odd; It is impossible to say without more information"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 9,
+    "fields": {
+        "quiz": 1,
+        "category": 3,
+        "problem_str": "Suppose that \\(f(x)\\) is odd and \\(g(x)\\) is even. Which of the following is true about \\( f(g(x)) \\)? <input type=hidden value =\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( f(g(x)) \\) is even",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( f(g(x)) \\) is odd; \\( f(g(x)) \\) is neither even nor odd; It is impossible to say without more information"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 10,
+    "fields": {
+        "quiz": 1,
+        "category": 3,
+        "problem_str": "Suppose that \\(f(x)\\) is odd and \\(g(x)\\) is odd. Which of the following is true about \\( f(g(x)) \\)? <input type=hidden value =\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( f(g(x)) \\) is odd",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( f(g(x)) \\) is even; \\( f(g(x)) \\) is neither even nor odd; It is impossible to say without more information"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 11,
+    "fields": {
+        "quiz": 1,
+        "category": 4,
+        "problem_str": "Consider the function \\( \\displaystyle f(x) = \\frac{{ {v[0]}x + {v[1]} }}{{ {v[2]}x + {v[3]} }}\\). Which of the following describes the inverse function \\( f^{{-1}}(x) \\)?",
+        "choices": "rand(1,3); rand(4,6); rand(3,5); rand(1,4)",
+        "num_vars": 4,
+        "answer": "\\( \\displaystyle f(x) = \\frac{{ {v[3]}x - {v[1]} }}{{ {v[0]} - {v[2]}x }} \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle f(x) = \\frac{{ {v[3]}x + {v[1]} }}{{ {v[2]} + {v[0]}x }} \\); \\( \\displaystyle f(x) = \\frac{{ x/{v[0]} + @2*{v[1]}@ }}{{ @{v[2]}+{v[0]}@ + {v[0]}x }} \\); \\( \\displaystyle f(x) = \\frac{{ {v[3]}x + {v[0]} }}{{ {v[1]} + {v[2]}x }} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 13,
+    "fields": {
+        "quiz": 1,
+        "category": 4,
+        "problem_str": "Consider the function \\( \\displaystyle f(x) = \\frac{{ {v[0]}x + {v[1]} }}{{ {v[2]}x + {v[3]} }}\\). What is \\( f^{{-1}}({v[4]}) \\)?",
+        "choices": "rand(1,3); rand(1,3); rand(3,5); rand(4,6); rand(2,5)",
+        "num_vars": 5,
+        "answer": "({v[3]}*{v[4]} - {v[1]} )/( {v[0]} - {v[2]}*{v[4]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 14,
+    "fields": {
+        "quiz": 1,
+        "category": 4,
+        "problem_str": "What is \\( \\displaystyle f\\left( f^{{-1}}({v[0]}) \\right) \\) if \\( f(x) = \\displaystyle \\frac{{ {v[1]} x^3 }}{{ x^3+{v[2]} }}. \\)",
+        "choices": "rand(-20,20); rand(1,20); rand(1,100):rand(-20,20); rand(-20,1); rand(1,100)",
+        "num_vars": 3,
+        "answer": "{v[0]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 15,
+    "fields": {
+        "quiz": 1,
+        "category": 5,
+        "problem_str": "Let \\( f(x) = {v[0]} x^2 + {v[1]} \\) and \\( g(x) = \\frac{{ {v[2]} }}{{ x}} \\). What is \\( f(g( {v[3]} )) \\)?",
+        "choices": "rand(1,10); rand(1,15); rand(-10,10); rand(1,10):rand(1,10); rand(1,15); rand(-10,10); rand(-10,-1)",
+        "num_vars": 4,
+        "answer": "({v[0]}*({v[2]})**2)/(({v[3]})**2) + {v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 16,
+    "fields": {
+        "quiz": 1,
+        "category": 5,
+        "problem_str": "Let \\( f(x) = {v[0]}x + {v[1]} \\) and \\( g(x) = {v[2]} x + {v[3]} \\). Determine the value of \\( f(f({v[4]} )) g(g({v[5]})) \\).",
+        "choices": "rand(1,5); rand(1,5); rand(1,5); rand(1,5); rand(-10,10); rand(-10,10)",
+        "num_vars": 6,
+        "answer": "lf({v[0]}, lf({v[0]}, {v[4]}, {v[1]}), {v[1]})*lf({v[2]}, lf({v[2]}, {v[5]}, {v[3]}), {v[3]})",
+        "functions": "{\"lf\": lambda a,x,b: a*x+b}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 17,
+    "fields": {
+        "quiz": 1,
+        "category": 5,
+        "problem_str": "Let \\( f(x) = {v[0]}x + {v[1]} \\) and \\( g(x) = {v[2]} x + {v[3]} \\). Determine the value of \\( \\displaystyle \\frac{{ f({v[4]}) }}{{  [g(f({v[5]}))]^2+1 }} \\).",
+        "choices": "rand(1,5); rand(1,5); rand(1,5); rand(1,5); rand(-10,10); rand(-10,10):rand(-5,-1); rand(1,5); rand(-5,-1); rand(1,5); rand(-10,10); rand(-10,10)",
+        "num_vars": 6,
+        "answer": "lf({v[0]}, {v[4]}, {v[1]}) / (lf({v[2]}, lf({v[0]}, {v[5]}, {v[1]}), {v[3]})**2+1)",
+        "functions": "{\"lf\": lambda a,x,b: a*x+b}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 18,
+    "fields": {
+        "quiz": 2,
+        "category": 1,
+        "problem_str": "For what values of \\(x\\) is \\( |{v[0]}x + 2 | < {v[1]} \\) satisfied?",
+        "choices": "rand(1,20); rand(1,10)",
+        "num_vars": 2,
+        "answer": "\\( ( @(-2-{v[1]})/{v[0]}@, @({v[1]}-2)/{v[0]}@ ) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\mathbb R \\); There is no solution; \\( (-\\infty, @-{v[0]}/{v[1]}@  ) \\) or \\( (@{v[0]}/{v[1]}@, \\infty ) \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 19,
+    "fields": {
+        "quiz": 2,
+        "category": 1,
+        "problem_str": "Consider the function \\( f(x) = {v[0]}x^2 + {v[1]} \\). Which of the following are true?",
+        "choices": "rand(1,50); rand(1,100)",
+        "num_vars": 2,
+        "answer": "\\( f(x) = |f(x)| \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( |f(x)| > f(x) \\); \\(f(x) - |f(x)| > 0 \\); \\(f\\) is an increasing function"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 20,
+    "fields": {
+        "quiz": 2,
+        "category": 1,
+        "problem_str": "If \\( f(x) \\) is odd, what can we say about the function \\( g(x) = {v[0]} \\left| f(x) \\right| f( |{v[1]}x | ) \\)?",
+        "choices": "rand(1,50); rand(-100,100):rand(-50,-1); rand(-100,100)",
+        "num_vars": 2,
+        "answer": "\\( g(x) \\) is even",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\(g(x) \\) is odd; \\( g(x) \\) is a constant function; \\( g(x) \\) is neither even nor odd; None of the given answer are correct"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 21,
+    "fields": {
+        "quiz": 2,
+        "category": 1,
+        "problem_str": "If \\( f(x) \\) is an invertible function, choose the correct statement. <input type=hidden value =\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "None of the given answer are correct",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( |f(x)| \\) is invertible; \\( f(|x|) \\) is invertible; \\( |f(|x|)| \\) is invertible; \\( f(x)\\) is the constant function"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 22,
+    "fields": {
+        "quiz": 2,
+        "category": 2,
+        "problem_str": "Which of the following expressions are equivalent to\r\n<br>\r\n\\( \\displaystyle \\exp\\left( {v[0]} \\log({v[1]}) + \\log({v[2]}) \\right) ?\\)\r\n<br>\r\n<small>[Remember that \\(\\log(x)\\) means base \\(e\\), and \\(\\exp(x) = e^x \\).]</small>",
+        "choices": "rand(1,100); rand(1,100); rand(1,100)",
+        "num_vars": 3,
+        "answer": "\\( {v[1]}^{{ {v[0]} }} {v[2]} \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( {v[0]}^{{ {v[1]} }} {v[2]} \\); \\( {v[2]}^{{ {v[1]} }} {v[0]} \\); \\( {v[0]}^{{ -{v[1]} }} {v[2]} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 23,
+    "fields": {
+        "quiz": 2,
+        "category": 2,
+        "problem_str": "Which of the following is a <b>false</b> statement: <input type=\"hidden\" value=\"{v[0]}{v[1]}\">",
+        "choices": "rand(1,15); rand(1,15)",
+        "num_vars": 2,
+        "answer": "\\( \\log(@{v[0]} + {v[1]}@) = \\log({v[0]}) + \\log({v[1]}) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\log(@{v[0]}*{v[1]}@) = \\log({v[0]}) + \\log({v[1]}) \\); \\( \\log(@{v[0]}**2@) = 2\\log({v[0]}) \\); \\( \\log({v[0]}/{v[1]}) = \\log({v[0]}) - \\log({v[1]}) \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 24,
+    "fields": {
+        "quiz": 2,
+        "category": 2,
+        "problem_str": "What is the domain of the function \\( f(x) = \\log({v[0]}x^2- @{v[0]}*({v[1]}**2)@ ) \\) <small> [Remember that \\(\\log(x)\\) means base \\(e\\).]</small>",
+        "choices": "rand(1,20); rand(1,10); 0",
+        "num_vars": 3,
+        "answer": "\\( (-\\infty, -{v[1]})  \\cup ( {v[1]}, \\infty) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( (-{v[0]}, {v[0]}) \\); \\( (-{v[1]}, {v[1]}) \\);\\( (-\\infty, -{v[0]})  \\cup ( {v[0]}, \\infty) \\); \\( (-\\infty, -@{v[0]}*{v[1]}@)  \\cup ( {v[0]}, \\infty) \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 25,
+    "fields": {
+        "quiz": 2,
+        "category": 2,
+        "problem_str": "There are two solutions to the equation \\( \\log({v[0]} x) + \\log(x-1) = 1\\). Find the <b>larger</b> of the two solutions. <small>[Remember that \\(\\log(x)\\) means base \\(e\\).]</small>",
+        "choices": "rand(1,30)",
+        "num_vars": 1,
+        "answer": "({v[0]}+ ( ({v[0]}**2)+4*{v[0]}*e )**(0.5) )/(2*{v[0]} )",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 26,
+    "fields": {
+        "quiz": 2,
+        "category": 3,
+        "problem_str": "Assume that \\( - \\frac\\pi2 \\leq \\theta \\leq \\frac\\pi 2 \\) satisfies \\( \\sin(\\theta) = \\frac{{ {v[0]} }}{{ {v[1]} }} \\). Determine the value of \\( \\cos(\\theta) \\).",
+        "choices": "rand(1,10); rand(11,20):rand(-10,-1); rand(11,20):rand(-10,-5); rand(11,15):rand(1,5); rand(6,20)",
+        "num_vars": 2,
+        "answer": "( 1 - ({v[0]}/{v[1]})**2)**(0.5)",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 27,
+    "fields": {
+        "quiz": 2,
+        "category": 3,
+        "problem_str": "Which of the following equations is equivalent to\r\n<br>\r\n\\( \\displaystyle \\cot({v[0]} x) + \\tan({v[0]}x) \\)?",
+        "choices": "rand(1,20); 0",
+        "num_vars": 2,
+        "answer": "\\( \\sec({v[0]} x) \\csc({v[0]} x) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\sec( @{v[0]}**2@ x ) + \\sec( {v[0]} x ) \\); \\( \\tan({v[0]} x) \\sec^2( x ) \\); \\( 1+ \\sin(@2*{v[0]}@ x) \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 28,
+    "fields": {
+        "quiz": 2,
+        "category": 3,
+        "problem_str": "Which of the following expressions is equivalent to <br>\r\n\\( \\displaystyle \\frac{{ 1+ \\cos( {v[0]} x ) }}{{\\sin({v[0]}x ) }} \\)",
+        "choices": "rand(1,10); 0 ",
+        "num_vars": 2,
+        "answer": "\\( \\displaystyle \\frac{{\\sin({v[0]}x)  }}{{  1-\\cos({v[0]}x ) }} \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\tan^2({v[0]} x) \\); \\( \\sin(@{v[0]}**2@x) + \\cos(@{v[0]}**2@ x) \\); \\( \\displaystyle \\frac{{ {v[0]} + \\sin( {v[0]} x )  }}{{ {v[0]} - \\sin({v[0]} x ) }} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 29,
+    "fields": {
+        "quiz": 2,
+        "category": 3,
+        "problem_str": "Suppose that \\( -\\frac\\pi2 \\leq \\theta \\leq \\frac \\pi 2 \\), and that \\( \\tan(\\theta) = {v[0]} \\). Determine the value of \\( \\sec(\\theta) \\).",
+        "choices": "uni(-2,2,1)",
+        "num_vars": 1,
+        "answer": "( 1+({v[0]})**2)**(0.5)",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 30,
+    "fields": {
+        "quiz": 2,
+        "category": 7,
+        "problem_str": "Suppose that \\( \\displaystyle \\lim_{{ x \\to {v[0]} }} f(x) = {v[1]} \\). Which of the following is necessarily <b>true</b>?",
+        "choices": "rand(-100,100); rand(-100,100)",
+        "num_vars": 2,
+        "answer": "The one-sided limits \\( \\displaystyle \\lim_{{ x \\to {v[0]}^\\pm }} f(x) = {v[1]} \\) exist and are equal",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( f({v[0]}) = {v[1]} \\); \\( f({v[0]}) \\) is not defined; If \\( g({v[0]}) = f({v[0]}) \\) then \\( \\displaystyle \\lim_{{ x \\to {v[0]} }} g(x) = {v[1]} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 31,
+    "fields": {
+        "quiz": 2,
+        "category": 7,
+        "problem_str": "If \\( f(x) = {v[0]} \\) and \\( \\displaystyle g(x) = \\frac{{ x^2 + {v[1]} x}}{{ \\log( {v[2]} x ) }} \\), then what is the limit\r\n<br>\r\n\\( \\displaystyle \\lim_{{ x \\to {v[3]} }} f(g(x)) \\)?\r\n<br><small>[Remember that \\(\\log(x)\\) means base \\(e\\).]</small>",
+        "choices": "rand(-100,100); rand(1,100); rand(1,100); rand(1,200)",
+        "num_vars": 4,
+        "answer": "{v[0]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 32,
+    "fields": {
+        "quiz": 2,
+        "category": 7,
+        "problem_str": "Suppose that \\( f(x) \\) is an invertible function with inverse \\( f^{{-1}}(x) \\). What is \\( \\displaystyle \\lim_{{ x \\to {v[0]} }} f(f^{{-1}}({v[1]}x) \\)?",
+        "choices": "rand(-100,100); rand(-100,100)",
+        "num_vars": 2,
+        "answer": "{v[0]}*{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 33,
+    "fields": {
+        "quiz": 2,
+        "category": 4,
+        "problem_str": "Consider the function \\(f(x)\\) given in diagram (a). What is \\(\\displaystyle \\left[\\lim_{{x\\to -1}} f(x)\\right] - f(-1)\\)?\r\n<br>\r\n<img src=\"http://i.imgur.com/NstQ8d3.png\" width=600>\r\n<input type=\"hidden\" name=\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "5",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 34,
+    "fields": {
+        "quiz": 2,
+        "category": 4,
+        "problem_str": "Consider the function \\(f(x)\\) given in diagram (b). On the interval \\( (-6,6)\\) shown, how many points are there at which the limit fails to exist?\r\n<img src=\"http://i.imgur.com/NstQ8d3.png\" width=600>\r\n<input type=\"hidden\" name=\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "3",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "0; 1; 2; 4"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 35,
+    "fields": {
+        "quiz": 2,
+        "category": 4,
+        "problem_str": "Consider the function \\(f(x)\\) given in diagram (a). What is \\(\\displaystyle 2\\left[\\lim_{{x\\to -3}} f(x)\\right] + f(2)\\)?\r\n<br>\r\n<img src=\"http://i.imgur.com/NstQ8d3.png\" width=600>\r\n<input type=\"hidden\" name=\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "-4",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 36,
+    "fields": {
+        "quiz": 2,
+        "category": 4,
+        "problem_str": "In which figure does the limit \\( \\displaystyle \\lim_{{ x\\to 0}} f(x) \\) exist? <input type=\"hidden\" value=\"{v[0]}\">\r\n<img src=\"http://i.imgur.com/NstQ8d3.png\" width=600>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "A and C",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "A and D; B and C; B and D; A and B"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 37,
+    "fields": {
+        "quiz": 2,
+        "category": 4,
+        "problem_str": "Consider the function \\(f(x)\\) given in diagram (c). Which statement is true?\r\n<img src=\"http://i.imgur.com/NstQ8d3.png\" width=600>\r\n<input type=\"hidden\" value=\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\lim_{x\\to 0} f(x) \\) exists but is not equal to \\( f(0) \\).",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\lim_{x\\to 2} f(x) \\) exists; \\( \\displaystyle \\lim_{x\\to 0} f(x) = f(0) \\); \\( \\displaystyle \\lim_{x\\to 5} f(x) \\) does not exist"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 38,
+    "fields": {
+        "quiz": 3,
+        "category": 1,
+        "problem_str": "Determine the limit \\( \\displaystyle \\lim_{{ x\\to {v[0]} }} \\frac{{ x^3-{v[1]}x^2-@{v[0]}**2@x+@{v[0]}**2*{v[1]}@}}{{x-{v[0]} }}. \\)",
+        "choices": "rand(1,20); rand(1,20); 0; 0; 0; 0 ",
+        "num_vars": 2,
+        "answer": "2*{v[0]}*({v[0]}-{v[1]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 39,
+    "fields": {
+        "quiz": 3,
+        "category": 1,
+        "problem_str": "Determine the limit \\( \\displaystyle \\lim_{{ x\\to {v[0]} }} \\left( \\frac{{ {v[1]} x^2}}{{x^2-@{v[0]}+{v[2]}@x+@{v[0]}*{v[2]}@ }} -  \\frac{{ @{v[0]}*{v[1]}@ x}}{{x^2-@{v[0]}+{v[2]}@x+@{v[0]}*{v[2]}@ }} \\right) \\).",
+        "choices": "rand(1,5); rand(1,10); rand(6,10); 0; 0; 0; 0;0;0;0;0;0",
+        "num_vars": 12,
+        "answer": "{v[0]}*{v[1]}/({v[0]}-{v[2]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 40,
+    "fields": {
+        "quiz": 3,
+        "category": 1,
+        "problem_str": "Determine the limit \\( \\displaystyle \\lim_{{x\\to 0 }} \\frac{{ \\sqrt{{ {v[0]}x^2+{v[1]}x+@{v[2]}**2@}} - {v[2]} }}{{ {v[3]} x }} \\).",
+        "choices": "rand(1,30); rand(1,30); rand(1,10); rand(1,50); 0",
+        "num_vars": 5,
+        "answer": "{v[1]}/(2*{v[2]}*{v[3]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 41,
+    "fields": {
+        "quiz": 3,
+        "category": 2,
+        "problem_str": "Determine the limit \\(\\displaystyle \\lim_{{ x \\to \\infty }} \\sqrt{{ @{v[0]}**2@x^2 + {v[1]}x + {v[2]} }} - {v[0]}x \\).",
+        "choices": "rand(1,40); rand(1,100); rand(1,100); 0",
+        "num_vars": 4,
+        "answer": "{v[1]}/(2*{v[0]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 42,
+    "fields": {
+        "quiz": 3,
+        "category": 2,
+        "problem_str": "Determine the limit \\(\\displaystyle \\lim_{{ x \\to -\\infty }} \\sqrt{{ @{v[0]}**2@x^2 + {v[1]}x + {v[2]} }} + {v[0]}x \\).",
+        "choices": "rand(1,40); rand(1,100); rand(1,100); 0",
+        "num_vars": 4,
+        "answer": "-{v[1]}/(2*{v[0]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 43,
+    "fields": {
+        "quiz": 3,
+        "category": 2,
+        "problem_str": "Let \\( a = \\displaystyle \\lim_{{ x \\to {v[0]}^- }} \\exp\\left( \\frac{{ {v[1]} }}{{x-{v[0]} }} \\right) \\) and \\( b = \\displaystyle \\lim_{{ x \\to {v[0]}^+ }} \\exp\\left( \\frac{{ {v[1]} }}{{x-{v[0]} }} \\right) \\). What is \\(b-a\\)?",
+        "choices": "rand(1,20); rand(1,100); 0; 0; 0;0",
+        "num_vars": 6,
+        "answer": "\\(\\infty\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\(-\\infty\\); \\(0\\); \\( @{v[0]}*{v[1]}@ \\); \\( @{v[0]} - {v[1]} @ \\); \\( @{v[0]} + {v[1]} @ \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 44,
+    "fields": {
+        "quiz": 3,
+        "category": 2,
+        "problem_str": "Determine the limit \\( \\displaystyle \\lim_{{ x \\to \\infty}} {v[0]} e^{{ {v[1]}x -{v[2]}x^2 }} \\).",
+        "choices": "rand(1,100); rand(1,100); rand(1,30):rand(-100,-1); rand(1,100); rand(1,30)",
+        "num_vars": 3,
+        "answer": "0",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 45,
+    "fields": {
+        "quiz": 3,
+        "category": 3,
+        "problem_str": "If \\( \\displaystyle \\lim_{{x \\to a}} \\left[ f(x) + g(x) \\right] \\) exists, which statement is true? <input type=hidden name=\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\lim_{x\\to a}\\left[ f(x)^2+2f(x)g(x)+g(x)^2 \\right] \\)  exists.",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\lim_{x\\to a} f(x) \\) and \\( \\displaystyle \\lim_{x\\to a} g(x) \\) exist; \\(\\displaystyle \\lim_{x\\to a} f(x) g(x) \\) exists; \\(\\displaystyle \\lim_{x\\to a} f(x)  = - \\lim_{x\\to a} g(x)  \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 46,
+    "fields": {
+        "quiz": 3,
+        "category": 3,
+        "problem_str": "If \\(\\displaystyle \\lim_{{x\\to {v[0]}}} \\left[ f(x) ^2\\right] = {v[1]} \\), \\(\\displaystyle \\lim_{{x\\to {v[0]}}} \\left[ g(x)^2 \\right] = {v[2]} \\), and \\( \\displaystyle \\lim_{{x\\to {v[0]}}} \\left[ f(x) + g(x) \\right] = {v[3]} \\), what is \\( \\displaystyle \\lim_{{x\\to {v[0]}}} \\left[ f(x) g(x) \\right] \\)?",
+        "choices": "rand(-100,100); rand(1,100); rand(1,100); rand(-10,10); 0; 0; 0",
+        "num_vars": 7,
+        "answer": "(({v[3]})**2-{v[2]}-{v[1]})/2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 47,
+    "fields": {
+        "quiz": 3,
+        "category": 3,
+        "problem_str": "Which statement is true?<input type=\"hidden\" name=\"{v[0]}\">",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "If \\( p(x) \\) is a polynomial, then \\( \\displaystyle \\lim_{x\\to a} p(x)^2 - 2p(x) + p(x)^3 \\) exists.",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "If \\(\\displaystyle \\lim_{x\\to \\infty} f(x) \\) does not exist, then \\( \\displaystyle \\lim_{x\\to \\infty} f(x) = \\infty \\) or \\( \\displaystyle\\lim_{x\\to \\infty} f(x) = -\\infty \\); If \\( \\displaystyle \\lim_{x\\to \\infty} f(x) \\) does not exist, then \\( \\displaystyle \\lim_{x\\to \\infty} |f(x)| \\) does not exist; If \\(\\displaystyle \\lim_{x\\to \\infty} f(x) = \\infty\\) and \\(\\displaystyle \\lim_{x\\to \\infty} g(x)  = -\\infty\\) then \\( \\displaystyle \\lim_{x\\to \\infty} [f(x)-g(x)] = 0 \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 48,
+    "fields": {
+        "quiz": 3,
+        "category": 4,
+        "problem_str": "If \\( \\displaystyle \\lim_{{x\\to{v[0]}}} |f(x)| = 0 \\) then what is \\( \\displaystyle \\lim_{{x \\to {v[0]} }} {v[1]}f(x) + {v[2]}\\)?",
+        "choices": "rand(-50,50); rand(1,40); rand(1,100); 0:rand(-50,50); rand(-40,-1); rand(1,100); 0",
+        "num_vars": 4,
+        "answer": "{v[2]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 49,
+    "fields": {
+        "quiz": 3,
+        "category": 4,
+        "problem_str": "Assume that \\(  \\displaystyle{v[1]}x+{v[2]} \\leq f(x) \\leq @{v[0]}*{v[1]}+{v[2]}@\\cos\\left( \\frac{{ \\pi(x-{v[0]}) }}2 \\right) \\) for all \\(x\\).  Determine \\( \\displaystyle \\lim_{{ x \\to {v[0]} }} f(x) \\).",
+        "choices": "rand(1,50); rand(-50,-1); rand(1,100); 0; 0; 0; 0:rand(1,50); rand(1,50); rand(1,100); 0; 0; 0; 0",
+        "num_vars": 7,
+        "answer": "{v[0]}*{v[1]}+{v[2]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 50,
+    "fields": {
+        "quiz": 3,
+        "category": 4,
+        "problem_str": "Determine the limit \\( \\displaystyle \\lim_{{ x\\to {v[3]} }} \\left[{v[0]} \\sin \\left( {v[1]} (x-{v[3]} ) \\right) \\exp \\left( \\sin\\left( \\frac{{ {v[2]} }}{{ x-{v[3]} }} \\right)\\right) \\right].\\)",
+        "choices": "rand(-100,-2); rand(1,50); rand(1,50); rand(1,50); 0; 0:rand(2,100); rand(1,50); rand(1,50); rand(1,50); 0; 0",
+        "num_vars": 6,
+        "answer": "0",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 52,
+    "fields": {
+        "quiz": 3,
+        "category": 5,
+        "problem_str": "Let \\( f^{{\\circ n}}(x)\\) denote the \\(n\\)-fold composition \\( (f \\circ f \\circ \\cdots \\circ f)(x) \\). Suppose that \\(f(x) \\) is continuous, and moreover\r\n<br><br>\r\n \\( f({v[0]}) = {v[1]}, f({v[1]})={v[0]} \\).\r\n<br><br>\r\nDetermine \\( \\displaystyle \\lim_{{x\\to {v[0]} }} f^{{\\circ @2*{v[2]}+1@}}(x) \\).",
+        "choices": "rand(-100,100); rand(-100,100); rand(1,20); 0; 0",
+        "num_vars": 6,
+        "answer": "{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 53,
+    "fields": {
+        "quiz": 3,
+        "category": 5,
+        "problem_str": "Let \\( f(x) = {v[0]} x^2 + {v[1]} \\) and \\( g(x) = \\begin{{cases}} {v[2]}  x - {v[3]} & x < 0\\\\ @{v[3]}**2@ & x = 0 \\\\ -{v[3]}-{v[2]}x & x >0  \\end{{cases}} \\). Determine \\(\\displaystyle \\lim_{{x\\to0}} f(g(x))\\).",
+        "choices": "rand(-20,-1); rand(1,100); rand(1,50); rand(1,50); 0; 0; 0",
+        "num_vars": 7,
+        "answer": "{v[0]}*({v[3]})**2+{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 54,
+    "fields": {
+        "quiz": 3,
+        "category": 5,
+        "problem_str": "Suppose that \\(f(x)\\) and \\(g(x)\\) are both continuous functions. Which of the following statements is not necessarily true? <input type=\"hidden\" name=\"{v[0]}{v[1]}\">",
+        "choices": "rand(1,10); rand(1,10)",
+        "num_vars": 2,
+        "answer": "\\(\\displaystyle \\frac{{ g(x) }}{{ f(x)^2 - @{v[0]}+{v[1]}@f(x) + @{v[0]}*{v[1]}@ }} \\) is continuous",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( f( {v[0]} g({v[1]} x^2 )) \\) is continuous; \\(\\sin\\left(f({v[0]}x)^2+g({v[1]}x) \\right) \\) is continuous; \\( @{v[0]}*{v[1]}@|f(x)|-f(@{v[0]}+{v[1]}@x)g(x) \\) is continuous; \\( \\displaystyle \\frac{{ {v[0]} g(x) }}{{ @({v[1]})**2@ + [f(x)]^2 }} \\) is continuous"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 55,
+    "fields": {
+        "quiz": 4,
+        "category": 1,
+        "problem_str": "What is the largest value of \\(x\\) such that the function \\(f(x) = |x^2-@{v[0]}+{v[1]}@x+@{v[0]}*{v[1]}@| \\) is not differentiable?",
+        "choices": "rand(1,20); rand(1,20); 0; 0",
+        "num_vars": 4,
+        "answer": "max( {v[0]}, {v[1]} )",
+        "functions": "{\"max\": lambda x,y: max(x,y)}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 56,
+    "fields": {
+        "quiz": 4,
+        "category": 1,
+        "problem_str": "Suppose that \\( f(x) \\) is differentiable at \\( x = {v[0]} \\) and  \\( f'({v[0]}) = {v[1]} \\) and \\( g(x) = {v[2]} \\). What is \\( \\displaystyle \\left.\\frac{{d}}{{dx}}\\right|_{{x={v[0]} }} \\left[ f(x) + g(x) \\right] \\)?",
+        "choices": "rand(-100,100); rand(-100,100); rand(-100,100); 0; 0",
+        "num_vars": 5,
+        "answer": "{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 57,
+    "fields": {
+        "quiz": 4,
+        "category": 1,
+        "problem_str": "What is the smallest value of \\(n\\) such that \\( \\displaystyle \\left.\\frac{{d^n}}{{dx^n}}\\right|_{{x=0}} x^{{ {v[0]} }} \\cos^{{ {v[1]} }} (x) \\neq 0 \\)?",
+        "choices": "rand(1,100); rand(1,100)",
+        "num_vars": 2,
+        "answer": "{v[0]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 58,
+    "fields": {
+        "quiz": 4,
+        "category": 2,
+        "problem_str": "Determine the value of \\( \\displaystyle \\left.\\frac{{ d^2}}{{dx^2}}\\right|_{{x=1 }} \\left[ {v[0]} x^{{ @2*{v[1]}@ }} + {v[2]} x^{{ {v[1]} }}+ {v[3]} \\right] \\)",
+        "choices": "rand(1,100); rand(1,20); rand(1,20); rand(1,100); 0",
+        "num_vars": 5,
+        "answer": "2*{v[1]}*(2*{v[1]}-1)*{v[0]}+ {v[2]}*{v[1]}*({v[1]}-1)",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 59,
+    "fields": {
+        "quiz": 4,
+        "category": 2,
+        "problem_str": "Determine \\( \\displaystyle \\left. \\frac{{ d^{{ @2*{v[0]}@ }} }}{{dx^{{ @2*{v[0]}@ }} }} \\right|_{{x=0}} \\left[ {v[1]}\\cos(x) + {v[2]}\\sin(x) \\right] \\).",
+        "choices": "rand(3,50); rand(1,100); rand(1,100); 0:rand(3,50); rand(-100,-1); rand(1,100); 0",
+        "num_vars": 4,
+        "answer": "par({v[0]})*{v[1]}*gobble({v[2]})",
+        "functions": "{\"par\": lambda x: 1 if x%2==0 else -1}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 60,
+    "fields": {
+        "quiz": 4,
+        "category": 2,
+        "problem_str": "Determine \\( \\displaystyle \\left. \\frac{{d^3}}{{dx^3}}\\right|_{{x=1 }} \\left[{v[2]} e^x +  {v[0]}x^{{ {v[1]} }} \\right]\\).",
+        "choices": "rand(1,100); rand(3,15); rand(1,100)",
+        "num_vars": 3,
+        "answer": "{v[2]}*e + {v[0]}*{v[1]}*({v[1]}-1)*({v[1]}-2)",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 61,
+    "fields": {
+        "quiz": 4,
+        "category": 3,
+        "problem_str": "Suppose that \\(f(x)\\) is differentiable at \\(x={v[0]}\\), with \\( f({v[0]}) = {v[1]}, f'({v[0]})={v[2]}\\). Determine \\(\\displaystyle \\left.\\frac{{d}}{{dx}}\\right|_{{x = {v[0]} }} \\left[ f(x) \\right]^3 \\).",
+        "choices": "rand(-20,20); rand(-20,20); rand(-20,20); 0;0;0",
+        "num_vars": 6,
+        "answer": "3*({v[1]})**2*{v[2]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 62,
+    "fields": {
+        "quiz": 4,
+        "category": 3,
+        "problem_str": "Suppose that \\( f(x) \\) is differentiable at \\( x = {v[2]} \\) with \\( f({v[2]}) = {v[0]} \\) and \\( f'({v[2]}) = {v[1]} \\). Determine the value of \r\n<br>\r\n\\( \\displaystyle \\left.\\frac{{d}}{{dx}}\\right|_{{x={v[2]}}} \\frac{{ f(x) }}{{1+f(x)^2}}. \\)",
+        "choices": "rand(-20,20); rand(-20,20); rand(-20,20); 0;0;0",
+        "num_vars": 6,
+        "answer": "({v[1]}-{v[1]}*({v[0]})**2)/(1+({v[0]})**2)**2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 63,
+    "fields": {
+        "quiz": 4,
+        "category": 3,
+        "problem_str": "Suppose that \\(f(x) \\) is differentiable at \\( x= {v[2]} \\), with \\(f({v[2]}) = {v[0]} \\) and \\( f'({v[2]}) = {v[1]} \\). If\r\n<br><br>\r\n\\( g(x) = x^2 f(x) + x f(x)^2 \\)\r\n<br><br>\r\nwhat is \\( g'({v[2]})\\)?",
+        "choices": "rand(-10,10); rand(-10,10); rand(-10,10); 0;0;0",
+        "num_vars": 6,
+        "answer": "2*{v[2]}*{v[0]}+ ({v[2]})**2*{v[1]} + ({v[0]})**2 + 2*{v[0]}*{v[1]}*{v[2]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 64,
+    "fields": {
+        "quiz": 4,
+        "category": 4,
+        "problem_str": "Determine the limit\r\n<br>\r\n\\( \\displaystyle \\lim_{{x\\to0}} \\frac{{ \\sin({v[0]}x) \\tan({v[1]}x) \\cot({v[2]}x) }}{{\\cos({v[3]}x) \\sin({v[4]}x) }} \\).",
+        "choices": "rand(1,10); rand(1,10); rand(1,10); rand(1,10); rand(1,10)",
+        "num_vars": 5,
+        "answer": "({v[0]}*{v[1]})/({v[2]}*{v[4]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 65,
+    "fields": {
+        "quiz": 4,
+        "category": 4,
+        "problem_str": "Determine the limit\r\n<br>\r\n\\( \\displaystyle \\lim_{{x\\to0}} \\frac{{\\sin\\left(1-\\cos({v[0]}x) \\right)}}{{ {v[1]}x \\tan({v[2]}x)}} \\).",
+        "choices": "rand(1,10); rand(2,10); rand(1,20):rand(1,10); rand(-10,-2); rand(1,20)",
+        "num_vars": 3,
+        "answer": "({v[0]})**2/(2*{v[1]}*{v[2]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 66,
+    "fields": {
+        "quiz": 4,
+        "category": 4,
+        "problem_str": "Determine the following limit:\r\n<br>\r\n\\( \\displaystyle \\lim_{{x\\to 0}}\\frac{{ \\cot({v[0]}x) \\tan({v[1]}x)\\tan({v[2]}x)}}{{\\cot({v[3]}x)\\tan({v[4]}x)\\tan({v[5]}x) }} \\).",
+        "choices": "rand(1,20);rand(1,20);rand(1,20);rand(1,20);rand(1,20);rand(1,20)",
+        "num_vars": 6,
+        "answer": "( {v[3]}*{v[1]}*{v[2]})/({v[0]}*{v[4]}*{v[5]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 67,
+    "fields": {
+        "quiz": 4,
+        "category": 5,
+        "problem_str": "Consider the function \\( f(x) = {v[0]}x^2 + bx + {v[1]} \\). Determine the value of \\(b\\) which ensures that the tangent line at \\(x=0\\) passes through \\( (0, {v[1]}) \\) and \\( ({v[3]}, {v[4]})\\).",
+        "choices": "Rand(-30,30);Rand(-30,30);Rand(-30,30);Rand(-30,30);Rand(-30,30)",
+        "num_vars": 5,
+        "answer": "({v[4]}-{v[2]})/{v[3]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 68,
+    "fields": {
+        "quiz": 4,
+        "category": 5,
+        "problem_str": "Suppose that \\(f(x) = {v[0]} e^x + {v[1]}x^{{{v[2]}}} \\). What is the \\(y\\)-intercept of the tangent line to \\(f(x) \\) at the point \\(x=1\\)?",
+        "choices": "Rand(-30,30); rand(2,30); rand(1,20)",
+        "num_vars": 3,
+        "answer": "{v[1]}*(1-{v[2]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 69,
+    "fields": {
+        "quiz": 4,
+        "category": 5,
+        "problem_str": "Two lines \\( y= m_1 x + b_1 \\) and \\( y = m_2 x+b_2 \\) are perpendicular if \\( m_1 = -1/m_2\\). Suppose that \\(L \\) is the tangent line to \\( f(x) = {v[0]}x^2 + {v[1]}x + {v[2]} \\) at \\( x = {v[3]} \\). Find the other value \\(x\\) whose tangent line is perpendicular to \\(L\\).",
+        "choices": "rand(1,20); rand(1,20); rand(1,20); rand(1,20)",
+        "num_vars": 4,
+        "answer": "(1/(2*{v[0]}*{v[3]} + {v[1]}) + {v[1]})/(-2*{v[0]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 70,
+    "fields": {
+        "quiz": 5,
+        "category": 1,
+        "problem_str": "True or False. Suppose that \\(f(x)\\) satisfies \\( f'(x) = 1 \\) for all \\(x \\neq 0\\). Then \\( f'(0) =1 \\). <input type=\"hidden\" value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "false",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "true"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 71,
+    "fields": {
+        "quiz": 5,
+        "category": 1,
+        "problem_str": "Which of the following functions is everywhere continuous but not everywhere differentiable?<input type=\"hidden\" value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\(\\displaystyle \\frac{|x|}{x^2+1} \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\(\\displaystyle  \\frac{x}{x^2+1} \\); \\( \\displaystyle x|x|\\); \\(\\displaystyle  \\frac{1}{|x|+1} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 72,
+    "fields": {
+        "quiz": 5,
+        "category": 1,
+        "problem_str": "Let \\( f(x) = \\begin{{cases}} {v[0]} x^2 \\sin\\left(\\frac{{ {v[1]} }}{{x}} \\right) & x \\neq 0 \\\\ 0 & x = 0 \\end{{cases}} \\). What is \\( f'(0) \\)?",
+        "choices": "Rand(-10,10); Rand(1,10)",
+        "num_vars": 2,
+        "answer": "0",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 73,
+    "fields": {
+        "quiz": 5,
+        "category": 2,
+        "problem_str": "Let \\(f(x)\\) be everywhere differentiable, and define \\( g(x) = f(xf(x)) \\). What is \\( g'(1) \\) if \r\n<br>\r\n\\( f(1) = {v[0]}, \\qquad f'(1) = {v[1]}, \\qquad f'({v[0]}) = {v[2]} \\)",
+        "choices": "rand(-20,20); rand(-20,20); Rand(-20,20); 0",
+        "num_vars": 4,
+        "answer": "{v[2]}*( {v[0]} + {v[1]} )",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 74,
+    "fields": {
+        "quiz": 5,
+        "category": 2,
+        "problem_str": "Compute \\( \\displaystyle \\left. \\frac{{d}}{{dx}} \\right|_{{x=0}} \\sin( {v[0]} \\sin({v[0]} \\sin( {v[0]} x ) ) ) \\)?",
+        "choices": "Rand(-5,5); 0; 0",
+        "num_vars": 3,
+        "answer": "({v[0]})**3",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 75,
+    "fields": {
+        "quiz": 5,
+        "category": 2,
+        "problem_str": "Compute \\( \\displaystyle \\left. \\frac{{d}}{{dx}}\\right|_{{x=1}} \\log( {v[0]} \\log( {v[0]} \\log({v[0]}x ) ) )\\).",
+        "choices": "rand(2,20); 0; 0",
+        "num_vars": 3,
+        "answer": "1/(ln({v[0]})* ln({v[0]}*ln({v[0]})))",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 76,
+    "fields": {
+        "quiz": 5,
+        "category": 3,
+        "problem_str": "Let \\( f(x) = {v[0]} x^{{ {v[1]}x }} \\). What is \\( f'(1) \\)?",
+        "choices": "Rand(-20,20); rand(2,10)",
+        "num_vars": 2,
+        "answer": "{v[0]}*{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 77,
+    "fields": {
+        "quiz": 5,
+        "category": 3,
+        "problem_str": "Suppose \\( f(x), g(x), h(x) \\) are all differentiable, with \r\n\\( f'({v[0]}) = {v[1]} f({v[0]}), \\quad g'({v[0]}) = {v[2]} g({v[0]}), \\quad h'({v[0]}) = {v[3]} h({v[0]}) \\)\r\n<br>\r\nLet \\(\\displaystyle  r(x) =  \\frac{{ f(x)^{{ {v[4]} }} g(x)^{{ {v[5]} }} }}{{ h(x)^{{ {v[6]} }} }} \\) and suppose \\( r({v[0]}) = {v[7]}\\). Find \\( r'({v[0]}) \\).",
+        "choices": "rand(-10,10); Rand(-10,10); Rand(-10,10); Rand(-10,10); rand(2,10); rand(2,10); rand(2,10); Rand(-10,10); 0; 0; 0; 0; 0; 0; 0",
+        "num_vars": 15,
+        "answer": "{v[7]} * ( {v[4]}*{v[1]} + {v[5]}*{v[2]} - {v[6]}*{v[3]} )",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 78,
+    "fields": {
+        "quiz": 5,
+        "category": 3,
+        "problem_str": "Determine \\( \\displaystyle \\left. \\frac d{{dx}} \\right|_{{x=1}} x^{{ (x^x)}} \\).<input type=hidden value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "1",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 79,
+    "fields": {
+        "quiz": 5,
+        "category": 4,
+        "problem_str": "Determine \\( \\displaystyle \\left. \\frac d{{dx}} \\right|_{{x = {v[0]} }} \\sin\\left( 2 \\arcsin(x) \\right) \\).",
+        "choices": "uni(-0.9,0.9,1)",
+        "num_vars": 1,
+        "answer": "2*(circ({v[0]})-({v[0]})**2/circ({v[0]}) )",
+        "functions": "{\"circ\": lambda x: (1-(x)**2)**(1/2)}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 80,
+    "fields": {
+        "quiz": 5,
+        "category": 4,
+        "problem_str": "Which of the following is a correct expression for \\( \\cos(2\\arcsin(x)) \\)?<input type=\"hidden\" value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\(1-2x^2\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\frac{2x+1}{\\sqrt{1-x^2}}\\); \\( \\displaystyle x^2+x+1\\); \\( x\\sqrt{1-x^2}\\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 81,
+    "fields": {
+        "quiz": 5,
+        "category": 4,
+        "problem_str": "Determine \\(\\displaystyle \\left. \\frac d{{dx}}\\right|_{{x=0}} {v[0]} \\arctan(\\arcsin({v[1]}x) ) \\).",
+        "choices": "Rand(-20,20); Rand(-20,20)",
+        "num_vars": 2,
+        "answer": "{v[0]}*{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 82,
+    "fields": {
+        "quiz": 5,
+        "category": 5,
+        "problem_str": "Consider the equation \\( x^{{{v[0]}}} y^{{{v[1]}}} + y + {v[2]} + {v[3]} x = 0 \\). Compute \\(\\displaystyle \\frac{{dy}}{{dx}} \\) at \\( x = 0\\).",
+        "choices": "rand(2,10); rand(2,10); rand(2,30); rand(2,30)",
+        "num_vars": 4,
+        "answer": "-{v[3]}*gobble({v[0]}, {v[1]}, {v[2]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 83,
+    "fields": {
+        "quiz": 5,
+        "category": 5,
+        "problem_str": "Consider the equation \\( \\sin(xy^2) + y^2 = @{v[0]}**2@ \\), where \\(y >0\\). Determine \\( \\displaystyle \\frac{{dy}}{{dx}} \\) at \\(x=0\\).",
+        "choices": "rand(1,15)",
+        "num_vars": 1,
+        "answer": "-{v[0]}/2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 84,
+    "fields": {
+        "quiz": 5,
+        "category": 5,
+        "problem_str": "Consider the equation \\( x^y = @{v[0]}**2@ \\). Find \\( \\displaystyle \\frac{{dy}}{{dx}} \\) at \\( x = {v[0]} \\).",
+        "choices": "rand(2,20); 0",
+        "num_vars": 2,
+        "answer": "-2/({v[0]}*ln({v[0]}))",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 85,
+    "fields": {
+        "quiz": 6,
+        "category": 1,
+        "problem_str": "Which of the following functions is increasing for \\( x >0\\)? <input type=\"hidden\" val={v[0]}{v[1]}{v[2]}{v[3]} >",
+        "choices": "rand(1,10); rand(1,10); rand(1,10); rand(1,10)",
+        "num_vars": 4,
+        "answer": "\\( \\log\\left( x^{{ {v[0]} }} \\right) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\sin\\left( {v[1]} x \\right) \\); \\( e^{{ -{v[2]}x }} \\); \\( -\\sqrt{{ x^2-{v[3]} x }} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 86,
+    "fields": {
+        "quiz": 6,
+        "category": 1,
+        "problem_str": "Consider the function \\( f(x) = e^{{ 1/x }} \\). Which of the following statements is <b> not</b> true? <input type=\"hidden\" value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\(f(x)\\) is increasing on \\( (-1/2, 0) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\(f(x) \\) is decreasing for \\(x >0\\); \\( f(x) \\) has a horizontal asymptote at both \\(\\pm\\infty\\); \\(f(x) \\) is concave up on \\( (-1/2, 0) \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 87,
+    "fields": {
+        "quiz": 6,
+        "category": 1,
+        "problem_str": "The function \\(\\displaystyle f(x) = \\frac{{ {v[0]} x }}{{ 1+ {v[1]}x^2 }} \\) changes from increasing to decreasing to increasing at the point \\(a\\), and from increasing to decreasing at the point \\(b\\). What is \\( a\\times b\\)?",
+        "choices": "rand(1,20); rand(1,20)",
+        "num_vars": 2,
+        "answer": "-1/{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 88,
+    "fields": {
+        "quiz": 6,
+        "category": 2,
+        "problem_str": "Find the largest value of \\( xy^2 \\) if \\( {v[0]} x + {v[1]} y = {v[2]} \\).",
+        "choices": "rand(1,10); rand(1,10); rand(20,40)",
+        "num_vars": 3,
+        "answer": "(4*({v[2]})**3)/(27*{v[0]}*({v[1]})**2 )",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 89,
+    "fields": {
+        "quiz": 6,
+        "category": 2,
+        "problem_str": "What is the area of the largest rectangle which can be inscribed in a circle of radius \\({v[0]}\\)?",
+        "choices": "rand(1,20)",
+        "num_vars": 1,
+        "answer": "2*{v[0]}**2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 90,
+    "fields": {
+        "quiz": 6,
+        "category": 2,
+        "problem_str": "How much fencing is necessary to build two adjacent rectangular playgrounds whose total area is \\(15000\\mathrm{{m}}^2\\)? <input type=\"hidden\" value ={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "600",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 91,
+    "fields": {
+        "quiz": 6,
+        "category": 3,
+        "problem_str": "Suppose that for some positive whole number \\(n\\) and function \\( f(x)\\) we know that \\( \\displaystyle \\sum_{{k=0}}^{{ {v[0]} }} f(k) = {v[1]} \\). If \\( f(0) = {v[2]} \\) and \\( f({v[0]}) = {v[3]} \\) then what is \\( \\displaystyle \\sum_{{k=1}}^{{ @{v[0]}-1@ }} f(k) \\)?",
+        "choices": "rand(100, 200); rand(1,100); rand(-100,100); rand(-100,100); 0; 0",
+        "num_vars": 6,
+        "answer": "{v[1]} - {v[2]} - {v[3]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 92,
+    "fields": {
+        "quiz": 6,
+        "category": 3,
+        "problem_str": "Given that\r\n<br>\r\n\\( \\displaystyle \\sum_{{i=1}}^n 1 = n, \\quad \\sum_{{i=1}}^n i = \\frac{{ n(n+1)}}2, \\quad \\sum_{{i=1}}^n i^2 = \\frac{{n(n+1)(2n+1)}}6,  \\)\r\n<br>\r\nwhat is\r\n<br>\r\n\\( \\displaystyle \\sum_{{i=1}}^{{ {v[3]} }} \\left( {v[0]} i^2 + {v[1]} i + {v[2]} \\right) \\)?",
+        "choices": "Rand(-5,5); rand(1,5); rand(1,5); rand(4,20)",
+        "num_vars": 4,
+        "answer": "{v[2]}*con({v[3]}) + {v[1]}*io({v[3]}) + {v[0]}*it({v[3]})",
+        "functions": "{\"con\": lambda x: x, \"io\": lambda x: x*(x+1)/2, \"it\": lambda x: x*(x+1)*(2*x+1)/6 }",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 93,
+    "fields": {
+        "quiz": 6,
+        "category": 3,
+        "problem_str": "Suppose that \\( \\displaystyle \\sum_{{k=1}}^{{ {v[0]} }}  \\sin(k) = A \\). What is \\(\\displaystyle \\sum_{{k=-{v[0]} }}^{{ {v[0]} }} \\sin(k) \\)?",
+        "choices": "rand(5,20); 0; 0",
+        "num_vars": 3,
+        "answer": "0",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "Impossible to determine; \\(2A\\); \\(2A+1\\); \\(-A\\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 94,
+    "fields": {
+        "quiz": 6,
+        "category": 4,
+        "problem_str": "Which of the following is the value of the Left Riemann sum for \\( \\displaystyle \\int_0^{{ @2*{v[0]}@ }} x \\mathrm dx \\) divided into \\(n\\) subintervals of equal length?",
+        "choices": "rand(1,10)",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle  \\frac{{ @2*{v[0]}**2@  (n-1)}}n \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\(\\displaystyle \\frac{{n-1}}{{2n}} \\); \\(\\displaystyle \\frac{{ @2*{v[0]}@ n}}{{n-1}} \\); \\( \\displaystyle \\frac{{ {v[0]} (n^2-1) }}{{n^2+1}} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 95,
+    "fields": {
+        "quiz": 6,
+        "category": 4,
+        "problem_str": "What is the Left Riemann sum for \\( f(x) = x^2 \\) on \\( [0, {v[0]} ] \\) if this interval is divided in \\({v[1]}\\) subintervals of equal length?",
+        "choices": "9; 3:5;5:10; 2:16;8:10;10:16;4:10;5:1; 4",
+        "num_vars": 2,
+        "answer": "{v[0]}**3*({v[1]}-1)*(2*{v[1]}-1)/(6*{v[1]}**2)",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 96,
+    "fields": {
+        "quiz": 6,
+        "category": 4,
+        "problem_str": "Which integral is equivalent to\r\n<br>\r\n\\(\\displaystyle \\lim_{{n\\to\\infty}} \\frac{{ {v[1]} }}n \\sum_{{i=0}}^{{n-1}} \\sin\\left({v[0]} + \\frac{{ {v[1]} i}}n \\right) \\)?",
+        "choices": "rand(1,10); rand(1,10); 0",
+        "num_vars": 3,
+        "answer": "\\( \\displaystyle \\int_{{ {v[0]} }}^{{ @{v[0]}+{v[1]}@ }} \\sin(x) \\mathrm dx \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\int_{{ {v[0]} }}^{{ {v[1]} }} \\sin(x) \\mathrm dx \\); \\( \\displaystyle \\int_{{ 0 }}^{{ {v[0]} }} \\sin(2+x) \\mathrm dx \\); \\( \\displaystyle \\int_{{ {v[0]} }}^{{ {v[1]} }} \\cos(x) \\mathrm dx \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 97,
+    "fields": {
+        "quiz": 6,
+        "category": 5,
+        "problem_str": "Suppose that \\( \\displaystyle \\int_a^b f(x) \\mathrm dx = {v[0]} \\) and \\( \\displaystyle \\int_a^b g(x) \\mathrm dx = {v[1]} \\). What is\r\n<br>\r\n\\( \\displaystyle \\int_a^b \\left[ {v[2]} f(x) + {v[3]} g(x) \\right] \\mathrm dx \\)?",
+        "choices": "rand(-10,10); rand(-10,10); Rand(-10,10); rand(1,10)",
+        "num_vars": 4,
+        "answer": "{v[2]}*{v[0]} + {v[3]}*{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 98,
+    "fields": {
+        "quiz": 6,
+        "category": 5,
+        "problem_str": "Suppose that \\( \\displaystyle \\int_{{{v[2]}}}^{{{v[3]}}} f(x) \\mathrm dx = {v[0]} \\) and \\( \\displaystyle \\int_{{{v[3]}}}^{{{v[4]}}} f(x) \\mathrm dx = {v[1]} \\). Determine \\( \\displaystyle \\int_{{{v[2]}}}^{{{v[4]}}} f(x) \\mathrm dx \\).",
+        "choices": "Rand(-20,20); Rand(-20,20); rand(1,3); rand(4,6); rand(7,10); 0;0;0",
+        "num_vars": 8,
+        "answer": "{v[0]} + {v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 99,
+    "fields": {
+        "quiz": 6,
+        "category": 5,
+        "problem_str": "Suppose that \\(f(x) \\) is a continuous function on \\([0,\\infty)\\), and we define a new function \\( F(x) = \\displaystyle \\int_0^x f(t) \\mathrm dt \\). What is the limit \\(\\displaystyle \\lim_{{x\\to 0}} F(x) \\)? <input type=\"hidden\" value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "0",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "It depends on \\(f(x)\\); \\(f(0)\\); \\(\\infty\\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 100,
+    "fields": {
+        "quiz": 7,
+        "category": 1,
+        "problem_str": "Suppose that \\(f(x)\\) is a differentiable function. Which of the following is an anti-derivative of \\( f'(x) f(x)^{{ {v[0]} }}\\)? <input type=hidden value={v[1]} >",
+        "choices": "rand(1,20); rand(1,20)",
+        "num_vars": 2,
+        "answer": "\\( \\frac1{{@{v[0]}+1@}}f(x)^{{ @{v[0]}+1@ }} + {v[1]} \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( f(x)^{{ {v[0]} }} \\); \\( e^{{ {v[0]} f(x) }} \\); \\( f(x) f(x)^{{ {v[0]} }} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 101,
+    "fields": {
+        "quiz": 7,
+        "category": 1,
+        "problem_str": "Which of the following is an anti-derivative of \\( \\displaystyle \\frac{{ {v[0]} }}x \\)? <input type=hidden value={v[1]}>",
+        "choices": "Rand(-10,10); rand(1,100)",
+        "num_vars": 2,
+        "answer": "\\( \\log(x^{{ {v[0]} }} ) + {v[1]} \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\log({v[0]} x^{{ {v[1]} }}) \\); \\( {v[0]} \\log( x + {v[1]} ) \\); \\( \\displaystyle \\frac{{ {v[0]} }} {{ {v[1]}  x^{{ @{v[0]} -1@ }} }} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 102,
+    "fields": {
+        "quiz": 7,
+        "category": 1,
+        "problem_str": "Suppose that \\(F(x) \\) and \\( G(x) \\) are both anti-derivatives of \\( f(x) \\). Which of the following is true? <input type=hidden value={v[0]} >",
+        "choices": "1",
+        "num_vars": 1,
+        "answer": "\\( F(x)-G(x) = C \\) for some constant \\(C\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( F(x) - G(x) = 0 \\); \\(F'(x) = G'(x) + C\\); We cannot say anything about their relationship"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 103,
+    "fields": {
+        "quiz": 7,
+        "category": 2,
+        "problem_str": "Let \\( \\displaystyle F(x) = \\int_1^{{ x^{{ {v[0]} }} }} \\frac{{ \\cos(t) }}t \\mathrm dt \\). Determine \\( F'({v[1]}) \\).",
+        "choices": "rand(2,5); rand(1,4)",
+        "num_vars": 2,
+        "answer": "{v[0]}/{v[1]}*cos( ({v[1]})**({v[0]}) )",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 104,
+    "fields": {
+        "quiz": 7,
+        "category": 2,
+        "problem_str": "Find \\( F'(2\\pi) \\) if \\(\\displaystyle F(x) = x \\int_1^{{ \\cos(x) }} f(t) \\mathrm dt \\) and \\( f(1) = {v[0]}\\).",
+        "choices": "Rand(-10,10)",
+        "num_vars": 1,
+        "answer": "0",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 105,
+    "fields": {
+        "quiz": 7,
+        "category": 2,
+        "problem_str": "Suppose that \\( f(x) \\) is integrable and \\( \\displaystyle \\int_0^x t f(t) \\mathrm dt = \\sin(x) - x \\cos(x) \\). Determine \\( f'({v[0]} ) \\).",
+        "choices": "rand(1,30)",
+        "num_vars": 1,
+        "answer": "cos({v[0]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 106,
+    "fields": {
+        "quiz": 7,
+        "category": 3,
+        "problem_str": "Determine \\( \\displaystyle \\int_0^{{ {v[0]} }} x \\sqrt{{ @{v[1]}**2@ - x^2 }} \\mathrm dx\\).",
+        "choices": "rand(1,5); rand(6,10)",
+        "num_vars": 2,
+        "answer": "1/3*( {v[1]}**3 - ({v[1]}**2 - {v[0]}**2)**(1.5))",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 107,
+    "fields": {
+        "quiz": 7,
+        "category": 3,
+        "problem_str": "Determine \\(\\displaystyle \\int_{{ -{v[0]} }} ^0 x^2 \\left( 1- \\frac {{ x^3 }} {{ @{v[0]}**2@ }} \\right)^{{-2}} \\mathrm dx \\).",
+        "choices": "rand(1,10); 0",
+        "num_vars": 2,
+        "answer": "{v[0]}**3/(3*({v[0]}+1))",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 108,
+    "fields": {
+        "quiz": 7,
+        "category": 3,
+        "problem_str": "Determine \\( \\displaystyle \\int_{{ {v[0]} }}^{{ {v[1]} }} \\sqrt{{ 1+ \\sin(x)}} \\cos(x) \\mathrm dx \\).",
+        "choices": "rand(-10,1); rand(1,10)",
+        "num_vars": 2,
+        "answer": "2/3*(ader({v[1]})-ader({v[0]}))",
+        "functions": "{\"ader\": lambda x: (1+math.sin(x))**(3/2)}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 109,
+    "fields": {
+        "quiz": 7,
+        "category": 4,
+        "problem_str": "Determine \\(\\displaystyle \\int_{{ {v[0]} }}^{{ {v[1]} }} x e^{{-x}} \\mathrm dx \\).",
+        "choices": "rand(-10,1); rand(1,10):rand(1,5); rand(6,10)",
+        "num_vars": 2,
+        "answer": "ader({v[1]}) - ader({v[0]})",
+        "functions": "{\"ader\": lambda x: -math.exp(-x)*(x+1)}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 110,
+    "fields": {
+        "quiz": 7,
+        "category": 4,
+        "problem_str": "Determine \\( \\displaystyle \\int_{{ {v[0]} }}^{{ {v[1]} }} \\sqrt x \\log(x) \\mathrm dx \\).",
+        "choices": "rand(1,3); rand(4,10):rand(1,6); rand(7,10)",
+        "num_vars": 2,
+        "answer": "ader({v[1]})-ader({v[0]})",
+        "functions": "{\"ader\": lambda x: 2/9*(x)**(3/2)*(3*math.log(x)-2)}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 111,
+    "fields": {
+        "quiz": 7,
+        "category": 4,
+        "problem_str": "Compute \\( \\displaystyle \\int_{{ {v[0]} }}^{{ {v[1]} }} x \\sin(2x) \\mathrm dx \\).",
+        "choices": "rand(-10,1); rand(1,10):rand(1,5); rand(6,9)",
+        "num_vars": 2,
+        "answer": "ader({v[1]})-ader({v[0]})",
+        "functions": "{\"ader\": lambda x: -x/2*math.cos(2*x)+math.sin(2*x)/4}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 112,
+    "fields": {
+        "quiz": 7,
+        "category": 5,
+        "problem_str": "Suppose \\( f(x) \\) and \\( g(x) \\) are differentiable, with \\( f(a) = f(b) = 0\\). Which of the following is \\( \\displaystyle \\int_a^b f(x) g'(x) \\mathrm dx \\)? <input type=hidden value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle -\\int_a^b f'(x) g(x) \\mathrm dx \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle g(a)-g(b) -\\int_a^b f'(x) g(x) \\mathrm dx \\); \\( \\displaystyle \\int_a^b f(x) g'(x) \\mathrm dx \\); \\( \\displaystyle \\int_a^b [f(x)]^2[g(x)]^2 \\mathrm dx \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 113,
+    "fields": {
+        "quiz": 7,
+        "category": 5,
+        "problem_str": "Suppose that \\(f (x) \\) is differentiable. Which of the following is \\( \\displaystyle \\int_0^1 \\left[ f(x) + x f'(x) \\right] e^{{x f(x) }} \\mathrm dx \\)? <input type=hidden value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( e^{{ f(1) }}-1 \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( e^{{ f(0) }} - e^{{ f(1) }} \\); \\( 0 \\); \\( e^{{ f(1)^2}} \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 114,
+    "fields": {
+        "quiz": 7,
+        "category": 5,
+        "problem_str": "Which of the following is an anti-derivative of \\( f(x) = 1/x \\)? <input type=hidden value={v[0]}>",
+        "choices": "rand(1,100)",
+        "num_vars": 1,
+        "answer": "\\( \\log({v[0]} x ) \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( -1/x^2\\); \\( e^x \\); \\( 1/x + 10 \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 115,
+    "fields": {
+        "quiz": 8,
+        "category": 1,
+        "problem_str": "Which of the following is \\(\\displaystyle \\int \\tan^2({v[0]}x) \\mathrm dx \\)",
+        "choices": "rand(2,10)",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\frac{{ \\tan({v[0]}x) }}{{ {v[0]} }} - x + C\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\frac{{ \\sec^2({v[0]} x) }}{{ {v[0]} }} + C \\); \\(\\displaystyle  \\frac{{ \\tan( @{v[0]}**2@) }}{{ @{v[0]}**2@ }}  + C\\); \\( \\displaystyle \\cos({v[0]}x ) \\sin^3({v[0]}x) + C \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 116,
+    "fields": {
+        "quiz": 8,
+        "category": 1,
+        "problem_str": "Which of the following describes \\( \\displaystyle \\int \\sin^2({v[0]} x) \\cos^3( {v[0]} x) \\mathrm dx \\)",
+        "choices": "rand(1,10); 0",
+        "num_vars": 2,
+        "answer": "\\( \\displaystyle \\frac{{ \\sin^3({v[0]} x ) }}{{@3*{v[0]}@}} - \\frac{{ \\sin^5({v[0]} x) }}{{@5*{v[0]}@}} +C \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\frac{{ \\sin^4({v[0]} x ) }}{{@4*{v[0]}@}} - \\frac{{ \\cos^6({v[0]} x) }}{{@6*{v[0]}@}} +C \\); \\( \\displaystyle \\tan\\left( @5*{v[0]}@ x\\right) - {v[0]}x^2 +C \\); \\( \\displaystyle \\frac{{ \\cos^3({v[0]} x ) }}{{@3*{v[0]}@}} - \\frac{{ \\sin^5({v[0]} x) }}{{@5*{v[0]}@}}+ \\frac{{\\sin^7({v[0]}x)}}{{@7*{v[0]}@}} +C \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 117,
+    "fields": {
+        "quiz": 8,
+        "category": 1,
+        "problem_str": "Determine \\( \\displaystyle \\int \\sec^2({v[0]} x) \\mathrm dx\\)",
+        "choices": "rand(2,10)",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\frac1{{ {v[0]} }} \\tan({v[0]} x) + C\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle   \\tan^3(x) - x + C\\); \\( \\displaystyle   \\sec^3({v[0]} x) - @2*{v[0]}@x + C\\); \\( \\displaystyle  \\frac{{ \\sec^3({v[0]} x) }}{{ {v[0]} }}  - x^{{ {v[0]} }} + C\\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 118,
+    "fields": {
+        "quiz": 8,
+        "category": 2,
+        "problem_str": "What is \\( \\displaystyle \\int \\frac{{ x^2 }} {{ (x^2 + @{v[0]}**2@)^2}} \\mathrm dx \\)?",
+        "choices": "rand(1,5)",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\frac1{{@2*{v[0]}@}} \\left[ \\arctan \\left( \\frac x{{ {v[0]} }} \\right) - \\frac{{ x }} {{ x^2 + @{v[0]}**2@ }}\\right] +C\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\frac1{{@{v[0]}@}} \\arcsin \\left( \\frac x{{ @{v[0]}**2@ }} \\right) - \\frac{{ x^2 }} {{ x^2 + @{v[0]}**2@ }} +C \\); \\( \\displaystyle  \\mathrm{{arccot}} \\left( \\frac x{{ @{v[0]}**2@ }} \\right) +C \\); \\( \\displaystyle  x^2\\arctan \\left( \\frac x{{ {v[0]} }} \\right) +C \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 119,
+    "fields": {
+        "quiz": 8,
+        "category": 2,
+        "problem_str": "Determine \\( \\displaystyle \\int \\sqrt{{ x^2-@{v[0]}**2@}} \\mathrm dx \\)",
+        "choices": "rand(1,10)",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\frac{{ x \\sqrt{{ @{v[0]}**2@ - x^2}}}}2 + \\frac{{@{v[0]}**2@}}2 \\log\\left| \\sqrt{{@{v[0]}**2@-x^2}} +x \\right| +C\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\frac{{ x \\sqrt{{ @{v[0]}**2@ - x^2}}}}2\\); \\( \\displaystyle  \\frac{{@{v[0]}**2@}}2 \\arctan\\left( \\frac{{ x}} {{ \\sqrt{{@{v[0]}**2@-x^2}}}} \\right) \\); \\(  @{v[0]}**2@\\pi \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 120,
+    "fields": {
+        "quiz": 8,
+        "category": 2,
+        "problem_str": "Determine \\(\\displaystyle \\int \\frac1 {{ e^x \\sqrt{{ e^{{2x}} - @{v[0]}**2@ }} }} \\mathrm dx \\)",
+        "choices": "rand(2,10)",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\frac1{{@{v[0]}**2@}} e^{{ -x }} \\sqrt{{ e^{{2x}} - @{v[0]}**2@ }}+C \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle  e^{{ -{v[0]} x }} \\sqrt{{ e^{{2x}} - @{v[0]}**2@ }}+C \\); \\( \\displaystyle  \\sqrt{{ e^{{2x}} - @{v[0]}**2@ }} +C\\);\\( \\displaystyle  x\\sqrt{{ e^{{2x}} - @{v[0]}**2@ }}+C \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 121,
+    "fields": {
+        "quiz": 8,
+        "category": 3,
+        "problem_str": "Determine \\( \\displaystyle \\int \\frac{{ x^5+2}} {{ x^2-1}} \\mathrm dx \\) <input type=hidden val={v[0]} >",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle \\frac{{x^4}}4 + \\frac{{x^2}}2 - \\frac12 \\log|x+1| + \\frac32 \\log|x-1| \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\frac{{x^4}}4- \\frac12 \\log|x^2-1| + C\\); \\( \\displaystyle \\frac{{x^4}}4 + \\frac{{x^2}}2  + x - \\log|x+1| + \\log|x-1| +C\\); \\( \\displaystyle \\frac{{ x^6/6 + 2x}}{{ x^3/3-x}} +C\\);"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 122,
+    "fields": {
+        "quiz": 8,
+        "category": 3,
+        "problem_str": "Determine \\( \\displaystyle \\int \\frac{{ x^2+5x+2}}{{(x+1)(x^2+1)}} \\mathrm dx \\) <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle -\\log|x+1| + \\log(x^2+1) + 3 \\arctan(x) + C\\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle -\\log|x^2+1| + 3\\log|x-1| + C\\);\\( \\displaystyle -\\arctan(2x+3) + 3\\log|x-1| + C\\); \\( \\log|x+1| - \\log|2x+3|+C \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 123,
+    "fields": {
+        "quiz": 8,
+        "category": 3,
+        "problem_str": "Determine \\( \\displaystyle \\int \\frac{{ 2x^2 +3}}{{x(x-1)^2}} \\mathrm dx \\) <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\( \\displaystyle 3\\log|x| - \\log|x-1| -\\frac 5{{x-1}}+C \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle \\log|x^2+x| -\\log| (x-1)^2| +C \\); \\(\\displaystyle \\frac{{ 3x^3 + 3x }}{{ x^4-3x^2+2}}+C \\); \\( \\displaystyle \\arctan\\left( \\frac x2 \\right) + \\log|x^2-x|+C \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 124,
+    "fields": {
+        "quiz": 8,
+        "category": 4,
+        "problem_str": "Find the area bounded by the curves \\( 4x = 4y-y^2\\) and \\( 4x-y=0 \\). <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "9/8",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 125,
+    "fields": {
+        "quiz": 8,
+        "category": 4,
+        "problem_str": "Find the area bounded by the curves \\( x+y-y^3=0\\) and \\( x-y+y^2=0 \\). <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "37/12",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 126,
+    "fields": {
+        "quiz": 8,
+        "category": 4,
+        "problem_str": "Let \\(T\\) be the triangle whose vertices are \\( (0,0), (1,3), (3,1) \\). Find the integral of the corresponding triangle. <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "4",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 127,
+    "fields": {
+        "quiz": 8,
+        "category": 5,
+        "problem_str": "Find the area bounded by the curves \\(  y^3 = x \\) and \\( y=x^2+x-1 \\). <input type=hidden val={v[0]}> Hint: These curves intersect at \\( x=\\pm 1\\).",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "4/3",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 128,
+    "fields": {
+        "quiz": 8,
+        "category": 5,
+        "problem_str": "Find the area bounded by the curves \\(  x+4=y^2 \\) and \\( x=5 \\). <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "36",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 129,
+    "fields": {
+        "quiz": 8,
+        "category": 5,
+        "problem_str": "Find the area bounded by the curves \\(  y= |x| \\) and \\( 3y-x=8 \\). <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "8",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 130,
+    "fields": {
+        "quiz": 9,
+        "category": 1,
+        "problem_str": "A hole of radius \\({v[0]} \\) is drilled through the center of a solid sphere of radius \\({v[1]}\\). What is the remaining volume?",
+        "choices": "rand(1,5); rand(6,10)",
+        "num_vars": 2,
+        "answer": "4/3*pi*( ({v[1]})**2 - ({v[0]})**2)**(1.5)",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 131,
+    "fields": {
+        "quiz": 9,
+        "category": 1,
+        "problem_str": "Consider a solid whose base is the ellipse \\( @{v[1]}**2@ x^2 + @{v[0]}**2@y^2 = @{v[0]}**2*{v[1]}**2@ \\), and whose cross-section perpendicular to the \\(x\\)-axis are square. What is the volume of this solid?",
+        "choices": "rand(1,5); rand(1,5); 0;0",
+        "num_vars": 4,
+        "answer": "16*{v[0]}*{v[1]}**2/3",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 132,
+    "fields": {
+        "quiz": 9,
+        "category": 1,
+        "problem_str": "Consider a solid whose base is the ellipse \\( @{v[1]}**2@ x^2 + @{v[0]}**2@y^2 = @{v[0]}**2*{v[1]}**2@ \\), and whose cross-section perpendicular to the \\(x\\)-axis are isosceles triangles whose height is half its width. What is the volume of this solid?",
+        "choices": "rand(1,5); rand(1,5); 0;0",
+        "num_vars": 4,
+        "answer": "4/3*{v[0]}*{v[1]}**2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 133,
+    "fields": {
+        "quiz": 9,
+        "category": 3,
+        "problem_str": "Find the volume when the area under \\( y={v[0]} x \\) on \\([0, {v[1]}]\\) is rotated about the \\(x\\)-axis.",
+        "choices": "Rand(-5,5); rand(1,5)",
+        "num_vars": 2,
+        "answer": "pi/3*({v[0]})**2*{v[1]}**3",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 134,
+    "fields": {
+        "quiz": 9,
+        "category": 2,
+        "problem_str": "Consider the area under the graph of \\( y={v[1]}\\sin({v[0]}x) \\) on \\( [0, \\pi/{v[0]}] \\). Find the volume when this area is rotated about the \\(x\\)-axis.",
+        "choices": "rand(1,10); rand(1,10); 0",
+        "num_vars": 3,
+        "answer": "pi**2*{v[1]}**2/(2*{v[0]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 135,
+    "fields": {
+        "quiz": 9,
+        "category": 2,
+        "problem_str": "Consider the area bounded between \\( y = {v[0]} x , y=-{v[1]} x\\), and \\( x = {v[2]}\\). Find the volume formed when this area is rotated about the \\(y\\)-axis.",
+        "choices": "rand(1,10); rand(1,10); rand(1,5)",
+        "num_vars": 3,
+        "answer": "2/3*pi*{v[2]}**3*({v[0]}+{v[1]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 136,
+    "fields": {
+        "quiz": 9,
+        "category": 2,
+        "problem_str": "Find the volume when the area between the curves \\( y = {v[0]} x^3 \\) on \\( [0,{v[1]}]\\) is rotated about the \\(y\\)-axis.",
+        "choices": "rand(1,10); rand(1,3)",
+        "num_vars": 2,
+        "answer": "2/5*pi*{v[0]}*{v[1]}**5",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 137,
+    "fields": {
+        "quiz": 9,
+        "category": 3,
+        "problem_str": "Rotate the area bounded by \\( y = {v[0]} x\\) and \\( y= {v[0]} \\sqrt x \\) about the \\(x\\)-axis. Find the volume of the corresponding solid of revolution.",
+        "choices": "rand(2,10); 0",
+        "num_vars": 2,
+        "answer": "pi/6*{v[0]}**2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 138,
+    "fields": {
+        "quiz": 9,
+        "category": 3,
+        "problem_str": "Rotate the area bounded between \\( y = {v[0]}x \\) and \\( y = {v[0]} \\sqrt x \\) about the \\(y\\)-axis. Find the corresponding volume of the solid of revolution.",
+        "choices": "rand(2,5); 0",
+        "num_vars": 2,
+        "answer": "2*pi*{v[0]}/15",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 139,
+    "fields": {
+        "quiz": 9,
+        "category": 4,
+        "problem_str": "Consider the solid generated by revolving the area under \\( y = {v[0]} \\sqrt x \\) on \\([ 0, @{v[1]}**2@]\\) about the line \\( x = @{v[1]}**2 + {v[2]}@ \\). Find the volume of that solid.",
+        "choices": "rand(1,10); rand(1,3); rand(1,3); 0",
+        "num_vars": 4,
+        "answer": "4/15*pi*{v[0]}*{v[1]}**3*( 2*{v[1]}**2 + 5*{v[2]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 140,
+    "fields": {
+        "quiz": 9,
+        "category": 4,
+        "problem_str": "Find the volume when \\( y = {v[0]} x \\) on \\( [0, {v[1]}]\\) is rotated about the line \\( y = -{v[2]} \\).",
+        "choices": "rand(2,10); rand(1,5); rand(1,4)",
+        "num_vars": 3,
+        "answer": "pi/3*{v[0]}*{v[1]}**2*({v[0]}*{v[1]}+3*{v[2]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 141,
+    "fields": {
+        "quiz": 9,
+        "category": 4,
+        "problem_str": "Rotate the area under the curve \\( y={v[0]}/x\\) on \\( [1, {v[1]} ]\\) about the line \\( y=-{v[2]}\\) and find the corresponding volume.",
+        "choices": "rand(1,5); rand(2,5); rand(1,5)",
+        "num_vars": 3,
+        "answer": "pi*{v[0]}*( 2*{v[2]}*ln({v[1]}) - {v[0]}/{v[1]} + {v[0]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 142,
+    "fields": {
+        "quiz": 9,
+        "category": 5,
+        "problem_str": "True or False: If \\( \\Omega \\) is a region in the first quadrant, then the volumes of the solids generated by rotating about the \\(y\\)-axis and \\(x\\)-axis are the same. <input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "false",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "true"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 143,
+    "fields": {
+        "quiz": 9,
+        "category": 5,
+        "problem_str": "Consider the area under the line \\( y = {v[0]} \\) on \\( [0, {v[1]} ] \\). Let \\( X \\) be the volume when this area is rotated about the \\(x\\)-axis, and \\(Y\\) the volume when rotated about the \\(y\\)-axis. What is \\(X -Y\\)?",
+        "choices": "rand(1,10); rand(1,10)",
+        "num_vars": 2,
+        "answer": "pi*{v[0]}*{v[1]}*({v[0]}-{v[1]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 144,
+    "fields": {
+        "quiz": 9,
+        "category": 5,
+        "problem_str": "Is it possible for the volume of a solid of revolution to be negative?<input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "Never",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "Always; Only if there are two functions involved; Only if one function lies below the \\(x\\)-axis"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 145,
+    "fields": {
+        "quiz": 14,
+        "category": 1,
+        "problem_str": "Consider the series \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ {v[0]} n^{{ {v[1]} }} -{v[3]}n^2 + {v[4]} }}{{ {v[2]} n^{{ @2*{v[1]}@ }} -@{v[3]}+4@n^3 - @{v[4]}**2@ }} \\). This series converges, by the Limit Comparison Test, and comparing against the series \\( b_n = 1/n^\\beta \\). What is \\(\\beta\\)?",
+        "choices": "Rand(-10,10); rand(4,8); Rand(-10,10); rand(2,5); rand(2,5); 0;0;0",
+        "num_vars": 8,
+        "answer": "{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 146,
+    "fields": {
+        "quiz": 14,
+        "category": 1,
+        "problem_str": "Consider the series \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ {v[0]} n^{{ @{v[1]}@ }} +{v[3]}n^2 - {v[4]} }}{{ {v[2]} n^{{ @2*{v[1]}+3@ }} -@{v[3]}+4@n^3 - @{v[4]}**2@ }} \\). This series converges, by the Limit Comparison Test, and comparing against the series \\( b_n = 1/n^\\beta \\). What is \\(\\beta\\)?",
+        "choices": "Rand(-10,10); rand(4,8); Rand(-10,10); rand(2,5); rand(2,5); 0;0;0",
+        "num_vars": 8,
+        "answer": "{v[1]}+3",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 147,
+    "fields": {
+        "quiz": 14,
+        "category": 1,
+        "problem_str": "Consider the series \\(\\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ k^{v[0]} }} {{ \\sqrt{{ {v[1]} k^{{ {v[1]}b }} + {v[2]} }} }} \\). What is the largest value of \\(b\\) which makes the series diverge?",
+        "choices": "rand(1,10); rand(1,10); rand(1,20); 0",
+        "num_vars": 4,
+        "answer": "(2+2*{v[0]})/{v[1]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 148,
+    "fields": {
+        "quiz": 14,
+        "category": 1,
+        "problem_str": "Suppose \\( a_k\\) is a sequence such that \\( \\displaystyle \\lim_{{k\\to\\infty}} a_k =  0 \\). Which of the following series must converge? <input type=hidden value={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "\\(\\displaystyle \\sum_{{k=1}}^\\infty \\frac{{a_k}}{{k^2}} \\)",
+        "functions": "{}",
+        "q_type": "MC",
+        "mc_choices": "\\( \\displaystyle\\sum_{{k=1}}^\\infty \\sqrt{{ |a_k| }} \\); \\( \\displaystyle\\sum_{{k=1}}^\\infty \\frac{{a_k}}k \\);\\( \\displaystyle\\sum_{{k=1}}^\\infty |a_k| \\)"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 149,
+    "fields": {
+        "quiz": 14,
+        "category": 2,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\( |x| > \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ x^k }}{{ {v[0]}^k }}  \\) diverges?\r\n <li> If \\( |x| < \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ x^k }}{{ {v[0]}^k }}  \\) converges?\r\n</ul>",
+        "choices": "rand(2,10); rand(2,10)",
+        "num_vars": 2,
+        "answer": "{v[0]}",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 150,
+    "fields": {
+        "quiz": 14,
+        "category": 2,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\( |x| > \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ x^k }}{{ k^{{ {v[0]} }} }}  \\) diverges?\r\n <li> If \\( |x| < \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ x^k }}{{ k^{{ {v[0]} }} }}  \\) converges?\r\n</ul>",
+        "choices": "rand(2,20); rand(2,20)",
+        "num_vars": 2,
+        "answer": "1",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 151,
+    "fields": {
+        "quiz": 14,
+        "category": 2,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\( |x| > \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\left( \\frac{{ {v[0]} k^2 - {v[1]} }}{{ x k^2 + {v[2]}k + {v[3]} }} \\right)^k  \\) converges?\r\n <li> If \\( |x| < \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty\\left( \\frac{{ {v[0]} k^2 - {v[1]} }}{{ x k^2 + {v[2]}k + {v[3]} }} \\right)^k  \\) diverges?\r\n</ul>",
+        "choices": "rand(3,10); rand(1,20); rand(1,20); rand(1,20); 0; 0; 0; 0",
+        "num_vars": 8,
+        "answer": "abs({v[0]})",
+        "functions": "{\"abs\": lambda x: abs(x)}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 152,
+    "fields": {
+        "quiz": 14,
+        "category": 3,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\(|x| > \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{k^{{ {v[0]} }} }}{{x^k }} \\) converges?\r\n <li> If \\(|x| < \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{k^{{ {v[0]} }} }}{{x^k }} \\) diverges?\r\n</ul>",
+        "choices": "rand(2,20); rand(2,20)",
+        "num_vars": 2,
+        "answer": "1",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 153,
+    "fields": {
+        "quiz": 14,
+        "category": 3,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\( |x| > \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ x^k k! }}{{ k^k }}  \\) diverges?\r\n <li> If \\( |x| < \\beta\\) then \\( \\displaystyle \\sum_{{k=1}}^\\infty \\frac{{ x^k k! }}{{ k^k }}  \\) converges?\r\n</ul>\r\n<input type=hidden val={v[0]}>",
+        "choices": "0",
+        "num_vars": 1,
+        "answer": "e",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 154,
+    "fields": {
+        "quiz": 14,
+        "category": 4,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\( |x| < \\beta\\) then  \\(\\displaystyle \\sum_{{k=1}}^\\infty \\frac{{k}}{{ {v[0]}^k }} x^k \\) converges?\r\n</ul>",
+        "choices": "rand(2,20)",
+        "num_vars": 1,
+        "answer": "abs({v[0]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 155,
+    "fields": {
+        "quiz": 14,
+        "category": 4,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\( |x| \\leq \\beta\\) then  \\(\\displaystyle \\sum_{{k=1}}^\\infty \\frac{{k}}{{ {v[0]}^k }} x^k \\) converges?\r\n</ul>",
+        "choices": "rand(2,20)",
+        "num_vars": 1,
+        "answer": "0",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 156,
+    "fields": {
+        "quiz": 14,
+        "category": 4,
+        "problem_str": "For what value of \\( \\beta\\) is the following true?\r\n<ul>\r\n <li> If \\( |x-{v[2]}| < \\beta\\) then \\(\\displaystyle \\sum_{{k=1}}^\\infty \\frac{{(-1)^k k}}{{ k^{{ {v[0]} }} {v[1]}^k }} (x-{v[2]}) ^k \\).  </ul>",
+        "choices": "rand(2,10); rand(2,5); rand(1,5)",
+        "num_vars": 4,
+        "answer": "abs({v[1]})",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": ""
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 163,
+    "fields": {
+        "quiz": 14,
+        "category": 1,
+        "problem_str": "Hello \\( \\sum_{{1 < 2 < 3}} {v[0]} {v[1]} {v[0]} \\)",
+        "choices": "0; 0",
+        "num_vars": 2,
+        "answer": "{v[0]}**2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": "[]"
+    }
+},
+{
+    "model": "quizzes.markedquestion",
+    "pk": 164,
+    "fields": {
+        "quiz": 14,
+        "category": 6,
+        "problem_str": "Hello world \\( {v[0]} {v[0]} \\)",
+        "choices": "rand(1,10)",
+        "num_vars": 1,
+        "answer": "( {v[0]} + 1 )**2",
+        "functions": "{}",
+        "q_type": "D",
+        "mc_choices": "[]"
+    }
+}
+]

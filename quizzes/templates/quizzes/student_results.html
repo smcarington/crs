@@ -1,0 +1,28 @@
+{% extends 'accounts/base.html' %}
+{% load render_table from django_tables2 %}
+{% load guardian_tags %}
+
+{% comment %}
+    Has context {{student_quizzes}} which is a list of StudentQuizResult elements
+        for the student requested
+    Has context {{course}} which is Course object to which the quiz belongs
+    Has context {{student}} which is User object to which the quizzes belong
+{% endcomment %}
+
+{% block title %}
+<title>Quizzes for {{user.username}}</title>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'list_quizzes' course_pk=course.pk %}">&#171; Quizzes</a>
+    <h2>
+        Quizzes for {{student.username}} 
+        {% if student.first_name %}
+            : ({{student.first_name}} {{student.last_name}})
+        {% endif %}
+    </h2>
+
+    <div>
+        {% render_table student_quizzes %}
+    </div>
+{% endblock %}

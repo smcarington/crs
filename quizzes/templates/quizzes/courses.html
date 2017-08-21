@@ -1,0 +1,100 @@
+{% extends 'accounts/base.html' %}
+{% comment %}
+    courses - list of Course objects for the user
+{% endcomment %}
+
+{% block title %}
+    <title>Courses - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <h2> Available Courses <a href="javascript:void" data-toggle="modal" data-target="#modal-search">Search for a course</a></h2>
+    {% for course in courses %}
+        <div class="course row 
+            {% if forloop.counter|divisibleby:2 %}even {% else %} odd {% endif %}
+            ">
+            <a href="{% url 'list_quizzes' course_pk=course.pk %}" class="row-content">
+                {{course.name}}
+                <span class="add-data"> 
+                    ( {{course.status}} )
+                </span>
+            </a>
+        </div>
+
+    {% endfor %}
+
+<div class="modal fade" id="modal-search" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">
+            Search: <input type="text" size="20" id="ajax_search">
+        </h5>
+      </div>
+      <div class="modal-body">
+          {# JS to add here #}
+      </div>
+      <div class="modal-footer">
+          <small>Only open enrollment courses are visible. If you do not see
+          your course, contact your instructor</small>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+
+{% block sidenote %}
+	{% if user.is_staff %}
+		<a class="btn btn-default" href="{% url 'quiz_admin' %}">
+			Administration
+		</a>
+	{% endif %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready( function() {
+
+            // Each time the user presses a key in the search menu, we send an
+            // ajax request to the server asking for courses which match the
+            // input
+            $("#ajax_search").keyup( function() {
+                var query = $(this).val();
+                update_search(query);
+            });
+
+            function update_search(query) {
+                $.get('{% url "course_search" %}', 
+                    {query:query},
+                    function (data) {
+                        $(".modal-body").html(data);
+                        // Add listeners to the spans
+                        $('span.glyphicon.glyphicon-plus').click( function(event) {
+                            pk = $(event.target).data('id');
+                            enroll_course(pk);
+                        });
+                    },
+                    "html"
+                );
+            }
+
+            function enroll_course(pk) {
+                $.post('{% url "enroll_course" %}',
+                    {course_pk: pk },
+                    function (data) {
+                        //If successful, reload the page
+                        if (data['response'] == 'success') {
+                            location.reload();
+                        } else {
+                            console.log(data['response']);
+                        }
+                    },
+                    "json"
+                );
+            }
+        });
+    </script>
+
+{% endblock %}
+

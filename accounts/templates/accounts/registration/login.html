@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'login' %}">
+{% csrf_token %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+   <table class="form-table">
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+    </table>
+
+    <input class="btn btn-default" type="submit" value="login" /> 
+    <br>
+    <small><a href="{% url 'password_reset' %}">Forgotten Password</a></small>
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}

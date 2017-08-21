@@ -1,0 +1,15 @@
+{% comment %}
+    Contains context
+        courses -- query set of courses matching the query
+        membership - UserMembership object for requesting user
+{% endcomment %}
+
+<ul>
+{% for course in courses %}
+    <li class="{% if course not in membership.courses.all %}un{% endif %}enrolled">
+        <span class="glyphicon glyphicon-plus" data-id="{{course.pk}}"></span> {{course.name}}
+    </li>
+{% empty %}
+    No results matching query.
+{% endfor %}
+</ul>

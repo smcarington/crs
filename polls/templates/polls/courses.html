@@ -1,4 +1,4 @@
-{% extends 'polls/base.html' %}
+{% extends 'accounts/base.html' %}
 {% comment %}
     courses - list of Course objects for the user
 {% endcomment %}
@@ -41,6 +41,14 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+{% endblock %}
+
+{% block sidenote %}
+    {% if user.is_staff %}
+        <a class="btn btn-default" href="{%url 'poll_admin'%}">
+            Administration
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block script %}

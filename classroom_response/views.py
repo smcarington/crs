@@ -7,3 +7,7 @@ def remote_login(request):
     """
     next_page = request.GET['next']
     return redirect(next_page)
+
+def home(request):
+    """ Landing page for generic home page"""
+    return render(request, 'accounts/home.html')

@@ -1,0 +1,26 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+	<h4>Select Module</h4>
+	<div class="menu">
+		<a class="menu_div quiz_menu" href="{% url 'quiz_courses' %}">Quizzes</a>
+		<a class="menu_div poll_menu" href="{% url 'polls_courses' %}">Classroom Response</a>
+	</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.menu_div').hover(function() {
+			$(this).stop().animate({
+				opacity: 1
+			}, 300);
+		}, function() {
+			$(this).stop().animate({
+				opacity: 0.6
+			}, 300);
+		});
+	});
+</script>
+{% endblock %}
+

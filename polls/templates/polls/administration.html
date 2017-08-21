@@ -1,11 +1,12 @@
-{% extends "polls/base.html" %}
+{% extends "accounts/base.html" %}
 
 {% block title %}
-<title>Administration - {{site_name}}</title>
+<title>Poll Administration - {{site_name}}</title>
 {% endblock %}
 
 {% block content %}
-    <h1>Administration</h1>
+    <a href="{% url 'polls_courses' %}">&#171; Courses</a>
+    <h2>Poll Administration</h2>
     
     {% if user.is_superuser %}
         <h3>Create Courses </h3>

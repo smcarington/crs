@@ -1,0 +1,23 @@
+{% extends 'accounts/base.html' %}
+{% load render_table from django_tables2 %}
+
+{% comment %}
+    Has context 'table' which is a Table element
+    Has context 'title' which is the page title
+    Has context 'sidenote' which is the page instructions/comments
+{% endcomment %}
+
+{% block title %}
+    <title>{{title}} -  </title>
+{% endblock %}
+
+{% block content %}
+    <div class="quiz-divs marks_wrapper">
+        <h1>{{title}}</h1>
+        {% render_table table %}
+    </div>
+{% endblock %}
+
+{% block sidenote %}
+    {{sidenote| safe}}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'accounts/base.html' %}
+{% load guardian_tags %}
+
+{% comment %}
+    Has context "return_html" which is a string containing the problems/answers
+    Has context "sqr" which is StudentQuizResult
+    Has context "course" 
+{% endcomment %}
+
+{% block title %}
+    <title>Quiz Details - {{site_name}}</title>
+{% endblock %}
+
+{% block content %}
+    {% get_obj_perms request.user for course as "course_perms" %}
+    {# If this is an admin looking at somebody else's page, go back to that list #}
+    {% if 'can_edit_quiz' in course_perms and request.user.pk != sqr.student.pk %}
+        <a href="{% url 'student_results' course_pk=course.pk user_pk=sqr.student.pk %}">&#171; Return to Quizzes</a>
+    {% else %}
+        <a href="{% url 'list_quizzes' course_pk=course.pk%}">&#171; Return to Quizzes</a>
+    {% endif %}
+    <h2>{{sqr.quiz.name}}</h2>
+    
+    {{return_html | safe}}
+{% endblock %}
+
+

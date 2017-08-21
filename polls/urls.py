@@ -3,7 +3,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^courses/$', views.courses, name='courses'),
+    url(r'^courses/$', views.courses, name='polls_courses'),
     # Polls (begin)
     url(r'^courses/(?P<course_pk>\d+)/$', views.list_polls, name='list_polls'),
     url(r'^courses/(?P<course_pk>\d+)/new_poll$', views.new_poll, name='new_poll'),
@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^courses/(?P<course_pk>\d+)/live_poll/$', views.live_poll, name='live_poll'),
     # Polls end
     # Admin begin
-    url(r'^administrative/$', views.administrative, name='administrative'),
+    url(r'^administrative/$', views.administrative, name='poll_admin'),
     url(r'^administrative/create_course/$', views.create_course, name='create_course'),
     url(r'^administrative/add_staff_member/$', views.add_staff_member, name='add_staff_member'),
     url(r'^administrative/add_students/$', views.add_students, name='add_students'),

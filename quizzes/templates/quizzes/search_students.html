@@ -1,0 +1,16 @@
+{% comment %}
+    Has 'users' which is a list of User objects matching the query.
+{% endcomment %}
+
+<ul>
+{% for user in users %}
+    <li> <a href="{% url 'student_results' course_pk=course_pk user_pk=user.pk%}"> 
+        {{user.username}}
+        {% if user.first_name %}
+            : ({{user.first_name}} {{user.last_name}})
+        {% endif %}
+    </a>
+{% empty %}
+    <p> No users matching query.</p>
+{% endfor %}
+</ul>

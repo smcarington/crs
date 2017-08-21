@@ -1,4 +1,4 @@
-{% extends 'polls/base.html' %}
+{% extends 'accounts/base.html' %}
 {% load navbar_inclusion_tag %}
 
 {% comment %}
@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'courses' %}">&#171; Courses</a>
+    <a href="{% url 'polls_courses' %}">&#171; Courses</a>
     <a href="{% url 'list_polls' course_pk=course.pk %}">&#171; Polls</a>
     <h2>Live Poll - {{course.name}} </h2>
 
