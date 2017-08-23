@@ -568,7 +568,12 @@ def eval_sub_expression(string):
         while "@" in temp_string:
             match = pattern.search(temp_string)
             # Evaluate the expression and substitute it back into the string
-            replacement = round(simple_eval(match.group(1)),4)
+            replacement = round(
+                simple_eval(match.group(1),
+                    names=settings.UNIVERSAL_CONSTANTS, 
+                    functions=settings.PREDEFINED_FUNCTIONS
+                )
+            ,4)
             temp_string = temp_string[:match.start()] + str(replacement) + temp_string[match.end():]
 
     except Exception as e: # Should expand the error handling here. What can go wrong?
