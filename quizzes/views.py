@@ -1044,6 +1044,10 @@ def test_quiz_question(request, course_pk, quiz_pk, mq_pk):
             html = ("Attribute Error: Likely you falied to close a @..@ group"
                     " or have an unbalanced @ group. See the code <br>"
             " '{{ {} }}'").format(str(e))
+        except SyntaxError as e:
+            html = ("Syntax Error: Evaluation failed. Did you forget to "
+                    "use an arithmetic operator? <br>"
+                    " '{{ {} }}'").format(str(e))
 
         except Exception as e:
             html = e
