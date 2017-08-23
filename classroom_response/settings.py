@@ -172,6 +172,9 @@ PREDEFINED_FUNCTIONS = {"sin": lambda x: math.sin(x),
                         "Rand": lambda x,y: NZRandInt(x,y),
                         "uni": lambda x,y,z: round(random.uniform(x,y),z),
                         "gobble": lambda *args: 1,
+                        "abs": lambda x: abs(x),
+                        "max": lambda *args: max(*args),
+                        "min": lambda *args: min(*args),
                         }
 
 def NZRandInt(x,y):
@@ -183,6 +186,9 @@ def NZRandInt(x,y):
             return random.randint(x,-1)
         else:
             return random.randint(1,y)
+
+
+
 #
 # Get local settings
 try:
