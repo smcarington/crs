@@ -1040,6 +1040,11 @@ def test_quiz_question(request, course_pk, quiz_pk, mq_pk):
             html = ("Key Error: Likely an instance of single braces '{{,'}} when"
             " double braces should have been used. See the code<br>"
             " '{{ {} }}'").format(str(e))
+        except AttributeError as e:
+            html = ("Attribute Error: Likely you falied to close a @..@ group"
+                    " or have an unbalanced @ group. See the code <br>"
+            " '{{ {} }}'").format(str(e))
+
         except Exception as e:
             html = e
 
