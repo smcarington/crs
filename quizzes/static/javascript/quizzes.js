@@ -46,4 +46,17 @@ $(document).ready(function() {
             { format:'Y-m-d H:i',
             });
     
+    if ($("#id_q_type option:selected").text() != "Multiple Choice") {
+        $("#id_mc_choices").prop("disabled", true);
+    }
+
+    $("#id_q_type").change( function() {
+        if ($(this).find("option:selected").text() == 'Multiple Choice') {
+            $("#id_mc_choices").prop('disabled', false);
+        } else {
+            $("#id_mc_choices").prop('disabled', true);
+        }
+    });
+
+
 });
