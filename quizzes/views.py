@@ -219,7 +219,7 @@ def quiz_admin(request, course_pk, quiz_pk):
     quiz      = get_object_or_404(Quiz,pk=quiz_pk)
 
     questions = MarkedQuestionTable(quiz.markedquestion_set.all())
-    RequestConfig(request, paginate={'per_page': 25}).configure(questions)
+    RequestConfig(request, paginate={'per_page': 10}).configure(questions)
 #    questions = quiz.markedquestion_set.all()
 
     return render(request, 'quizzes/quiz_admin.html',

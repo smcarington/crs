@@ -11,6 +11,7 @@
 {% block content %}
     <a href="{% url 'quiz_admin' course_pk=mquestion.quiz.course.pk quiz_pk=mquestion.quiz.pk %}">&#171; Return to Quiz Administration</a>
     <h1>Test Question</h1>
+    <a href="{% url 'edit_quiz_question' course_pk=mquestion.quiz.course.pk quiz_pk=mquestion.quiz.pk mq_pk=mquestion.pk %}">&#171; Edit the Question</a>
    
     <form method="POST"> {% csrf_token %}
         <input id="num_tests" name="num_tests" value="100" type="number">
