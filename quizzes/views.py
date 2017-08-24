@@ -543,7 +543,7 @@ def start_quiz(request, course_pk, quiz_pk):
              'high_score': high_score,
              })
 
-def eval_sub_expression(string):
+def eval_sub_expression(string, question):
     """ Used to evaluate @-sign delimited subexpressions in sentences which do
         not totally render. Variables should be passed into the string first,
         before passing to this function.  For example, if a string is if the
@@ -553,6 +553,8 @@ def eval_sub_expression(string):
     
         <<INPUT>>
         string (String) containing (possibly zero) @-delimited expressions.
+        question (MarkedQuestion) object. Contains the user-defined functions,
+        so we need them
         <<OUTPUT>>
         That string, but with the @ signs removed and the internal expression
         evaluated.
@@ -564,6 +566,8 @@ def eval_sub_expression(string):
 
     temp_string = string
     pattern = re.compile(r'@(.+?)@')
+    functions = eval(question.functions)
+    functions.update(settings.PREDEFINED_FUNCTIONS)
     try:
         while "@" in temp_string:
             match = pattern.search(temp_string)
@@ -571,7 +575,7 @@ def eval_sub_expression(string):
             replacement = round(
                 simple_eval(match.group(1),
                     names=settings.UNIVERSAL_CONSTANTS, 
-                    functions=settings.PREDEFINED_FUNCTIONS
+                    functions=functions
                 )
             ,4)
             temp_string = temp_string[:match.start()] + str(replacement) + temp_string[match.end():]
@@ -583,7 +587,7 @@ def eval_sub_expression(string):
 
 def sub_into_question_string(question, choices):
     """ Given a MarkedQuestion object and a particular choice set for the
-        variables {v[0]}=5, {v[1]}=-10, etc, substitute tese into the problem
+        variables {v[0]}=5, {v[1]}=-10, etc, substitute these into the problem
         and return the string.
         <<INPUT>
         question (MarkedQuestion) object 
@@ -602,7 +606,7 @@ def sub_into_question_string(question, choices):
     problem = problem.format(v=choices.replace(' ', '').split(';'))
 
     # Pass the string through the sub-expression generator
-    problem = eval_sub_expression(problem)
+    problem = eval_sub_expression(problem, question)
     return problem
 
 def mark_question(sqr, string_answer, accuracy=10e-5):
@@ -745,7 +749,7 @@ def get_mc_choices(question, choices, answer):
         """
         if re.findall(r'{v\[\d+\]}', part): # matches no variables
             part = part.format(v=split_choices)
-            part = eval_sub_expression(part)
+            part = eval_sub_expression(part, question)
 
         try:
             # Remove troublesome whitespace as well
@@ -819,7 +823,7 @@ def get_answer(question, choices):
         return answer
     if re.findall(r'{v\[\d+\]}', answer): # matches no variables
         answer = answer.format(v=choices.split(';'))
-        answer = eval_sub_expression(answer)
+        answer = eval_sub_expression(answer, question)
 
     try:
         # Substitute the variables into the string and evaluate the functions dictionary
