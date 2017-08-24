@@ -14,6 +14,8 @@ import random
 class Course(models.Model):
     """ A container for storing multiple quizzes. Will only be visible to students
         who are enrolled in that course.
+        name (Char) the name of the course
+        open_enrollment (Boolean) whether any student can enroll
     """
     name = models.CharField(max_length=20)
     # Allows any student to enroll
@@ -91,6 +93,9 @@ class Quiz(models.Model):
         _cat_list - (TextField) Contains the category pool numbers. Has custom
             set/get methods to serialize the data.
         out_of - (IntegerField) The number of different MarkedQuestion pools. 
+        immediate_solutions (Boolean) If true, students can see solutions at any
+        time. If false, solutions are only available once the quiz has
+        concluded.
     """
     course  = models.ForeignKey(Course, related_name='quizzes')
     name    = models.CharField("Name", max_length=200)
@@ -98,6 +103,7 @@ class Quiz(models.Model):
     tries   = models.IntegerField("Tries", default=0)
     live    = models.DateTimeField("Live on")
     expires = models.DateTimeField("Expires on")
+    immediate_solutions = models.BooleanField(default=True)
     _cat_list = models.TextField(null=True)
 #    # Replaced as a property computed from _cat_list
 #    out_of  = models.IntegerField("Points", default=1)
@@ -105,6 +111,14 @@ class Quiz(models.Model):
     class Meta:
         verbose_name = "Quiz"
         verbose_name_plural = "Quizzes"
+
+    @property
+    def solutions_are_visible(self):
+        """ Used to determine if students are currently allowed to see the
+            solutions for this quiz.
+        """
+        return self.immediate_solutions or timezone.now() > self.expires
+
 
     # cat_list needs custom set/get methods to handle serialization
     @property

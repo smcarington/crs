@@ -49,7 +49,7 @@ def delete_item(request, objectStr, pk):
                             'quiz_pk': theObj.quiz.pk,
                         }))
             else:
-                raise HttpResponseForbidden(
+                return HttpResponseForbidden(
                     'You are not authorized to delete that object')
                 
         else:
@@ -88,7 +88,7 @@ def administrative(request):
         that: Adminstrate a course.
     """
     if not request.user.is_staff:
-        raise HttpResponseForbidden("Not a valid User")
+        return HttpResponseForbidden("Not a valid User")
     else:
         return render(
             request,
@@ -109,7 +109,7 @@ def new_quiz(request, course_pk):
     course = get_object_or_404(Course, pk=course_pk)
 
     if not request.user.has_perm('quizzes.can_edit_quiz', course):
-        raise HttpResponse('You are not authorized to create quizzes')
+        return HttpResponseForbidden('You are not authorized to create quizzes')
 
     if request.method == "POST":
         form = QuizForm(request.POST)
@@ -191,12 +191,20 @@ def list_quizzes(request, course_pk, message=''):
     live_quiz   = all_quizzes.filter(live__lte=timezone.now(), expires__gt=timezone.now())
 
     # Get this specific user's previous quiz results
-    student_quizzes = SQRTable(
-        StudentQuizResult.objects.select_related(
-            'quiz', 'quiz__course').filter(
-                student=request.user,
-                quiz__course=course).order_by('quiz')
-    )
+    student_sqrs = StudentQuizResult.objects.select_related(
+        'quiz', 'quiz__course').filter(
+            student=request.user,
+            quiz__course=course).order_by('quiz')
+    # Now we need to filter these according to whether the solutions_are_visible
+    # property is true on each quiz
+    student_sqrs = [sqr for sqr in student_sqrs if sqr.quiz.solutions_are_visible]
+    student_quizzes = SQRTable(student_sqrs)
+#    student_quizzes = SQRTable(
+#        StudentQuizResult.objects.select_related(
+#            'quiz', 'quiz__course').filter(
+#                student=request.user,
+#                quiz__course=course).order_by('quiz')
+#    )
     RequestConfig(request, paginate={'per_page': 10}).configure(student_quizzes)
 
     return render(request, 'quizzes/list_quizzes.html', 
@@ -417,7 +425,7 @@ def search_students(request, course_pk):
     try:
         course = get_object_or_404(Course, pk=course_pk)
         if not request.user.has_perm('can_edit_polls', course):
-            raise HttpResponseForbidden('Insufficient privileges')
+            return HttpResponseForbidden('Insufficient privileges')
 
         if 'query' in request.GET:
             query = request.GET['query']
@@ -455,7 +463,7 @@ def student_results(request, course_pk, user_pk):
     course = get_object_or_404(Course, pk=course_pk)
 
     if not request.user.has_perm('can_edit_quiz', course):
-        raise HttpResponseForbidden('Insufficient Privilges')
+        return HttpResponseForbidden('Insufficient Privilges')
     student = get_object_or_404(User, pk=user_pk)
     # Get this specific user's previous quiz results
     student_quizzes = SQRTable(
@@ -877,7 +885,7 @@ def display_question(request, course_pk, quiz_pk, sqr_pk, submit=None):
     # Start by doing some validation to make sure only the correct student has
     # access to this page
     if sqr.student != request.user:
-        raise HttpResponseForbidden(
+        return HttpResponseForbidden(
             'You are not authorized to see this question')
 
     # submit=None means the student is just viewing the question and hasn't
@@ -1024,7 +1032,7 @@ def test_quiz_question(request, course_pk, quiz_pk, mq_pk):
 
     if not request.user.has_perm('quizzes.can_edit_quiz', 
             mquestion.quiz.course):
-        raise HttpResponseForbidden('You are not authorized to test this.')
+        return HttpResponseForbidden('You are not authorized to test this.')
         
 
     if request.method == "POST": # Testing the question
@@ -1099,18 +1107,28 @@ def render_html_for_question(problem, answer, choice, mc_choices):
 def quiz_details(request, course_pk, quiz_pk, sqr_pk):
     """ A view which allows students to see the details of a
         completed/in-progress quiz.  
+        <<INPUT>>
+        course_pk, quiz_pk, sqr_pk (Int) Primary keys
 
     Depends on: sub_into_question_string
     """
 
-    course = get_object_or_404(Course, pk=course_pk)
-    quiz_results = get_object_or_404(StudentQuizResult, pk=sqr_pk)
+    quiz_results = get_object_or_404(
+        StudentQuizResult.objects.select_related('quiz', 'quiz__course'), 
+        pk=sqr_pk)
+    quiz = quiz_results.quiz
+    course = quiz.course
 
+    # Ensure you're looking at your own results, or your an admin
     if not ( (request.user == quiz_results.student) 
                 or
              (request.user.has_perm('can_edit_quiz', course))
            ):
-        raise HttpResponseForbidden()
+        return HttpResponseForbidden()
+
+    # Next ensure that you are allowed to see the results
+    if not quiz.solutions_are_visible:
+        raise Http404('Solutions are unavailable at this time')
 
     result_dict = quiz_results.get_result()[0]
     template = """
@@ -1175,7 +1193,7 @@ def create_course(request):
     handle setting the administrator.
     """
     if not request.user.is_superuser:
-        raise HttpResponseForbidden("You are not authorized to create a course")
+        return HttpResponseForbidden("You are not authorized to create a course")
 
     if request.method == "POST": # Form returned filled in
         form = CourseForm(request.POST)

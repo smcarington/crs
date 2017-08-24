@@ -62,11 +62,15 @@ class MarkedQuestionTable(Table):
 
 class AllQuizTable(Table):
     out_of = Column("Points", empty_values=())
+    immediate_solutions = Column("Solutions Visible", empty_values=())
 
     class Meta:
         model = Quiz
         attrs = {'class': 'paleblue'}
         exclude = ['course','id', '_cat_list']
+
+    def render_immediate_solutions(self, value, record):
+        return record.solutions_are_visible
 
     def render_out_of(self, value, record):
         return record.out_of
