@@ -1,0 +1,6 @@
+#!/bin/sh
+
+NOW=$(date +"%m%d")
+DBBNAME=mat237db
+
+pg_dump mat237db > /opt/mat237backups/$DBBNAME$NOW

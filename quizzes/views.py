@@ -149,6 +149,10 @@ def edit_quiz(request, course_pk, quiz_pk):
 
     quiz = get_object_or_404(Quiz, pk=quiz_pk)
     course = quiz.course
+
+    if not request.user.has_perm('can_edit_quiz', course):
+        return HttpResponseForbidden("You are not authorized to see this.")
+
     if request.method == "POST":
         form = QuizForm(request.POST, instance=quiz)
         if form.is_valid():
@@ -182,7 +186,9 @@ def list_quizzes(request, course_pk, message=''):
     """
     course = get_object_or_404(Course, pk=course_pk)
     all_quizzes = Quiz.objects.filter(course=course)
-    if request.user.is_staff:
+
+
+    if request.user.has_perm('can_edit_quiz', course):
         all_quizzes_table = AllQuizTable(all_quizzes)
         RequestConfig(request, paginate={'per_page', 10}).configure(all_quizzes_table)
     else:
@@ -224,7 +230,11 @@ def quiz_admin(request, course_pk, quiz_pk):
         respectively.
         TODO: Change access dependencies to new row privileges.
     """
+
     quiz      = get_object_or_404(Quiz,pk=quiz_pk)
+
+    if not request.user.has_perm('can_edit_quiz', quiz.course):
+        return HttpResponseForbidden("You are not authorized to see this.")
 
     questions = MarkedQuestionTable(quiz.markedquestion_set.all())
     RequestConfig(request, paginate={'per_page': 10}).configure(questions)
@@ -241,8 +251,10 @@ def edit_quiz_question(request, course_pk, quiz_pk, mq_pk=None):
     """ View designed to add/edit a question. If mq_pk is None then we make the
         question, otherwise we design the form to be edited.
     """
+    quiz = get_object_or_404(Quiz.objects.select_related('course'), pk=quiz_pk)
 
-    quiz = get_object_or_404(Quiz, pk=quiz_pk)
+    if not request.user.has_perm('can_edit_quiz', quiz.course):
+        return HttpResponseForbidden("You are not authorized to see this.")
 
     if mq_pk is None: # Adding a new question, so create the form.
         if request.method == "POST":
@@ -375,6 +387,9 @@ def edit_choices(request, course_pk, quiz_pk, mq_pk):
     )
     error_message = ''
 
+    if not request.user.has_perm('can_edit_quiz', mquestion.quiz.course):
+        return HttpResponseForbidden("You are not authorized to see this.")
+
     if request.method == "POST":
         form_data = request.POST
         try:
@@ -424,7 +439,7 @@ def search_students(request, course_pk):
     """
     try:
         course = get_object_or_404(Course, pk=course_pk)
-        if not request.user.has_perm('can_edit_polls', course):
+        if not request.user.has_perm('can_edit_quiz', course):
             return HttpResponseForbidden('Insufficient privileges')
 
         if 'query' in request.GET:
@@ -463,7 +478,7 @@ def student_results(request, course_pk, user_pk):
     course = get_object_or_404(Course, pk=course_pk)
 
     if not request.user.has_perm('can_edit_quiz', course):
-        return HttpResponseForbidden('Insufficient Privilges')
+        return HttpResponseForbidden('Insufficient Privileges')
     student = get_object_or_404(User, pk=user_pk)
     # Get this specific user's previous quiz results
     student_quizzes = SQRTable(
