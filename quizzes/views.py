@@ -1142,7 +1142,8 @@ def quiz_details(request, course_pk, quiz_pk, sqr_pk):
         return HttpResponseForbidden()
 
     # Next ensure that you are allowed to see the results
-    if not quiz.solutions_are_visible:
+    if (quiz.solutions_are_visible or 
+        request.user.has_perm('quizzes.can_edit_quiz', course) ):
         raise Http404('Solutions are unavailable at this time')
 
     result_dict = quiz_results.get_result()[0]
