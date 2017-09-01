@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os,socket,math,random,fractions
 
+from simpleeval import simple_eval, NameNotDefined
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -199,8 +201,8 @@ def reduced_fraction(num, den):
     template="{}\\frac{{ {} }}{{ {} }}"
     sign = ''
     try:
-        numer = int(num)
-        denom = int(den)
+        numer = int(simple_eval(num))
+        denom = int(simple_eval(den))
 
         if not denom:
             raise TypeError('Denominator cannot be zero or empty')
