@@ -69,6 +69,10 @@ class MarkedQuestionForm(forms.ModelForm):
         list_of_vars = [int(var_ind) for var_ind in list_of_vars]
         list_of_vars = sorted(list_of_vars)
         # Now we check whether they are sequential
+        if not list_of_vars:
+            raise ValidationError(
+                "No variables specified. Consider hiding one in an input tag"
+                )
         if all(a==b for a,b in enumerate(list_of_vars, list_of_vars[0])):
             return problem_str
         else:
