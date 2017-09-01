@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
-import os,socket,math,random
+import os,socket,math,random,fractions
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -175,6 +175,7 @@ PREDEFINED_FUNCTIONS = {"sin": lambda x: math.sin(x),
                         "abs": lambda x: abs(x),
                         "max": lambda *args: max(*args),
                         "min": lambda *args: min(*args),
+                        "redfrac": lambda x,y: reduced_fraction(x,y),
                         }
 
 def NZRandInt(x,y):
@@ -187,7 +188,35 @@ def NZRandInt(x,y):
         else:
             return random.randint(1,y)
 
+def reduced_fraction(num, den):
+    """ Given a fraction num/den where num/den are strings, produces the LaTeX
+        string for the reduced fraction. For example,
+        reduced_fraction(3,9) = \frac{{1}}{{3}} while
+        reduced_fraction(4,2) = 2
+        <<INPUT>> 
+        num, den (strings) for the numerator and denominator
+    """
+    template="{}\\frac{{ {} }}{{ {} }}"
+    sign = ''
+    try:
+        numer = int(num)
+        denom = int(den)
 
+        if not denom:
+            raise TypeError('Denominator cannot be zero or empty')
+
+        gcd = fractions.gcd(numer, denom)
+        (red_num, red_den) = (numer/gcd, denom/gcd)
+
+        if red_den == 1:
+            return str(int(red_num))
+        else:
+            if red_num*red_den < 0:
+                sign = '-'
+            return template.format(sign, int(abs(red_num)), int(abs(red_den)))
+
+    except TypeError as e:
+        raise e
 
 #
 # Get local settings

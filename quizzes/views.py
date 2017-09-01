@@ -585,7 +585,7 @@ def eval_sub_expression(string, question):
 
     # If no subexpression can be found, simply return
     if not "@" in string:
-        return string
+        return post_process(string)
 
     temp_string = string
     pattern = re.compile(r'@(.+?)@')
@@ -595,16 +595,45 @@ def eval_sub_expression(string, question):
         while "@" in temp_string:
             match = pattern.search(temp_string)
             # Evaluate the expression and substitute it back into the string
-            replacement = round(
-                simple_eval(match.group(1),
+            replacement = simple_eval(
+                    match.group(1),
                     names=settings.UNIVERSAL_CONSTANTS, 
                     functions=functions
-                )
-            ,4)
+                    )
+            try: # Round if a number
+                replacement = round(replacement,4)
+            except TypeError as e: #Otherwise it's a string do nothing
+                pass
+            except Exception as e:
+                raise e
+
             temp_string = temp_string[:match.start()] + str(replacement) + temp_string[match.end():]
 
     except Exception as e: # Should expand the error handling here. What can go wrong?
         raise e
+
+    temp_string = post_process(temp_string)
+
+    return temp_string
+
+def post_process(input_string):
+    """ Hack fix to certain math problems, such as 1x, a^1, or +- or --.
+        <<INPUT>>
+        input_string (String) The string to process
+    """
+    temp_string = input_string
+    
+    # List of regex's to find issues, and their replacement string
+    regex_patterns = [
+        (re.compile(r'1\s*([a-zA-Z])'), r'\g<1>'), # Should match 1x and replace with x
+        (re.compile(r'(\w*)\^1'), 'r\g<1>'), # Matches a^1 and replaces with a
+        (re.compile(r'(\w*)\^{{\s*1\s*}}'), 'r\g<1>'), # Matches a^1 and replaces with a
+        (re.compile(r'\+\s*\-'), '-'), #Matches +- and replaces with -
+        (re.compile(r'\-\-'), '+'), #matches -- and replaces with +
+    ]
+
+    for pat, repl in regex_patterns:
+        temp_string = pat.sub(repl, temp_string)
 
     return temp_string
 
