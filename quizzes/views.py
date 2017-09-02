@@ -283,7 +283,7 @@ def edit_quiz_question(request, course_pk, quiz_pk, mq_pk=None):
                 evaluation.quiz_update_out_of(mquestion.quiz)
 
                 # Check to see if there are any possible issues with the format of the question
-                return redirect('quiz_admin', course_pk=course_pk, quiz_pk=quiz.pk)
+                return redirect('edit_choices', course_pk=course_pk, quiz_pk=quiz.pk, mq_pk=mquestion.pk)
         else:
             form = MarkedQuestionForm(instance=mquestion)
 
