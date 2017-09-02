@@ -1102,9 +1102,11 @@ def test_quiz_question(request, course_pk, quiz_pk, mq_pk):
             " double braces should have been used. See the code<br>"
             " '{{ {} }}'").format(str(e))
         except AttributeError as e:
-            html = ("Attribute Error: Likely you falied to close a @..@ group"
+            html = ("Attribute Error: Likely you failed to close a @..@ group"
                     " or have an unbalanced @ group. See the code <br>"
             " '{{ {} }}'").format(str(e))
+            import traceback;
+            traceback.print_exc()
         except SyntaxError as e:
             html = ("Syntax Error: Evaluation failed. Did you forget to "
                     "use an arithmetic operator? <br>"

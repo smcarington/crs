@@ -201,8 +201,8 @@ def reduced_fraction(num, den):
     template="{}\\frac{{ {} }}{{ {} }}"
     sign = ''
     try:
-        numer = int(simple_eval(num))
-        denom = int(simple_eval(den))
+        numer = int(simple_eval(str(num)))
+        denom = int(simple_eval(str(den)))
 
         if not denom:
             raise TypeError('Denominator cannot be zero or empty')
