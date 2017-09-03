@@ -56,6 +56,7 @@
     <script>
     $('document').ready( function() {
         $('.quiz_mc').click( function() {
+			$('.quiz_mc').attr("disabled", true);
             answer = $(this).attr('data-id');
             problem = $(".question-detail").attr("data-id");
             $.post("{% url 'display_question' course_pk=sqr.quiz.course.pk quiz_pk=sqr.quiz.pk sqr_pk=sqr.pk submit='submit'%}", 
