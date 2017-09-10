@@ -625,7 +625,7 @@ def post_process(input_string):
     
     # List of regex's to find issues, and their replacement string
     regex_patterns = [
-        (re.compile(r'(?<!\d)1\s*([a-zA-Z])'), r'\g<1>'), # Should match 1x and replace with x
+        (re.compile(r'(?<!\d)1\s*(\\?[a-zA-Z])'), r'\g<1>'), # Should match 1x and replace with x
         (re.compile(r'(\w*)\^1'), 'r\g<1>'), # Matches a^1 and replaces with a
         (re.compile(r'(\w*)\^{{\s*1\s*}}'), 'r\g<1>'), # Matches a^1 and replaces with a
         (re.compile(r'\+\s*\-'), '-'), #Matches +- and replaces with -
@@ -1055,7 +1055,7 @@ def get_result_table(result):
     ret_data = []
     res_dict = json.loads(result)
     for field, data in res_dict.items():
-        part = {'q_num': field, 
+        part = {'q_num': int(field), 
                 'correct': str(data['answer']), 
                 'guess': str(data['guess']),
                 'score': data['score']}
