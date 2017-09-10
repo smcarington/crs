@@ -39,7 +39,7 @@
 
 {% endblock %}
 
-{% block buttons %}
+{% block sidenote %}
     {% get_obj_perms request.user for course as "course_perms" %} 
     {% if "can_edit_poll" in course_perms %}
     <div class="button-div">

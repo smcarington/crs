@@ -32,7 +32,7 @@
             <p class="top-menu">Hello {{ request.user.username }}<small> (<a href="{% url 'logout' %}">Log out</a>)<br> (<a href="{% url 'password_change' %}">Change Password</a>)</small></p>
                 {% else %}
                 <div class="top-menu">
-                    <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span>Log In</a>
+					<a href="{% url 'remote_login' %}?next={% url 'home' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span>Log In</a>
                     <br>
                 </div>
             {% endif %}
