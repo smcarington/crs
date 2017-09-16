@@ -84,7 +84,7 @@ class MarkedQuestionForm(forms.ModelForm):
         text_area_attrs = {'cols':'80', 'rows': '5'}
         mc_attrs = dict(text_area_attrs, **{'visible': 'false'})
         model = MarkedQuestion
-        fields = ['category', 'problem_str', 'answer', 'q_type', 'mc_choices', 'functions']
+        fields = ['category', 'problem_str', 'answer', 'q_type', 'mc_choices']
         help_texts = {
             'problem_str': 'Use {v[0]}, {v[1]}, ... to indicate variables.',
             'category': 'Used to group several questions into the same category for randomization',

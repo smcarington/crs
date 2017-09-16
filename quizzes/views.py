@@ -295,7 +295,9 @@ def edit_quiz_question(request, course_pk, quiz_pk, mq_pk=None):
         <li>Exponentiation is indicated by using a**b; for example, \(2^3\) may be entered as 2**3
         <li>You may use the functions \(\sin, \cos,\\tan, \ln\) in your answer.
         <li>You may use the constants pi and e for  \(\pi\)  and \(e\).
-        <li>You may use the python math package in your functions. For example, <code>{"f": lambda x: math.sqrt(x) }</code>
+        <li>The function <code>redfrac</code> is a built-in which returns a
+        reduced fraction. For example <code>@redfrac(6,4)@</code> will return
+        \( \\frac32\).
         <li> Use 'rand(-5,10)' to create a random integer in the range [-5,10] (inclusive). Use 'uni(-1,1,2)' to create a real number in [-1,1] with 2 floating points of accuracy
     </ul>"""
 
