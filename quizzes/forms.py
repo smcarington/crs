@@ -80,8 +80,6 @@ class MarkedQuestionForm(forms.ModelForm):
                 "Variables have non-sequential indices {}".format(list_of_vars)
             )
 
-
-
     class Meta:
         text_area_attrs = {'cols':'80', 'rows': '5'}
         mc_attrs = dict(text_area_attrs, **{'visible': 'false'})

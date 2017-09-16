@@ -1105,8 +1105,6 @@ def test_quiz_question(request, course_pk, quiz_pk, mq_pk):
             html = ("Attribute Error: Likely you failed to close a @..@ group"
                     " or have an unbalanced @ group. See the code <br>"
             " '{{ {} }}'").format(str(e))
-            import traceback;
-            traceback.print_exc()
         except SyntaxError as e:
             html = ("Syntax Error: Evaluation failed. Did you forget to "
                     "use an arithmetic operator? <br>"
@@ -1165,7 +1163,7 @@ def quiz_details(request, course_pk, quiz_pk, sqr_pk):
     quiz = quiz_results.quiz
     course = quiz.course
 
-    # Ensure you're looking at your own results, or your an admin
+    # Ensure you're looking at your own results, or you're an admin
     if not ( (request.user == quiz_results.student) 
                 or
              (request.user.has_perm('can_edit_quiz', course))
