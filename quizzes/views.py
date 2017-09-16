@@ -635,6 +635,10 @@ def post_process(input_string):
     for pat, repl in regex_patterns:
         temp_string = pat.sub(repl, temp_string)
 
+    # Finally, get rid of those pesky \r and \n.
+    temp_string=temp_string.replace('\n', '')
+    temp_string=temp_string.replace('\r', '')
+
     return temp_string
 
 def sub_into_question_string(question, choices):
