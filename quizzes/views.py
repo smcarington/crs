@@ -667,6 +667,22 @@ def sub_into_question_string(question, choices):
     problem = eval_sub_expression(problem, question)
     return problem
 
+def strip_string(string):
+    """ Remove all line breaks and spaces from a string:
+    """
+    fix_list = [
+        ('\r', ''),
+        ('\n', ''),
+        (' ',  ''),
+    ]
+
+    temp_string = string
+
+    for fix in fix_list:
+        temp_string = temp_string.replace(fix[0], fix[1])
+
+    return temp_string
+
 def mark_question(sqr, string_answer, accuracy=10e-5):
     """ Helper question to check if the answers are the same. Updates SQR
         internally and returns a boolean flag indicating whether this is the
@@ -690,7 +706,7 @@ def mark_question(sqr, string_answer, accuracy=10e-5):
 
     # For multiple choice questions, we do not want to evaluate, just compare strings
     if result[qnum]['type'] == "MC":
-        if str(correct) == string_answer:
+        if strip_string(str(correct)) == strip_string(string_answer):
             result[qnum]['score']='1'
             sqr.update_score()
         else:
