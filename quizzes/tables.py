@@ -143,7 +143,7 @@ class SeeAllMarksTable(Table):
         attrs = {'class': 'paleblue'}
         row_attrs = {'data-active': lambda record: record.user.is_active}
 
-def define_all_marks_table():
+def define_all_marks_table(course):
     """ A helper function which extends the base SeeAllMarksTable for variable category types.
         <<INPUT>>
           categories (List of ExemptionType) Add these as columns to the table
@@ -151,7 +151,7 @@ def define_all_marks_table():
           (SeeAllMarksTable, Table) object
     """
     
-    categories = Evaluation.objects.all().order_by('name')
+    categories = Evaluation.objects.filter(course=course).order_by('name')
     attrs = dict( (cat.name.replace(' ', ''), Column(verbose_name=cat.name)) for cat in categories)
     # Meta is not inherited, so need to explicitly define it
     attrs['Meta'] = type('Meta', 

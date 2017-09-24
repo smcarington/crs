@@ -11,8 +11,9 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'list_quizzes' course_pk=quiz.course.pk %}">&#171; Return to Quizzes</a>
-    <h1>{{quiz.name}} Administration</h1>
+    <a href="{% url 'quiz_courses' %}">&#171; Courses</a>
+    <a href="{% url 'list_quizzes' course_pk=quiz.course.pk %}">&#171; Quizzes</a>
+    <h2>{{quiz.course.name}} - {{quiz.name}} Administration</h2>
    
     <div class="quiz-divs">
     {% if questions %}

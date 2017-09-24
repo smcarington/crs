@@ -109,6 +109,9 @@ urlpatterns = [
        views.student_results,
        name='student_results'
     ),
-
+    url(r'^change_mark$',
+       views.change_mark,
+       name='change_mark'
+    ),
     # Quizzes and Quiz Admin (end)
 ]

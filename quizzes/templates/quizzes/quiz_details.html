@@ -24,4 +24,36 @@
     {{return_html | safe}}
 {% endblock %}
 
-
+{% block script %}
+    {% get_obj_perms request.user for course as "course_perms" %}
+    {# If this is an admin looking at somebody else's page, go back to that list #}
+    {% if 'can_edit_quiz' in course_perms%}
+        <script>
+            $(document).ready( function() {
+                $('.change_mark').click( function() {
+                    $par = $(this).parent();
+                    qnum = $(this).attr('data-id');
+                    $.post('{% url "change_mark" %}',
+                        {qnum: qnum, sqr_pk: {{sqr.pk}} },
+                        function (data) {
+                            //If successful, reload the page
+                            if (data['result'] == 'success') {
+                                // If Incorrect
+                                if ($par.css('color')=='rgb(255, 0, 0)') {
+                                    $par.css('color', 'green');
+                                    $par.children(".text").html('Correct')
+                                } else { //Correct
+                                    $par.css('color', 'red');
+                                    $par.children(".text").html('Incorrect')
+                                }
+                            } else {
+                                console.alert(data['response']);
+                            }
+                        },
+                        "json"
+                    );
+                });
+            });
+        </script>
+    {% endif %}
+{% endblock %}

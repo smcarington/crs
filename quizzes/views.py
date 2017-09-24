@@ -1223,10 +1223,16 @@ def quiz_details(request, course_pk, quiz_pk, sqr_pk):
 
         problem = sub_into_question_string(mquestion, temp_dict['inputs'])
 
+        c_mark = ''
         if int(temp_dict['score']):
-            correct = "<p style='color:green'>Correct</p>"
+            c_temp = "<p style='color:green'><span class='text'>Correct</span>{}</p>"
         else:
-            correct = "<p style='color:red'>Incorrect</p>"
+            c_temp = "<p style='color:red'><span class='text'>Incorrect</span>{}</p>"
+        if request.user.has_perm('quizzes.can_edit_quiz', course):
+            c_mark=(" <small style='color:blue; cursor:pointer' class='change_mark' data-id={}>"
+                      "(Change)"
+                      "</small>").format(qnum)
+        correct = c_temp.format(c_mark)
         
         return_html += template.format(problem=problem, 
                                        correct=correct,
@@ -1241,7 +1247,39 @@ def quiz_details(request, course_pk, quiz_pk, sqr_pk):
              'sqr': quiz_results,
              'course': course,
             })
-            
+
+@login_required
+def change_mark(request):
+    """
+        Used to easily change a student mark.
+    """
+    try:
+        if request.method == "POST":
+            sqr_pk = request.POST['sqr_pk']
+            qnum = request.POST['qnum']
+            sqr = get_object_or_404(
+                StudentQuizResult.objects.select_related('quiz', 'quiz__course'), 
+                pk=int(sqr_pk)
+            )
+            if request.user.has_perms('quizzes.can_edit_quiz', sqr.quiz.course):
+                res, _ = sqr.get_result()
+                res[qnum]['score'] = int(not res[qnum]['score'])
+                sqr.update_result(res)
+                # Update the score. update_score by default adds one to the score,
+                # but takes option argument 'minus' to subtract. We modify based off
+                # the new score.
+                sqr.update_score(res[qnum]['score'])
+
+                # Finally, we update the marks
+                update_marks(sqr)
+
+                return HttpResponse(json.dumps({'result': 'success'}))
+
+        return HttpResponse(json.dumps({'result': 'unauthorized'}))
+
+    except Exception as e:
+        return HttpResponse(json.dumps({'result': str(e)}))
+
 # ---------- Quiz Handler (end) ---------- #
 
 # ---------- Quizzes (end) ---------- #
@@ -1467,7 +1505,7 @@ def see_all_marks(request, course_pk):
     course = get_object_or_404(Course, pk=course_pk)
     # Generate the table. This is dynamic to the number of categories which currently exists
     table_data = get_marks_data(course)
-    table = define_all_marks_table()(table_data)
+    table = define_all_marks_table(course)(table_data)
     RequestConfig(request, paginate=False).configure(table)
 
     sidenote = format_html("<h4>Options</h4><a class='btn btn-default' href='{}'>Download Marks</a>", 

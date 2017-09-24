@@ -1,1 +1,3 @@
-1. A 500-error if the
+0. Easier to adjust marks for error
+1. Questions from a template, so only main questions needs to be changed.
+2. if Solutions Visible = False, still show score but no details

@@ -345,9 +345,12 @@ class StudentQuizResult(models.Model):
         self._q_order = json.dumps(value)
         self.save()
 
-    def update_score(self):
+    def update_score(self, minus=False):
         """ Adds one to the overall score """
-        self.score += 1
+        if minus:
+            self.score -= 1
+        else:
+            self.score += 1
         self.save()
 
     def update_result(self, result):
