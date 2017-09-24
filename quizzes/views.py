@@ -1262,8 +1262,9 @@ def change_mark(request):
                 pk=int(sqr_pk)
             )
             if request.user.has_perms('quizzes.can_edit_quiz', sqr.quiz.course):
+                import pdb; pdb.set_trace()
                 res, _ = sqr.get_result()
-                res[qnum]['score'] = int(not res[qnum]['score'])
+                res[qnum]['score'] = str(int(not int(res[qnum]['score'])))
                 sqr.update_result(res)
                 # Update the score. update_score by default adds one to the score,
                 # but takes option argument 'minus' to subtract. We modify based off
