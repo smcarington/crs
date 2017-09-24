@@ -1269,7 +1269,7 @@ def change_mark(request):
                 # Update the score. update_score by default adds one to the score,
                 # but takes option argument 'minus' to subtract. We modify based off
                 # the new score.
-                sqr.update_score(res[qnum]['score'])
+                sqr.update_score(int(res[qnum]['score']))
 
                 # Finally, we update the marks
                 update_marks(sqr)
