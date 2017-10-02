@@ -1532,7 +1532,7 @@ def get_marks_data(course):
     students = User.objects.prefetch_related('marks','membership').filter(
             membership__courses__in=[course],
             is_staff=False, is_active=True,
-            )
+            ).order_by('last_name','first_name', 'username')
     for student in students:
         try:
             table_data.append(get_student_marks_for_table(student, course))
