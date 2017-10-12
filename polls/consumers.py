@@ -155,7 +155,7 @@ def admin_receive(message, course_pk, poll_pk):
     Group("Admin-"+course_pk).send({'text': json.dumps(response_data)})
 
     # Need to add code to broadcast to voters that a change has occured
-#
+
 # Attached to websocket.connect
 @channel_session
 @channel_session_user_from_http
@@ -163,14 +163,20 @@ def voter_connect(message, course_pk):
     """ Consumer for when a voter accesses the live poll for a certain course. 
         host/vote/{course_pk}/{poll_pk}. Group: Voter-{course_pk}
     """
+    # Add to both the list of voters for the course, as well as establishing a
+    # group for just this user
+    user = message.user
     Group('Voter-'+course_pk).add(message.reply_channel)
+    Group('User-'+str(user.pk)).add(message.reply_channel)
     message.reply_channel.send({'accept': True})
 
 @channel_session
 def voter_disconnect(message, course_pk):
     """ Disconnecting from live poll.  Remove from the group
     """
+    user = message.user
     Group('Voter-'+course_pk).discard(message.reply_channel)
+    Group('User-'+str(user.pk)).discard(message.reply_channel)
 
 # Attached to websocket.message
 @channel_session_user
@@ -214,7 +220,10 @@ def voter_receive(message, course_pk):
 
             response_data = {'status': 'success'}
 
-        Group('Voter-'+course_pk).send({'text': json.dumps(response_data)})
+#        Group('Voter-'+course_pk).send({'text': json.dumps(response_data)})
+#        This is wrong. We need to send this to the individual user, not
+#        everyone in the course
+        Group('User-'+str(message.user.pk)).send({'text': json.dumps(response_data)})
         send_votes_to_admin(choice.question, course_pk)
 
 def send_votes_to_admin(question, course_pk):
