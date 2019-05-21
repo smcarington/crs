@@ -1,6 +1,10 @@
 from django import template
 from polls.models import *
-from django.core.urlresolvers import resolve, Resolver404
+# Added for 2.2
+#from django.core.urlresolvers import resolve, Resolver404
+from django.urls import resolve, Resolver404
+from django.urls.exceptions import Resolver404
+
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 from django.conf import settings

@@ -4,7 +4,9 @@ from django.utils.html import mark_safe, format_html
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.http import HttpResponse, Http404, HttpResponseForbidden
-from django.core.urlresolvers import reverse
+# Changed for migration from 1.11 to 2.2
+#from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.db import transaction, IntegrityError
 from django.db.models import Max, Q, F

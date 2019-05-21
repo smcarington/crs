@@ -2,7 +2,9 @@ from django_tables2 import tables, Column, Table
 
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django.core.urlresolvers import reverse
+# Changed in migrations from 1.11 to 2.2
+#from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from django_tables2 import RequestConfig
 

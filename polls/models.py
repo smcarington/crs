@@ -58,7 +58,7 @@ class Course(models.Model):
 class UserMembership(models.Model):
     """ Tracks which courses a student/ta can see
     """
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     courses = models.ManyToManyField(Course)
 
     def __str__(self):
@@ -75,7 +75,7 @@ class Poll(models.Model):
     course.  
     """
     title  = models.CharField(max_length=200)
-    course = models.ForeignKey(Course)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{}: {}".format(self.course.name, self.title)
@@ -83,7 +83,8 @@ class Poll(models.Model):
 class PollQuestion(models.Model):
     """ A questions within a poll. 
     """
-    poll     = models.ForeignKey(Poll, related_name="questions")
+    poll     = models.ForeignKey(Poll, related_name="questions",
+            on_delete=models.CASCADE)
     text     = models.TextField(blank=True) # The question itself
     live     = models.BooleanField(default=False) # Question is being voted on
     num_poll = models.IntegerField(default=1) # Poll might be asked multiple times
@@ -195,7 +196,8 @@ class PollChoice(models.Model):
     """ Each poll has multiple choice answers. These also track how many votes
         each answer has received. When a poll is reset, these must be cloned.
     """
-    question  = models.ForeignKey(PollQuestion, related_name="choices")
+    question  = models.ForeignKey(PollQuestion, related_name="choices",
+            on_delete=models.CASCADE)
     text      = models.CharField(max_length=400)
     num_votes = models.IntegerField(default=0)
     cur_poll  = models.IntegerField(default=1)
@@ -223,9 +225,11 @@ class PollChoice(models.Model):
 class StudentVote(models.Model):
     """ Tracks an individual student's vote. 
     """
-    student  = models.ForeignKey(User)
-    question = models.ForeignKey(PollQuestion, null=True)
-    vote     = models.ForeignKey(PollChoice, related_name="votes", null=True)
+    student  = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(PollQuestion, null=True,
+            on_delete=models.CASCADE)
+    vote     = models.ForeignKey(PollChoice, related_name="votes",
+            null=True, on_delete=models.CASCADE)
     cur_poll = models.IntegerField(default=1)
 
     #class Meta:

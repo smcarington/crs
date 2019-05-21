@@ -88,6 +88,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'classroom_response.wsgi.application'
+# For channels to work
+ASGI_APPLICATION = "classroom_response.routing.application"
 
 
 # Database

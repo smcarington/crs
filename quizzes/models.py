@@ -68,7 +68,8 @@ class UserMembership(models.Model):
     a UserMembership object according to user, then the um.courses.add(course)
     command.
     """
-    user = models.OneToOneField(User, related_name='membership')
+    user = models.OneToOneField(
+        User, related_name='membership', on_delete=models.CASCADE)
     courses = models.ManyToManyField(Course)
 
     def __str__(self):
@@ -79,7 +80,6 @@ class UserMembership(models.Model):
         return "{}: {}".format(
             self.user.username,
             course_string)
-
 
 class Quiz(models.Model):
     """ Container for holding a quiz. Quizzes consist of several MarkedQuestion
@@ -97,7 +97,8 @@ class Quiz(models.Model):
         time. If false, solutions are only available once the quiz has
         concluded.
     """
-    course  = models.ForeignKey(Course, related_name='quizzes')
+    course  = models.ForeignKey(
+        Course, related_name='quizzes', on_delete=models.CASCADE)
     name    = models.CharField("Name", max_length=200)
     # Number of tries a student is allowed. A value of category=0 is equivalent to infinity.
     tries   = models.IntegerField("Tries", default=0)
@@ -298,8 +299,8 @@ class StudentQuizResult(models.Model):
             pool = cat_list[_q_order[cur_quest-1]] = cat_list[_q_order[3]] 
                  = cat_list[2] = 10.
     """
-    student   = models.ForeignKey(User)
-    quiz      = models.ForeignKey(Quiz)
+    student   = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz      = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     attempt   = models.IntegerField(null=True, default=1) #track which attempt this is
     #track which question the student is on if they leave. If cur_question = 0 then completed
     cur_quest = models.IntegerField(null=True, default=1) 
@@ -433,7 +434,8 @@ class Evaluation(models.Model):
     """
     name = models.CharField(max_length=200)
     out_of = models.IntegerField(default=0)
-    course = models.ForeignKey(Course, null=True)
+    course = models.ForeignKey(Course, null=True,
+            on_delete=models.CASCADE)
 
     def quiz_update_out_of(self, quiz):
         """ If the exemption corresponds to a quiz, we update the out_of category
@@ -451,8 +453,9 @@ class StudentMark(models.Model):
         evaluation (Evaluation) The evaluation object (quiz, test, etc)
         score (Float) The score (relative to evaluation.out_of)
     """
-    user = models.ForeignKey(User, related_name='marks')
-    evaluation = models.ForeignKey(Evaluation)
+    user = models.ForeignKey(User, related_name='marks', 
+            on_delete=models.CASCADE)
+    evaluation = models.ForeignKey(Evaluation, on_delete=models.CASCADE)
     score = models.FloatField(blank=True, null=True)
 
     class Meta:

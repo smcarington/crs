@@ -1,6 +1,8 @@
 from django import template
 from polls.models import *
-from django.core.urlresolvers import resolve, Resolver404
+# Migration from 1.11 to 2.2
+from django.urls import resolve
+from django.urls.exceptions import Resolver404
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 from django.conf import settings
