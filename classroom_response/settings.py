@@ -160,11 +160,12 @@ SENDFILE_BACKEND = 'sendfile.backends.development'
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        #"BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            "hosts": [('127.0.0.1', 6379)], #[os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
-        "ROUTING": "polls.routing.channel_routing",
+        #"ROUTING": "polls.routing.channel_routing",
     },
 }
 
