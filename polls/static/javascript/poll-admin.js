@@ -1,3 +1,5 @@
+// The URL_PREPEND must be added to this file manually
+
 $(document).ready(function() {
     // Websocket version of poll_admin interface. Used for updating votes only.
     // Start/stop information can still be sent by ajax.
@@ -102,7 +104,7 @@ $(document).ready(function() {
             action: action,
             questionpk: pk
         }
-        votesock.send(JSON.stringify(message))
+        votesock.send(JSON.stringify({'text': message}))
     });
 
     // Opens choices option in poll administration
@@ -138,7 +140,7 @@ $(document).ready(function() {
         } else if (action == "down") {
             $thisDiv.next("[id^='global']").insertBefore($thisDiv);
         }
-        $.post('/change_question_order/', 
+        $.post('/development/change_question_order/', 
                {action:action, pk:pk},
                "json")
             .always( function(data) 

@@ -28,7 +28,7 @@ SECRET_KEY = '1f@)#j@ruuv&azgoqlkav86^$&p4*d3i77x$zx2e#e!@w#k10#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.0.117", "localhost", "mcs.utm.utoronto.ca"]
 
 # Application definition
 
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+#    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,7 +144,7 @@ LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-URL_PREPEND = ''
+URL_PREPEND = 'development/'
 WS_PREPEND = URL_PREPEND
 SITE_NAME = ''
 SITE_URL = ''
@@ -160,11 +160,11 @@ SENDFILE_BACKEND = 'sendfile.backends.development'
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
-        "ROUTING": "polls.routing.channel_routing",
+#        "ROUTING": "polls.routing.channel_routing",
     },
 }
 
