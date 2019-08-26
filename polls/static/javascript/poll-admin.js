@@ -104,7 +104,7 @@ $(document).ready(function() {
             action: action,
             questionpk: pk
         }
-        votesock.send(JSON.stringify({'text': message}))
+        votesock.send(JSON.stringify(message))
     });
 
     // Opens choices option in poll administration
