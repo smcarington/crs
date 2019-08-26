@@ -1,3 +1,5 @@
+// The URL_PREPEND must be added to this file manually
+
 $(document).ready(function() {
     // Websocket version of poll_admin interface. Used for updating votes only.
     // Start/stop information can still be sent by ajax.
@@ -9,7 +11,8 @@ $(document).ready(function() {
     var course_pk = document.getElementById("course_pk").value
     var poll_pk  = document.getElementById("poll_pk").value
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    var votesock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/ws/" + url_prepend+ "/query_live/" + course_pk + "/" + poll_pk + "/");
+	var ws_url = ws_scheme + '://' + window.location.host + "/ws/" + url_prepend+ "/query_live/" + course_pk + "/" + poll_pk + "/";
+    var votesock = new ReconnectingWebSocket(ws_url, null, {debug: true} );
 
     // Update votes.
     votesock.onmessage = function(message) {
@@ -102,7 +105,7 @@ $(document).ready(function() {
             action: action,
             questionpk: pk
         }
-        votesock.send(JSON.stringify(message))
+        votesock.send(JSON.stringify({'text': message}))
     });
 
     // Opens choices option in poll administration
@@ -138,7 +141,7 @@ $(document).ready(function() {
         } else if (action == "down") {
             $thisDiv.next("[id^='global']").insertBefore($thisDiv);
         }
-        $.post('/change_question_order/', 
+        $.post('/development/change_question_order/', 
                {action:action, pk:pk},
                "json")
             .always( function(data) 

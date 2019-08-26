@@ -22,7 +22,8 @@ class StaffForm(forms.Form):
     username = forms.CharField(max_length=8)
     admin = forms.BooleanField(required=False)
 
-    def __init__(self, queryset, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        queryset = kwargs.pop('queryset')
         super(StaffForm, self).__init__(*args, **kwargs)
         self.fields['course'].queryset = queryset
 

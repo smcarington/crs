@@ -22,8 +22,11 @@ simpleeval==0.9.8
 six==1.12.0
 sqlparse==0.3.0
 txaio==18.8.1
+<<<<<<< HEAD
+=======
 xsendfile==1.0rc2
 zope.interface==4.6.0
 
 #Note that this must be installed manually
 django-shibboleth-remoteuser==0.11a2
+>>>>>>> c7d3464a3e8dea85fcf217597656a12be4f4f456

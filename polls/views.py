@@ -645,7 +645,7 @@ def add_staff_member(request):
     # Populate the form with list of courses 
     courses = get_objects_for_user(request.user, 'polls.can_edit_poll')
     if request.method == "POST":
-        form = StaffForm(request.POST)
+        form = StaffForm(request.POST, queryset=courses)
         course_pk = int(request.POST['course'])
         username  = request.POST['username']
         is_admin = 'admin' in request.POST
