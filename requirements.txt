@@ -6,7 +6,7 @@ Automat==0.7.0
 channels==2.2.0
 constantly==15.1.0
 daphne==2.3.0
-Django==2.2.1
+Django==2.2.20
 django-guardian==1.4.9
 django-sendfile==0.3.11
 django-tables2==2.0.6
